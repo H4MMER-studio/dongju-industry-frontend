@@ -1,8 +1,7 @@
 {
-  "name": "next_plate",
+  "name": "dongju-industry-frontend",
   "version": "1.0.0",
-  "description": "next_plate",
-  "main": "index.js",
+  "description": "dongju-industry-frontend",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.4.16",
+    "graphql": "^16.0.1",
     "next": "11.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
