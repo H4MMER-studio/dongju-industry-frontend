@@ -12,6 +12,7 @@ const slice = createSlice({
     setTest: (state, { payload }: PayloadAction<any>) => {
       state.test = payload;
     },
+    getData: (_, __) => {},
   },
 });
 
