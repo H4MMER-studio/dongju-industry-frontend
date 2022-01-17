@@ -4,6 +4,7 @@ import { useGetStore } from '@/hooks';
 import { homeActions } from '@/store';
 import { Home } from '@/components';
 import { API } from '@/utils';
+import { Widgets } from '@/components';
 
 const HomePage: React.FC = () => {
   const { test } = useGetStore.home();
@@ -25,6 +26,9 @@ const HomePage: React.FC = () => {
   return (
     <>
       <div>hello {test}</div>
+      <Widgets.Button.Primary value="제품" state={'active'} />
+      <Widgets.Button.Secondary value="제품" state={'active'} />
+      <Widgets.Button.Widget value="이미지" state={'default'} />
       <Home.Container onClickSetTest={onClickSetTest} />
     </>
   );
