@@ -32,6 +32,10 @@ const ItemLayout = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &:hover {
+    background-color: #555555;
+  }
 `;
 
 const Left = styled.div`
