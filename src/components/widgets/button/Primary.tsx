@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { device } from '@/styles';
 
 interface IProps {
   value: string;
@@ -33,5 +34,16 @@ const PrimaryButton = styled.button<PrimaryButtonProps>`
   background-color: ${(props) => (props.state === 'active' ? '#2979FF' : '')};
   color: ${(props) => (props.state === 'active' ? '#fff' : '#fff')};
   font-size: 18px;
+  &:active {
+    background-color: #2979ff;
+    color: white;
+  }
+
+  @media ${device.laptop} {
+    &:hover {
+      background-color: #2979ff;
+      color: white;
+    }
+  }
   ${({ cssStyle }) => cssStyle}
 `;

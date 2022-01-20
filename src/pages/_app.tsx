@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import { MainNav } from '@/components';
 import { AppProps } from 'next/app';
 import {
@@ -27,11 +27,11 @@ const client = new ApolloClient({
 });
 
 function App({ Component, pageProps }: AppProps) {
-  const dispatch = useDispatch();
-  const { selectedMenu } = useGetStore.home();
+  const router = useRouter();
+  const selectedMenu = router.pathname;
 
   const onClickMenu = (menu: string) => {
-    dispatch(homeActions.setSelectedMenu(menu));
+    router.push(`/${menu === 'product' ? '' : menu}`);
   };
 
   return (

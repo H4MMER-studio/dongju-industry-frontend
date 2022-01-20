@@ -45,12 +45,12 @@ const STDProductWrapper = styled.div`
   }
 `;
 
-const MainNav: React.FC<IProps> = ({ selectedMenu, onClickMenu }) => {
+const MainNav: React.FC<IProps> = ({ selectedMenu = '/', onClickMenu }) => {
   const MENU_LIST = [
-    { value: '제품' },
-    { value: '회사' },
-    { value: '공지' },
-    { value: '고객지원' },
+    { value: '제품', id: 'product' },
+    { value: '회사', id: 'company' },
+    { value: '공지', id: 'notice' },
+    { value: '고객지원', id: 'cutomer-service' },
   ];
 
   const PRDUCT_LIST = [
@@ -62,12 +62,17 @@ const MainNav: React.FC<IProps> = ({ selectedMenu, onClickMenu }) => {
   return (
     <STDContainer>
       <STDMainMenu>
-        <img src="/image/header_logo.png" />
-        {MENU_LIST.map(({ value }, index) => (
+        <img src="/image/mainNav/header_logo.png" />
+        {MENU_LIST.map(({ id, value }, index) => (
           <Widgets.Button.Primary
+            key={value}
             value={value}
-            onClick={() => onClickMenu(value)}
-            state={selectedMenu === value ? 'active' : 'default'}
+            onClick={() => onClickMenu(id)}
+            state={
+              selectedMenu === `/${id === 'product' ? '' : id}`
+                ? 'active'
+                : 'default'
+            }
             cssStyle={
               index === MENU_LIST.length - 1 ? '' : 'margin-bottom: 26px;'
             }
@@ -76,7 +81,7 @@ const MainNav: React.FC<IProps> = ({ selectedMenu, onClickMenu }) => {
       </STDMainMenu>
       <STDProductList>
         {PRDUCT_LIST.map(({ imageSrc, name }) => (
-          <STDProductWrapper>
+          <STDProductWrapper key={name}>
             <img alt="product image" src={imageSrc} />
             <p>{name}</p>
           </STDProductWrapper>
