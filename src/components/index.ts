@@ -1,3 +1,8 @@
+//common
+import MainNav from './common/MainNav';
+
+export { MainNav };
+
 // Home
 import HomeContainter from './Layout/Home/HomeContainter';
 

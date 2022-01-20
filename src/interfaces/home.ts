@@ -1,3 +1,3 @@
 export interface IHomeInitialState {
-  test: any;
+  selectedMenu: string;
 }
