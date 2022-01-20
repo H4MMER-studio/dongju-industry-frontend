@@ -9,3 +9,5 @@ function useGetRootState() {
 export const useGetStore = {
   home: () => selectHomeState(useGetRootState().home),
 };
+
+export * from './useResize';

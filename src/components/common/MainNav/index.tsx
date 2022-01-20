@@ -13,6 +13,7 @@ const STDContainer = styled.nav`
   padding: 36px 20px 20px 30px;
   background-color: #383838;
   border-radius: 12px;
+  height: 100%;
 `;
 
 const STDMainMenu = styled.div`
@@ -50,7 +51,7 @@ const MainNav: React.FC<IProps> = ({ selectedMenu = '/', onClickMenu }) => {
     { value: '제품', id: 'product' },
     { value: '회사', id: 'company' },
     { value: '공지', id: 'notice' },
-    { value: '고객지원', id: 'cutomer-service' },
+    { value: '고객지원', id: 'customer-service' },
   ];
 
   const PRDUCT_LIST = [
