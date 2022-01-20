@@ -16,6 +16,7 @@ import { useGetStore } from '@/hooks';
 import { mixins } from '@/styles';
 import { homeActions } from '@/store';
 import { useResize } from '@/hooks';
+import CssBaseline from '@mui/material/CssBaseline';
 
 interface IContainerProps {
   height: number;
@@ -43,6 +44,7 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
+      <CssBaseline />
       <STDContainer height={innerHeight}>
         <MainNav selectedMenu={selectedMenu} onClickMenu={onClickMenu} />
         <Component {...pageProps} />
