@@ -15,10 +15,16 @@ import { wrapper } from '@/store/configureStore';
 import { useGetStore } from '@/hooks';
 import { mixins } from '@/styles';
 import { homeActions } from '@/store';
+import { useResize } from '@/hooks';
 
-const STDContainer = styled.div`
-  ${mixins.flexSet('flex-start')}
+interface IContainerProps {
+  height: number;
+}
+
+const STDContainer = styled.div<IContainerProps>`
+  ${mixins.flexSet('flex-start', 'flex-start')}
   padding: 16px;
+  height: ${(props) => props.height}px;
 `;
 
 const client = new ApolloClient({
@@ -29,6 +35,7 @@ const client = new ApolloClient({
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const selectedMenu = router.pathname;
+  const innerHeight = useResize();
 
   const onClickMenu = (menu: string) => {
     router.push(`/${menu === 'product' ? '' : menu}`);
@@ -36,7 +43,7 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
-      <STDContainer>
+      <STDContainer height={innerHeight}>
         <MainNav selectedMenu={selectedMenu} onClickMenu={onClickMenu} />
         <Component {...pageProps} />
       </STDContainer>
