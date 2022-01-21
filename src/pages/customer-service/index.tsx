@@ -10,7 +10,14 @@ const CustomerServiceView: React.FC = () => {
     switch (type) {
       case 'estimate':
         route.push('/customer-service?question=estimate');
+        break;
 
+      case 'A/S':
+        route.push('/customer-service?question=A/S');
+        break;
+
+      case 'ETC':
+        route.push('/customer-service?question=ETC');
         break;
 
       default:

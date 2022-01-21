@@ -12,5 +12,6 @@ export const Images = {
 
 import DownloadIcon from './download-icon.svg';
 import ShareIcon from './share-icon.svg';
+import CloseIcon from './close-icon.svg';
 
-export const Icon = { DownloadIcon, ShareIcon };
+export const Icon = { DownloadIcon, ShareIcon, CloseIcon };

@@ -43,7 +43,9 @@ const CustomerServiceContainer: React.FC<Iprops> = ({
           backgroundImageSrc={Images.InfoBackground}
         />
       </Layouts>
-      <CustomerServiceComponents.Form questionType={questionType} />
+      {questionType && (
+        <CustomerServiceComponents.FormModal questionType={questionType} />
+      )}
     </CustomerServiceContainerLayout>
   );
 };

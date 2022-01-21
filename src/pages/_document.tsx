@@ -7,10 +7,12 @@ import Document, {
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { GlobalStyle } from '../styles';
+import { ServerStyleSheets } from '@mui/styles';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
+    const materialSheets = new ServerStyleSheets();
     const originalRenderPage = ctx.renderPage;
 
     try {
@@ -32,6 +34,7 @@ export default class MyDocument extends Document {
           <>
             {initialProps.styles}
             {sheet.getStyleElement()}
+            {materialSheets.getStyleElement()}
           </>
         ),
       };

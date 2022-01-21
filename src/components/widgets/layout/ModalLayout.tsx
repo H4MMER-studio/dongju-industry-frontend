@@ -14,6 +14,7 @@ const ModalLayout: React.FC<ModalLayoutProps> = ({ children, onClose }) => {
     <Dialog
       open
       fullScreen={false}
+      maxWidth={false}
       onClose={(e, r) => {
         e;
         onClose(r);

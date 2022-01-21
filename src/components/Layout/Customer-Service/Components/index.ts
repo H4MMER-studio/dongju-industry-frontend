@@ -1,5 +1,5 @@
 import Service from './Service';
 import InfoCard from './InfoCard';
-import Form from './Form';
+import FormModal from './FormModal';
 
-export { Service, InfoCard, Form };
+export { Service, InfoCard, FormModal };
