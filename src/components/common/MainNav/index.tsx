@@ -61,6 +61,7 @@ const MainNav: React.FC<IProps> = ({
     { value: '고객지원', id: 'customer-service' },
   ];
 
+<<<<<<< HEAD
   const PRDUCT_LIST: {
     imageSrc: string;
     name: string;
@@ -91,12 +92,18 @@ const MainNav: React.FC<IProps> = ({
       name: '완전밀폐도어',
       type: 'fully-sealed-door',
     },
+=======
+  const PRDUCT_LIST = [
+    { imageSrc: '/image/main_nav/product_1.png', name: '공기조화기' },
+    { imageSrc: '/image/main_nav/product_2.png', name: '동파방지댐퍼코일' },
+    { imageSrc: '/image/main_nav/product_3.png', name: '배기유니트' },
+>>>>>>> c3982dc ([ENH] : 메인 페이지 작업)
   ];
 
   return (
     <STDContainer>
       <STDMainMenu>
-        <img src="/image/mainNav/header_logo.png" />
+        <img src="/image/main_nav/header_logo.png" />
         {MENU_LIST.map(({ id, value }, index) => (
           <Widgets.Button.Primary
             key={value}
