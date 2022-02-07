@@ -17,6 +17,7 @@ import { mixins } from '@/styles';
 import { homeActions } from '@/store';
 import { useResize } from '@/hooks';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Product } from '@/interfaces';
 
 interface IContainerProps {
   height: number;
@@ -42,11 +43,19 @@ function App({ Component, pageProps }: AppProps) {
     router.push(`/${menu === 'product' ? '' : menu}`);
   };
 
+  const onClickProduct = (productType: Product['type']) => {
+    router.push(`/product/${productType}`);
+  };
+
   return (
     <ApolloProvider client={client}>
       <CssBaseline />
       <STDContainer height={innerHeight}>
-        <MainNav selectedMenu={selectedMenu} onClickMenu={onClickMenu} />
+        <MainNav
+          selectedMenu={selectedMenu}
+          onClickMenu={onClickMenu}
+          onClickProduct={onClickProduct}
+        />
         <Component {...pageProps} />
       </STDContainer>
     </ApolloProvider>

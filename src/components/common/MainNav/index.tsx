@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Widgets } from '@/components';
 import { mixins } from '@/styles';
+import { Product } from '@/interfaces';
 
 interface IProps {
   selectedMenu: string;
   onClickMenu(menu: string): void;
+  onClickProduct(product: Product['type']): void;
 }
 
 const STDContainer = styled.nav`
@@ -34,6 +36,7 @@ const STDProductList = styled.div`
 const STDProductWrapper = styled.div`
   ${mixins.flexSet('center', 'center', 'column')}
   margin-bottom: 51px;
+  cursor: pointer;
 
   img {
     width: 138px;
@@ -46,7 +49,11 @@ const STDProductWrapper = styled.div`
   }
 `;
 
-const MainNav: React.FC<IProps> = ({ selectedMenu = '/', onClickMenu }) => {
+const MainNav: React.FC<IProps> = ({
+  selectedMenu = '/',
+  onClickMenu,
+  onClickProduct,
+}) => {
   const MENU_LIST = [
     { value: '제품', id: 'product' },
     { value: '회사', id: 'company' },
@@ -54,10 +61,36 @@ const MainNav: React.FC<IProps> = ({ selectedMenu = '/', onClickMenu }) => {
     { value: '고객지원', id: 'customer-service' },
   ];
 
-  const PRDUCT_LIST = [
-    { imageSrc: '/image/mainNav/product_1.png', name: '공기조화기' },
-    { imageSrc: '/image/mainNav/product_2.png', name: '동파방지댐퍼코일' },
-    { imageSrc: '/image/mainNav/product_3.png', name: '배기유니트' },
+  const PRDUCT_LIST: {
+    imageSrc: string;
+    name: string;
+    type: Product['type'];
+  }[] = [
+    {
+      imageSrc: '/image/mainNav/product_1.png',
+      name: '공기조화기',
+      type: 'air-conditioner',
+    },
+    {
+      imageSrc: '/image/mainNav/product_2.png',
+      name: '동파방지댐퍼코일',
+      type: 'freeze-protection-damper-coil',
+    },
+    {
+      imageSrc: '/image/mainNav/product_3.png',
+      name: '배기유니트',
+      type: 'exhaust-unit',
+    },
+    {
+      imageSrc: '/image/mainNav/product_4.png',
+      name: '버블댐퍼',
+      type: 'exhaust-unit',
+    },
+    {
+      imageSrc: '/image/mainNav/product_5.png',
+      name: '완전밀폐도어',
+      type: 'fully-sealed-door',
+    },
   ];
 
   return (
@@ -81,8 +114,8 @@ const MainNav: React.FC<IProps> = ({ selectedMenu = '/', onClickMenu }) => {
         ))}
       </STDMainMenu>
       <STDProductList>
-        {PRDUCT_LIST.map(({ imageSrc, name }) => (
-          <STDProductWrapper key={name}>
+        {PRDUCT_LIST.map(({ imageSrc, name, type }) => (
+          <STDProductWrapper key={name} onClick={() => onClickProduct(type)}>
             <img alt="product image" src={imageSrc} />
             <p>{name}</p>
           </STDProductWrapper>

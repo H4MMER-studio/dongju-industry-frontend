@@ -6,6 +6,9 @@ export { MainNav };
 // Home
 import HomeContainter from './Layout/Home/HomeContainter';
 
+//product
+import ProductContainer from './Layout/Product/ProductContainer';
+
 //Notice
 import NoticeContainer from './Layout/Notice/NoticeContainer';
 
@@ -29,6 +32,10 @@ export const NoticeDetail = {
 
 export const CustomerService = {
   Container: CustomerServiceContainer,
+};
+
+export const Product = {
+  Container: ProductContainer,
 };
 
 //Wigets
