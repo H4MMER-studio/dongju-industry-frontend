@@ -5,21 +5,26 @@ import { Widgets } from '@/components';
 interface Iprops {
   title: string;
   infoMessage: string;
-
   backgroundImageSrc: string;
+  clickContact: () => void;
 }
 
 const Service: React.FC<Iprops> = ({
   backgroundImageSrc,
   title,
   infoMessage,
+  clickContact,
 }) => {
   return (
     <ServiceLayout style={{ backgroundImage: `url(${backgroundImageSrc})` }}>
       <Title>{title}</Title>
       <InfoMessage>{infoMessage}</InfoMessage>
       <ButtonLayout>
-        <Widgets.Button.Primary value="문의하기" state={'active'} />
+        <Widgets.Button.Primary
+          value="문의하기"
+          state={'active'}
+          onClick={clickContact}
+        />
       </ButtonLayout>
     </ServiceLayout>
   );

@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import * as CustomerServiceComponents from './Components';
 import { Images } from 'public/image';
 
-const CustomerServiceContainer: React.FC = () => {
+interface Iprops {
+  questionType: 'estimate' | 'A/S' | 'ETC';
+  clickContact: (type: 'estimate' | 'A/S' | 'ETC') => void;
+  closeForm: () => void;
+}
+
+const CustomerServiceContainer: React.FC<Iprops> = ({
+  questionType,
+  clickContact,
+  closeForm,
+}) => {
   return (
     <CustomerServiceContainerLayout>
-      <Layout>
+      <Layouts>
         <ServiceLayout>
           <CustomerServiceComponents.Service
             title="견적 문의"
             infoMessage="제품의 설치의 초기 견적 문의"
             backgroundImageSrc={Images.EsitmateBackground}
+            clickContact={() => clickContact('estimate')}
           />
         </ServiceLayout>
         <ServiceLayout>
@@ -19,6 +30,7 @@ const CustomerServiceContainer: React.FC = () => {
             title="A/S 문의"
             infoMessage="설치 후 고장 및 수리 관련 문의"
             backgroundImageSrc={Images.ASBackground}
+            clickContact={() => clickContact('A/S')}
           />
         </ServiceLayout>
         <ServiceLayout>
@@ -26,12 +38,19 @@ const CustomerServiceContainer: React.FC = () => {
             title="그 외 문의"
             infoMessage="기타 사항 문의"
             backgroundImageSrc={Images.ETCBackground}
+            clickContact={() => clickContact('ETC')}
           />
         </ServiceLayout>
         <CustomerServiceComponents.InfoCard
           backgroundImageSrc={Images.InfoBackground}
         />
-      </Layout>
+      </Layouts>
+      {questionType && (
+        <CustomerServiceComponents.FormModal
+          questionType={questionType}
+          closeForm={closeForm}
+        />
+      )}
     </CustomerServiceContainerLayout>
   );
 };
@@ -48,9 +67,24 @@ const CustomerServiceContainerLayout = styled.div`
 
 const ServiceLayout = styled.div`
   margin-right: 16px;
+
+  @media (max-width: 1240px) {
+    &:nth-child(2n) {
+      margin-right: 0px;
+    }
+
+    &:nth-child(-1n + 2) {
+      margin-bottom: 16px;
+    }
+  }
 `;
 
-const Layout = styled.div`
+const Layouts = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 1240px) {
+    width: 556px;
+    flex-wrap: wrap;
+  }
 `;
