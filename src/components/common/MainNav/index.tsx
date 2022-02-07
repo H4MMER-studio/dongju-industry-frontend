@@ -13,6 +13,7 @@ interface IProps {
 const STDContainer = styled.nav`
   ${mixins.flexSet('center', 'flex-start')}
   padding: 36px 20px 20px 30px;
+  margin-right: 16px;
   background-color: #383838;
   border-radius: 12px;
   height: 100%;
@@ -26,6 +27,7 @@ const STDMainMenu = styled.div`
   > img {
     width: 96px;
     margin-bottom: 36px;
+    cursor: pointer;
   }
 `;
 
@@ -49,11 +51,15 @@ const STDProductWrapper = styled.div`
   }
 `;
 
+<<<<<<< HEAD
 const MainNav: React.FC<IProps> = ({
   selectedMenu = '/',
   onClickMenu,
   onClickProduct,
 }) => {
+=======
+const MainNav: React.FC<IProps> = ({ selectedMenu = '', onClickMenu }) => {
+>>>>>>> f207429 ([ENH] : 회사 연혁 작업중)
   const MENU_LIST = [
     { value: '제품', id: 'product' },
     { value: '회사', id: 'company' },
@@ -103,17 +109,16 @@ const MainNav: React.FC<IProps> = ({
   return (
     <STDContainer>
       <STDMainMenu>
-        <img src="/image/main_nav/header_logo.png" />
+        <img
+          src="/image/main_nav/header_logo.png"
+          onClick={() => onClickMenu('')}
+        />
         {MENU_LIST.map(({ id, value }, index) => (
           <Widgets.Button.Primary
             key={value}
             value={value}
             onClick={() => onClickMenu(id)}
-            state={
-              selectedMenu === `/${id === 'product' ? '' : id}`
-                ? 'active'
-                : 'default'
-            }
+            state={selectedMenu === `/${id}` ? 'active' : 'default'}
             cssStyle={
               index === MENU_LIST.length - 1 ? '' : 'margin-bottom: 26px;'
             }

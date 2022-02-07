@@ -22,14 +22,6 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <div>hello {selectedMenu}</div>
-      <Widgets.Button.Primary
-        value="제품"
-        state={'active'}
-        onClick={() => {}}
-      />
-      <Widgets.Button.Secondary value="제품" state={'active'} />
-      <Widgets.Button.Widget value="이미지" state={'default'} />
       <Home.Container onClickSetTest={onClickSetTest} />
     </>
   );

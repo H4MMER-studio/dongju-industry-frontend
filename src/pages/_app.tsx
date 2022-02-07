@@ -40,7 +40,7 @@ function App({ Component, pageProps }: AppProps) {
   const innerHeight = useResize();
 
   const onClickMenu = (menu: string) => {
-    router.push(`/${menu === 'product' ? '' : menu}`);
+    router.push(`/${menu}`);
   };
 
   const onClickProduct = (productType: ProductType['type']) => {
