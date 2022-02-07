@@ -2,12 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'public/image';
 
-const EstimateForm: React.FC = () => {
+interface Iprops {
+  closeForm: () => void;
+}
+
+const EstimateForm: React.FC<Iprops> = ({ closeForm }) => {
   return (
     <EstimateFormLayout>
       <Header>
         <Title>고객문의</Title>
-        <Icon.CloseIcon />
+        <CloseIconLayout onClick={closeForm}>
+          <Icon.CloseIcon />
+        </CloseIconLayout>
       </Header>
     </EstimateFormLayout>
   );
@@ -30,4 +36,9 @@ const Header = styled.header`
 const Title = styled.div`
   font-size: 24px;
   font-weight: 600;
+  color: #fff;
+`;
+
+const CloseIconLayout = styled.div`
+  cursor: pointer;
 `;

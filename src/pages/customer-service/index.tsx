@@ -25,10 +25,15 @@ const CustomerServiceView: React.FC = () => {
     }
   };
 
+  const closeForm = () => {
+    route.push('/customer-service');
+  };
+
   return (
     <CustomerService.Container
       questionType={query.question}
       clickContact={clickContact}
+      closeForm={closeForm}
     />
   );
 };

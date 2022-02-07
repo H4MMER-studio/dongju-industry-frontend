@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Widgets } from '@/components';
+import EstimateForm from './EstimateForm';
 
 interface Iprops {
   questionType?: 'estimate' | 'A/S' | 'ETC';
+  closeForm: () => void;
 }
 
-const FormModal: React.FC<Iprops> = ({ questionType }) => {
+const FormModal: React.FC<Iprops> = ({ questionType, closeForm }) => {
   const displayForm = (type?: 'estimate' | 'A/S' | 'ETC') => {
     switch (type) {
       case 'estimate':
-        return <div>견적문의</div>;
+        return <EstimateForm closeForm={closeForm} />;
 
       default:
         return null;

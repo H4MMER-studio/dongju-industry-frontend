@@ -6,11 +6,13 @@ import { Images } from 'public/image';
 interface Iprops {
   questionType: 'estimate' | 'A/S' | 'ETC';
   clickContact: (type: 'estimate' | 'A/S' | 'ETC') => void;
+  closeForm: () => void;
 }
 
 const CustomerServiceContainer: React.FC<Iprops> = ({
   questionType,
   clickContact,
+  closeForm,
 }) => {
   return (
     <CustomerServiceContainerLayout>
@@ -44,7 +46,10 @@ const CustomerServiceContainer: React.FC<Iprops> = ({
         />
       </Layouts>
       {questionType && (
-        <CustomerServiceComponents.FormModal questionType={questionType} />
+        <CustomerServiceComponents.FormModal
+          questionType={questionType}
+          closeForm={closeForm}
+        />
       )}
     </CustomerServiceContainerLayout>
   );
@@ -62,9 +67,24 @@ const CustomerServiceContainerLayout = styled.div`
 
 const ServiceLayout = styled.div`
   margin-right: 16px;
+
+  @media (max-width: 1240px) {
+    &:nth-child(2n) {
+      margin-right: 0px;
+    }
+
+    &:nth-child(-1n + 2) {
+      margin-bottom: 16px;
+    }
+  }
 `;
 
 const Layouts = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 1240px) {
+    width: 556px;
+    flex-wrap: wrap;
+  }
 `;
