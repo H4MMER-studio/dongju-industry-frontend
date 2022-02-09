@@ -4,9 +4,10 @@ import { Product } from '@/components';
 import { ProductType } from '@/interfaces';
 
 const ProductView: React.FC = () => {
-  const query = useRouter().query as { type: ProductType['type'] };
+  const router = useRouter();
+  const { type } = router.query as { type: ProductType['type'] };
 
-  return <Product.Container productType={query.type} />;
+  return <Product.Container productType={type} />;
 };
 
 export default ProductView;
