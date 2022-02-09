@@ -17,7 +17,7 @@ import { mixins } from '@/styles';
 import { homeActions } from '@/store';
 import { useResize } from '@/hooks';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Product } from '@/interfaces';
+import { ProductType } from '@/interfaces';
 
 interface IContainerProps {
   height: number;
@@ -43,7 +43,7 @@ function App({ Component, pageProps }: AppProps) {
     router.push(`/${menu === 'product' ? '' : menu}`);
   };
 
-  const onClickProduct = (productType: Product['type']) => {
+  const onClickProduct = (productType: ProductType['type']) => {
     router.push(`/product/${productType}`);
   };
 

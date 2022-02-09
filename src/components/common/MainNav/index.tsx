@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Widgets } from '@/components';
 import { mixins } from '@/styles';
-import { Product } from '@/interfaces';
+import { ProductType } from '@/interfaces';
 
 interface IProps {
   selectedMenu: string;
   onClickMenu(menu: string): void;
-  onClickProduct(product: Product['type']): void;
+  onClickProduct(product: ProductType['type']): void;
 }
 
 const STDContainer = styled.nav`
@@ -64,7 +64,7 @@ const MainNav: React.FC<IProps> = ({
   const PRDUCT_LIST: {
     imageSrc: string;
     name: string;
-    type: Product['type'];
+    type: ProductType['type'];
   }[] = [
     {
       imageSrc: '/image/mainNav/product_1.png',

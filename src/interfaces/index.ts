@@ -1,6 +1,6 @@
 export * from './home';
 
-export interface Product {
+export interface ProductType {
   type:
     | 'air-conditioner'
     | 'freeze-protection-damper-coil'
