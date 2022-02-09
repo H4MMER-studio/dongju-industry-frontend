@@ -6,9 +6,6 @@ export { MainNav };
 // Home
 import HomeContainter from './Layout/Home/HomeContainter';
 
-//product
-import ProductContainer from './Layout/Product/ProductContainer';
-
 export const Home = {
   Container: HomeContainter,
 };
@@ -34,10 +31,6 @@ export const CustomerService = {
   Container: CustomerServiceContainer,
 };
 
-export const Product = {
-  Container: ProductContainer,
-};
-
 //Company
 import CompanyContainer from './Layout/Company/CompanyContainer';
 
@@ -45,6 +38,16 @@ export const Company = {
   Container: CompanyContainer,
 };
 
+//Product
+import ProductContainer from './Layout/Product/ProductContainer';
+import DamperCoilDetail from './Layout/Product/DamperCoilDetail';
+import AirConditioner from './Layout/Product/AirConditioner';
+
+export const Product = {
+  Container: ProductContainer,
+  DamperCoilDetail,
+  AirConditioner,
+};
 //Wigets
 import * as Widgets from './widgets';
 

@@ -27,6 +27,7 @@ const STDContainer = styled.div<IContainerProps>`
   ${mixins.flexSet('flex-start', 'flex-start')}
   padding: 16px;
   height: ${(props) => props.height}px;
+  background-color: #f0f0f0;
 `;
 
 const client = new ApolloClient({
