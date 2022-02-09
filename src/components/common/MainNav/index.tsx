@@ -12,10 +12,12 @@ interface IProps {
 
 const STDContainer = styled.nav`
   ${mixins.flexSet('center', 'flex-start')}
-  padding: 36px 20px 20px 30px;
-  background-color: #383838;
-  border-radius: 12px;
   height: 100%;
+  padding: 36px 20px 20px 30px;
+  margin-right: 24px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);
 `;
 
 const STDMainMenu = styled.div`
@@ -45,7 +47,9 @@ const STDProductWrapper = styled.div`
 
   p {
     font-size: 15px;
-    color: #b7b7b7;
+    font-weight: 600px;
+    line-height: 18px;
+    color: #777777;
   }
 `;
 
@@ -67,27 +71,27 @@ const MainNav: React.FC<IProps> = ({
     type: ProductType['type'];
   }[] = [
     {
-      imageSrc: '/image/mainNav/product_1.png',
+      imageSrc: '/image/main_nav/product_1.png',
       name: '공기조화기',
       type: 'air-conditioner',
     },
     {
-      imageSrc: '/image/mainNav/product_2.png',
+      imageSrc: '/image/main_nav/product_2.png',
       name: '동파방지댐퍼코일',
       type: 'freeze-protection-damper-coil',
     },
     {
-      imageSrc: '/image/mainNav/product_3.png',
+      imageSrc: '/image/main_nav/product_3.png',
       name: '배기유니트',
       type: 'exhaust-unit',
     },
     {
-      imageSrc: '/image/mainNav/product_4.png',
+      imageSrc: '/image/main_nav/product_4.png',
       name: '버블댐퍼',
       type: 'exhaust-unit',
     },
     {
-      imageSrc: '/image/mainNav/product_5.png',
+      imageSrc: '/image/main_nav/product_5.png',
       name: '완전밀폐도어',
       type: 'fully-sealed-door',
     },
@@ -96,17 +100,18 @@ const MainNav: React.FC<IProps> = ({
   return (
     <STDContainer>
       <STDMainMenu>
-        <img src="/image/mainNav/header_logo.png" />
+        <img
+          src="/image/main_nav/header_logo.png"
+          onClick={() => onClickMenu('')}
+        />
         {MENU_LIST.map(({ id, value }, index) => (
           <Widgets.Button.Primary
             key={value}
             value={value}
-            onClick={() => onClickMenu(id)}
-            state={
-              selectedMenu === `/${id === 'product' ? '' : id}`
-                ? 'active'
-                : 'default'
+            onClick={() =>
+              onClickMenu(id === 'product' ? 'product/air-conditioner' : id)
             }
+            state={selectedMenu.includes(id) ? 'active' : 'default'}
             cssStyle={
               index === MENU_LIST.length - 1 ? '' : 'margin-bottom: 26px;'
             }

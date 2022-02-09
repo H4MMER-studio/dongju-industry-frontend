@@ -5,7 +5,6 @@ import { homeActions } from '../module/home';
 export function* testSaga() {
   try {
     const test = yield call(API.GET, TEST_API);
-    yield put(homeActions.setTest(test));
   } catch (error) {
     console.error(error);
   }

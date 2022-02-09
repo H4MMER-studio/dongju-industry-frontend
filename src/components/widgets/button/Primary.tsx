@@ -32,7 +32,7 @@ const PrimaryButton = styled.button<PrimaryButtonProps>`
   padding: 6px 12px;
   border-radius: 18px;
   background-color: ${(props) => (props.state === 'active' ? '#2979FF' : '')};
-  color: ${(props) => (props.state === 'active' ? '#fff' : '#fff')};
+  color: ${(props) => (props.state === 'active' ? '#fff' : '#000')};
   font-size: 18px;
   &:active {
     background-color: #2979ff;

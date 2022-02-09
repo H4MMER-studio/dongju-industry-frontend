@@ -2,15 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { ProductType } from '@/interfaces';
 import * as ProductComponents from './components';
-
+import { Product } from '@/components';
+import { mixins } from '@/styles';
 interface Iprops {
   productType: ProductType['type'];
 }
 
 const ProductContainerLayout = styled.div`
-  display: flex;
-  justify-content: space-between;
+  ${mixins.flexSet('space-between', 'unset')}
   width: 100%;
+  height: 100%;
   padding-left: 24px;
   padding-right: 8px;
 
@@ -29,20 +30,25 @@ const ProductManualLayout = styled.div`
 `;
 
 const ProductContainer: React.FC<Iprops> = ({ productType }) => {
+  const renderProduct = (type: ProductType['type']) => {
+    switch (type) {
+      case 'air-conditioner':
+        return <Product.AirConditioner />;
+      case 'freeze-protection-damper-coil':
+        return <Product.DamperCoilDetail />;
+    }
+  };
+
   return (
     <ProductContainerLayout>
       <ProductManualLayout>
         <ProductComponents.ProductManual />
       </ProductManualLayout>
-      <TableLocation>테이블 위치</TableLocation>
+      <TableLocation>{renderProduct(productType)}</TableLocation>
     </ProductContainerLayout>
   );
 };
 
 export default ProductContainer;
 
-const TableLocation = styled.div`
-  background-color: red;
-  width: 100%;
-  height: 100%;
-`;
+const TableLocation = styled.div``;
