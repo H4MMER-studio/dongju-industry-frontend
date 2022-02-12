@@ -88,7 +88,7 @@ const MainNav: React.FC<IProps> = ({
     {
       imageSrc: '/image/main_nav/product_4.png',
       name: '버블댐퍼',
-      type: 'exhaust-unit',
+      type: 'bubble-damper',
     },
     {
       imageSrc: '/image/main_nav/product_5.png',
