@@ -29,7 +29,9 @@ const ProductManualLayout = styled.div`
   }
 `;
 
-const TableLocation = styled.div``;
+const TableLocation = styled.section`
+  width: 100%;
+`;
 
 const ProductContainer: React.FC<Iprops> = ({ productType }) => {
   const [selectedProductManual, setSelectedProductManual] = useState(
@@ -46,6 +48,12 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
         return <Product.AirConditioner />;
       case 'freeze-protection-damper-coil':
         return <Product.DamperCoilDetail />;
+      case 'exhaust-unit':
+        return <Product.ExhaustUnit />;
+      case 'bubble-damper':
+        return <Product.BubbleDamper />;
+      case 'fully-sealed-door':
+        return <Product.FullySealedDoor />;
     }
   };
 
