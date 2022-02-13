@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import ProductImages from './ProductImages';
 import Menu from './Menu';
+import { ProductMenu } from '@/interfaces';
+
+interface Iprops {
+  productMenu: ProductMenu;
+}
 
 const ProductMaualLayout = styled.div``;
 
@@ -19,13 +24,13 @@ const ProductImagesLayout = styled.div`
   }
 `;
 
-const ProductManual: React.FC = () => {
+const ProductManual: React.FC<Iprops> = ({ productMenu }) => {
   return (
     <ProductMaualLayout>
       <ProductImagesLayout>
         <ProductImages />
       </ProductImagesLayout>
-      <Menu />
+      <Menu productMenu={productMenu} />
     </ProductMaualLayout>
   );
 };

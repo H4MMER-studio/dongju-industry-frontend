@@ -42,11 +42,17 @@ export const Company = {
 import ProductContainer from './Layout/Product/ProductContainer';
 import DamperCoilDetail from './Layout/Product/DamperCoilDetail';
 import AirConditioner from './Layout/Product/AirConditioner';
+import ExhaustUnit from './Layout/Product/ExhaustUnit';
+import BubbleDamper from './Layout/Product/BubbleDamper';
+import FullySealedDoor from './Layout/Product/FullySealedDoor';
 
 export const Product = {
   Container: ProductContainer,
   DamperCoilDetail,
   AirConditioner,
+  ExhaustUnit,
+  BubbleDamper,
+  FullySealedDoor,
 };
 //Wigets
 import * as Widgets from './widgets';

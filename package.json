@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "dongju-industry-frontend",
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run open-browser && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "open-browser": "start http://localhost:3000/"
   },
   "keywords": [],
   "author": "",
