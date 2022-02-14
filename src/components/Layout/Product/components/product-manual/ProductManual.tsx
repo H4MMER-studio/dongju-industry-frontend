@@ -28,7 +28,7 @@ const ProductManual: React.FC<Iprops> = ({ productMenu }) => {
   return (
     <ProductMaualLayout>
       <ProductImagesLayout>
-        <ProductImages />
+        <ProductImages detailImages={productMenu.detailImages} />
       </ProductImagesLayout>
       <Menu productMenu={productMenu} />
     </ProductMaualLayout>
