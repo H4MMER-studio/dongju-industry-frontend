@@ -8,6 +8,9 @@ interface IProps {
   selectedMenu: string;
   onClickMenu(menu: string): void;
   onClickProduct(product: ProductType['type']): void;
+  onClickCompanyMenu: (
+    companyMenu: 'welcome' | 'history' | 'way-to-come'
+  ) => void;
 }
 
 const STDContainer = styled.nav`
@@ -53,10 +56,25 @@ const STDProductWrapper = styled.div`
   }
 `;
 
+const STDCompanyWrapper = styled.div`
+  &:nth-child(1) {
+    padding-top: 74px;
+  }
+
+  p {
+    font-size: 18px;
+    font-weight: 400px;
+    color: #000;
+    margin-bottom: 35px;
+    cursor: pointer;
+  }
+`;
+
 const MainNav: React.FC<IProps> = ({
   selectedMenu = '/',
   onClickMenu,
   onClickProduct,
+  onClickCompanyMenu,
 }) => {
   const MENU_LIST = [
     { value: '제품', id: 'product' },
@@ -97,6 +115,15 @@ const MainNav: React.FC<IProps> = ({
     },
   ];
 
+  const COMPANY_MENU_LIST: {
+    name: string;
+    type: 'welcome' | 'history' | 'way-to-come';
+  }[] = [
+    { name: '인사말', type: 'welcome' },
+    { name: '연혁', type: 'history' },
+    { name: '오시는 길', type: 'way-to-come' },
+  ];
+
   return (
     <STDContainer>
       <STDMainMenu>
@@ -118,13 +145,25 @@ const MainNav: React.FC<IProps> = ({
           />
         ))}
       </STDMainMenu>
+
       <STDProductList>
-        {PRDUCT_LIST.map(({ imageSrc, name, type }) => (
-          <STDProductWrapper key={name} onClick={() => onClickProduct(type)}>
-            <img alt="product image" src={imageSrc} />
-            <p>{name}</p>
-          </STDProductWrapper>
-        ))}
+        {selectedMenu.includes('product')
+          ? PRDUCT_LIST.map(({ imageSrc, name, type }) => (
+              <STDProductWrapper
+                key={name}
+                onClick={() => onClickProduct(type)}
+              >
+                <img alt="product image" src={imageSrc} />
+                <p>{name}</p>
+              </STDProductWrapper>
+            ))
+          : selectedMenu.includes('company')
+          ? COMPANY_MENU_LIST.map((menu) => (
+              <STDCompanyWrapper key={menu.type}>
+                <p onClick={() => onClickCompanyMenu(menu.type)}>{menu.name}</p>
+              </STDCompanyWrapper>
+            ))
+          : null}
       </STDProductList>
     </STDContainer>
   );

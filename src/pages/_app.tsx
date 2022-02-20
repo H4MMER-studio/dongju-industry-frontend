@@ -48,6 +48,12 @@ function App({ Component, pageProps }: AppProps) {
     router.push(`/product/${productType}`);
   };
 
+  const onClickCompanyMenu = (
+    companyMenu: 'welcome' | 'history' | 'way-to-come'
+  ) => {
+    router.push(`/company/${companyMenu}`);
+  };
+
   return (
     <ApolloProvider client={client}>
       <CssBaseline />
@@ -56,6 +62,7 @@ function App({ Component, pageProps }: AppProps) {
           selectedMenu={selectedMenu}
           onClickMenu={onClickMenu}
           onClickProduct={onClickProduct}
+          onClickCompanyMenu={onClickCompanyMenu}
         />
         <Component {...pageProps} />
       </STDContainer>
