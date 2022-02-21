@@ -14,16 +14,20 @@ const ProductContainerLayout = styled.div`
   width: 100%;
   min-width: 0;
   height: 100%;
-  padding-left: 24px;
   padding-right: 8px;
 
   @media (max-width: 1365px) {
     display: block;
+    overflow: scroll;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0 16px 0;
   }
 `;
 
 const ProductManualLayout = styled.div`
-  padding-right: 24px;
+  padding: 16px 24px 0 0;
 
   @media (max-width: 1365px) {
     padding-right: 0px;
@@ -34,6 +38,7 @@ const ProductManualLayout = styled.div`
 const TableLocation = styled.section`
   width: 100%;
   min-width: 0;
+  margin-right: 16px;
 `;
 
 const ProductContainer: React.FC<Iprops> = ({ productType }) => {
