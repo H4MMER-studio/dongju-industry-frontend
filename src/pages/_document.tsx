@@ -53,7 +53,6 @@ export default class MyDocument extends Document {
             charSet="UTF-8"
             href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
           />
-          <title>동주산업</title>
         </Head>
         <body>
           <Main />
