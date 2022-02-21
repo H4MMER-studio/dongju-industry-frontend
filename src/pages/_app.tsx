@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { MainNav } from '@/components';
@@ -49,17 +50,22 @@ function App({ Component, pageProps }: AppProps) {
   };
 
   return (
-    <ApolloProvider client={client}>
-      <CssBaseline />
-      <STDContainer height={innerHeight}>
-        <MainNav
-          selectedMenu={selectedMenu}
-          onClickMenu={onClickMenu}
-          onClickProduct={onClickProduct}
-        />
-        <Component {...pageProps} />
-      </STDContainer>
-    </ApolloProvider>
+    <>
+      <Head>
+        <title>동주산업</title>
+      </Head>
+      <ApolloProvider client={client}>
+        <CssBaseline />
+        <STDContainer height={innerHeight}>
+          <MainNav
+            selectedMenu={selectedMenu}
+            onClickMenu={onClickMenu}
+            onClickProduct={onClickProduct}
+          />
+          <Component {...pageProps} />
+        </STDContainer>
+      </ApolloProvider>
+    </>
   );
 }
 

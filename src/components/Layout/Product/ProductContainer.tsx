@@ -12,6 +12,7 @@ interface Iprops {
 const ProductContainerLayout = styled.div`
   ${mixins.flexSet('space-between', 'unset')}
   width: 100%;
+  min-width: 0;
   height: 100%;
   padding-left: 24px;
   padding-right: 8px;
@@ -32,6 +33,7 @@ const ProductManualLayout = styled.div`
 
 const TableLocation = styled.section`
   width: 100%;
+  min-width: 0;
 `;
 
 const ProductContainer: React.FC<Iprops> = ({ productType }) => {
