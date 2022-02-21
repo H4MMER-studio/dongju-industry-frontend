@@ -9,10 +9,17 @@ interface IProps {
 const STDContainer = styled.article`
   ${mixins.flexSet()}
   width: 100%;
-  height: 100%;
+  height: calc(100% - 48px);
+  margin: 24px;
   border-radius: 20px;
   background: url('/image/main_page/main_company.png') no-repeat center;
   background-size: cover;
+
+  @media (max-width: 1024px) {
+    height: 738px;
+    margin: 0;
+    border-radius: 0;
+  }
 `;
 
 const STDMainLogoWrapper = styled.div`

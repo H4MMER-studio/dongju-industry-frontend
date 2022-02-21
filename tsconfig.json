@@ -20,7 +20,8 @@
     "target": "es5",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@svg": ["assets/svg/index"]
     }
   },
   "exclude": ["node_modules"],

@@ -25,6 +25,11 @@ const h3Style = css`
 `;
 
 const STDContainer = styled.div`
+  overflow: scroll;
+`;
+
+const STDWrapper = styled.div`
+  width: 1064px;
   margin-bottom: 36px;
   border-radius: 12px;
   overflow: hidden;
@@ -180,87 +185,89 @@ const STDNoticeWrapper = styled.div`
 const DesignCondition1 = () => {
   return (
     <STDContainer>
-      <STDAirConditionWrapper>
-        <h3>공기조건</h3>
-        <STDSeasonWapper>
-          <STDSummerWinterWrapper>
-            <h3>여름</h3>
-            <div>
-              <STDMainContentWrapper>
-                <h4>입구 건구온도</h4>
-                <p>27.8℃</p>
-              </STDMainContentWrapper>
-              <STDMainContentWrapper>
-                <h4>입구 습구온도</h4>
-                <p>22.4℃</p>
-              </STDMainContentWrapper>
-            </div>
-          </STDSummerWinterWrapper>
-          <STDSummerWinterWrapper>
-            <h3>겨울</h3>
-            <div>
-              <STDMainContentWrapper>
-                <h4>입구 건구온도</h4>
-                <p>15℃</p>
-              </STDMainContentWrapper>
-              <STDMainContentWrapper>
-                <h4>입구 습구온도</h4>
-                <p></p>
-              </STDMainContentWrapper>
-            </div>
-          </STDSummerWinterWrapper>
-        </STDSeasonWapper>
-        <STDCoilDetailContainer>
-          <STDCoilDetailWrapper>
-            <h3>Cooling Coil</h3>
-            <div>
-              <STDMainContentWrapper>
-                <h4>입구수온</h4>
-                <p>7</p>
-              </STDMainContentWrapper>
-              <STDMainContentWrapper>
-                <h4>출구수온</h4>
-                <p>12</p>
-              </STDMainContentWrapper>
-            </div>
-          </STDCoilDetailWrapper>
-          <STDCoilDetailWrapper>
-            <h3>온수 Coil</h3>
-            <div>
-              <STDMainContentWrapper>
-                <h4>입구수온</h4>
-                <p>60</p>
-              </STDMainContentWrapper>
-              <STDMainContentWrapper>
-                <h4>출구수온</h4>
-                <p>50</p>
-              </STDMainContentWrapper>
-            </div>
-          </STDCoilDetailWrapper>
-        </STDCoilDetailContainer>
-      </STDAirConditionWrapper>
-      <STDVaporPressureWrapper>
-        <h3>증기압</h3>
-        <p>2㎏/㎠</p>
-      </STDVaporPressureWrapper>
-      <STDWindSpeedWrapper>
-        <h3>코일 통과 풍속</h3>
-        <p>2.6m/sec</p>
-      </STDWindSpeedWrapper>
-      <STDNoticeWrapper>
-        <h3>주의사항</h3>
-        <div>
-          <ul>
-            <li>소요풍량, 정압은 최대량을 선정</li>
-            <li>COIL 통과 풍속은 2.5m/sec ~ 3m/sec로 선택함이 경제적임.</li>
-            <li>표준규격</li>
+      <STDWrapper>
+        <STDAirConditionWrapper>
+          <h3>공기조건</h3>
+          <STDSeasonWapper>
+            <STDSummerWinterWrapper>
+              <h3>여름</h3>
+              <div>
+                <STDMainContentWrapper>
+                  <h4>입구 건구온도</h4>
+                  <p>27.8℃</p>
+                </STDMainContentWrapper>
+                <STDMainContentWrapper>
+                  <h4>입구 습구온도</h4>
+                  <p>22.4℃</p>
+                </STDMainContentWrapper>
+              </div>
+            </STDSummerWinterWrapper>
+            <STDSummerWinterWrapper>
+              <h3>겨울</h3>
+              <div>
+                <STDMainContentWrapper>
+                  <h4>입구 건구온도</h4>
+                  <p>15℃</p>
+                </STDMainContentWrapper>
+                <STDMainContentWrapper>
+                  <h4>입구 습구온도</h4>
+                  <p></p>
+                </STDMainContentWrapper>
+              </div>
+            </STDSummerWinterWrapper>
+          </STDSeasonWapper>
+          <STDCoilDetailContainer>
+            <STDCoilDetailWrapper>
+              <h3>Cooling Coil</h3>
+              <div>
+                <STDMainContentWrapper>
+                  <h4>입구수온</h4>
+                  <p>7</p>
+                </STDMainContentWrapper>
+                <STDMainContentWrapper>
+                  <h4>출구수온</h4>
+                  <p>12</p>
+                </STDMainContentWrapper>
+              </div>
+            </STDCoilDetailWrapper>
+            <STDCoilDetailWrapper>
+              <h3>온수 Coil</h3>
+              <div>
+                <STDMainContentWrapper>
+                  <h4>입구수온</h4>
+                  <p>60</p>
+                </STDMainContentWrapper>
+                <STDMainContentWrapper>
+                  <h4>출구수온</h4>
+                  <p>50</p>
+                </STDMainContentWrapper>
+              </div>
+            </STDCoilDetailWrapper>
+          </STDCoilDetailContainer>
+        </STDAirConditionWrapper>
+        <STDVaporPressureWrapper>
+          <h3>증기압</h3>
+          <p>2㎏/㎠</p>
+        </STDVaporPressureWrapper>
+        <STDWindSpeedWrapper>
+          <h3>코일 통과 풍속</h3>
+          <p>2.6m/sec</p>
+        </STDWindSpeedWrapper>
+        <STDNoticeWrapper>
+          <h3>주의사항</h3>
+          <div>
             <ul>
-              <li>COIL 선정기준 - 증기가열 : 2열</li>
-              <li>FAN은 BACKWARD FAN를 기준하였음.</li>
+              <li>소요풍량, 정압은 최대량을 선정</li>
+              <li>COIL 통과 풍속은 2.5m/sec ~ 3m/sec로 선택함이 경제적임.</li>
+              <li>표준규격</li>
+              <ul>
+                <li>COIL 선정기준 - 증기가열 : 2열</li>
+                <li>FAN은 BACKWARD FAN를 기준하였음.</li>
+              </ul>
             </ul>
-          </ul>
-        </div>
-      </STDNoticeWrapper>
+          </div>
+        </STDNoticeWrapper>
+      </STDWrapper>
     </STDContainer>
   );
 };
