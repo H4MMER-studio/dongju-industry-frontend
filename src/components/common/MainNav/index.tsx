@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Widgets } from '@/components';
 import { mixins } from '@/styles';
 import { ProductType } from '@/interfaces';
+import { IconHamburg, IconDownArrow, IconClose } from '@svg';
 
 interface IProps {
   selectedMenu: string;
@@ -15,12 +16,16 @@ interface IProps {
 
 const STDContainer = styled.nav`
   ${mixins.flexSet('center', 'flex-start')}
-  height: 100%;
+  height: calc(100% - 48px);
   padding: 36px 20px 20px 30px;
-  margin-right: 24px;
+  margin: 24px;
   background-color: white;
   border-radius: 12px;
   box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 const STDMainMenu = styled.div`
@@ -36,6 +41,8 @@ const STDMainMenu = styled.div`
 
 const STDProductList = styled.div`
   flex: 1;
+  height: 100%;
+  overflow-y: scroll;
 `;
 
 const STDProductWrapper = styled.div`
@@ -56,17 +63,62 @@ const STDProductWrapper = styled.div`
   }
 `;
 
-const STDCompanyWrapper = styled.div`
-  &:nth-child(1) {
-    padding-top: 74px;
-  }
+const STDMiniHeaderWrapper = styled.header<{ isOpen: boolean }>`
+  position: fixed;
+  top: 0;
+  z-index: 100000;
+  width: 100%;
+  ${({ isOpen }) => isOpen && 'height: 100%;'}
+  background: white;
 
-  p {
-    font-size: 18px;
-    font-weight: 400px;
-    color: #000;
-    margin-bottom: 35px;
+  @media (min-width: 1024px) {
+    display: none;
+  }
+`;
+
+const STDMiniHeader = styled.div`
+  ${mixins.flexSet('space-between')}
+  padding: 13px 23px 13px 12px;
+
+  img {
+    width: 91px;
     cursor: pointer;
+  }
+`;
+
+const STDHamburgButton = styled.button`
+  width: 18px;
+  height: 12px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+`;
+
+const STDEmptySpace = styled.div`
+  height: 62px;
+`;
+
+const STDSideMenuList = styled.ul`
+  width: 100%;
+  background: white;
+
+  li {
+  }
+`;
+
+const STDSideMenuTitleWrapper = styled.div`
+  ${mixins.flexSet('space-between')}
+  width: 100%;
+  padding: 18px 20px 18px 28px;
+  cursor: pointer;
+
+  svg {
+    width: 16px;
+    height: 8px;
+    object-fit: contain;
   }
 `;
 
@@ -76,6 +128,7 @@ const MainNav: React.FC<IProps> = ({
   onClickProduct,
   onClickCompanyMenu,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const MENU_LIST = [
     { value: '제품', id: 'product' },
     { value: '회사', id: 'company' },
@@ -125,47 +178,66 @@ const MainNav: React.FC<IProps> = ({
   ];
 
   return (
-    <STDContainer>
-      <STDMainMenu>
-        <img
-          src="/image/main_nav/header_logo.png"
-          onClick={() => onClickMenu('')}
-        />
-        {MENU_LIST.map(({ id, value }, index) => (
-          <Widgets.Button.Primary
-            key={value}
-            value={value}
-            onClick={() =>
-              onClickMenu(id === 'product' ? 'product/air-conditioner' : id)
-            }
-            state={selectedMenu.includes(id) ? 'active' : 'default'}
-            cssStyle={
-              index === MENU_LIST.length - 1 ? '' : 'margin-bottom: 26px;'
-            }
+    <>
+      <STDContainer>
+        <STDMainMenu>
+          <img
+            src="/image/main_nav/header_logo.png"
+            onClick={() => onClickMenu('')}
           />
-        ))}
-      </STDMainMenu>
-
-      <STDProductList>
-        {selectedMenu.includes('product')
-          ? PRDUCT_LIST.map(({ imageSrc, name, type }) => (
-              <STDProductWrapper
-                key={name}
-                onClick={() => onClickProduct(type)}
-              >
-                <img alt="product image" src={imageSrc} />
-                <p>{name}</p>
-              </STDProductWrapper>
-            ))
-          : selectedMenu.includes('company')
-          ? COMPANY_MENU_LIST.map((menu) => (
-              <STDCompanyWrapper key={menu.type}>
-                <p onClick={() => onClickCompanyMenu(menu.type)}>{menu.name}</p>
-              </STDCompanyWrapper>
-            ))
-          : null}
-      </STDProductList>
-    </STDContainer>
+          {MENU_LIST.map(({ id, value }, index) => (
+            <Widgets.Button.Primary
+              key={value}
+              value={value}
+              onClick={() =>
+                onClickMenu(id === 'product' ? 'product/air-conditioner' : id)
+              }
+              state={selectedMenu.includes(id) ? 'active' : 'default'}
+              cssStyle={
+                index === MENU_LIST.length - 1 ? '' : 'margin-bottom: 26px;'
+              }
+            />
+          ))}
+        </STDMainMenu>
+        <STDProductList>
+          {PRDUCT_LIST.map(({ imageSrc, name, type }) => (
+            <STDProductWrapper key={name} onClick={() => onClickProduct(type)}>
+              <img alt="product image" src={imageSrc} />
+              <p>{name}</p>
+            </STDProductWrapper>
+          ))}
+        </STDProductList>
+      </STDContainer>
+      <STDMiniHeaderWrapper isOpen={isOpen}>
+        <STDMiniHeader>
+          <img
+            alt="header logo"
+            src="/image/main_nav/header_logo2.png"
+            onClick={() => onClickMenu('')}
+          />
+          <STDHamburgButton onClick={() => setIsOpen((isOpen) => !isOpen)}>
+            {isOpen ? <IconClose /> : <IconHamburg />}
+          </STDHamburgButton>
+        </STDMiniHeader>
+        {isOpen && (
+          <STDSideMenuList>
+            <STDSideMenuTitleWrapper>
+              제품 <IconDownArrow />
+            </STDSideMenuTitleWrapper>
+            <STDSideMenuTitleWrapper>
+              회사 <IconDownArrow />
+            </STDSideMenuTitleWrapper>
+            <STDSideMenuTitleWrapper>
+              공지 <IconDownArrow />
+            </STDSideMenuTitleWrapper>
+            <STDSideMenuTitleWrapper>
+              고객지원 <IconDownArrow />
+            </STDSideMenuTitleWrapper>
+          </STDSideMenuList>
+        )}
+      </STDMiniHeaderWrapper>
+      <STDEmptySpace />
+    </>
   );
 };
 

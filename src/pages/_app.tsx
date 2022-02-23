@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { MainNav } from '@/components';
@@ -25,9 +26,13 @@ interface IContainerProps {
 
 const STDContainer = styled.div<IContainerProps>`
   ${mixins.flexSet('flex-start', 'flex-start')}
-  padding: 16px;
   height: ${(props) => props.height}px;
   background-color: #f0f0f0;
+
+  @media (max-width: 1024px) {
+    ${mixins.flexSet('flex-start', 'flex-start', 'column')}
+    height: auto;
+  }
 `;
 
 const client = new ApolloClient({
@@ -55,18 +60,22 @@ function App({ Component, pageProps }: AppProps) {
   };
 
   return (
-    <ApolloProvider client={client}>
-      <CssBaseline />
-      <STDContainer height={innerHeight}>
-        <MainNav
-          selectedMenu={selectedMenu}
-          onClickMenu={onClickMenu}
-          onClickProduct={onClickProduct}
-          onClickCompanyMenu={onClickCompanyMenu}
-        />
-        <Component {...pageProps} />
-      </STDContainer>
-    </ApolloProvider>
+    <>
+      <Head>
+        <title>동주산업</title>
+      </Head>
+      <ApolloProvider client={client}>
+        <CssBaseline />
+        <STDContainer height={innerHeight}>
+          <MainNav
+            selectedMenu={selectedMenu}
+            onClickMenu={onClickMenu}
+            onClickProduct={onClickProduct}
+          />
+          <Component {...pageProps} />
+        </STDContainer>
+      </ApolloProvider>
+    </>
   );
 }
 

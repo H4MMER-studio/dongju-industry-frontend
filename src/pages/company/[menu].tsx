@@ -1,5 +1,6 @@
 import React from 'react';
 import Router, { useRouter } from 'next/router';
+import { Company } from '@/components';
 
 const CompanyView: React.FC = () => {
   const router = useRouter();
@@ -7,9 +8,7 @@ const CompanyView: React.FC = () => {
     menu: 'welcome' | 'history' | 'way-to-come';
   };
 
-  console.log(menu, '메뉴');
-
-  return <div />;
+  return <Company.Container menu={menu} />;
 };
 
 export default CompanyView;

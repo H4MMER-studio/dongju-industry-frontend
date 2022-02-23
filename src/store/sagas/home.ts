@@ -4,7 +4,6 @@ import { homeActions } from '../module/home';
 
 export function* testSaga() {
   try {
-    const test = yield call(API.GET, TEST_API);
   } catch (error) {
     console.error(error);
   }
