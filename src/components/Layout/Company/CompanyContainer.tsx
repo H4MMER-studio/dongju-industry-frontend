@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Welcome from './welcome';
 import History from './history';
+import WayToCome from './way-to-come';
 
 interface Iprops {
   menu: 'welcome' | 'history' | 'way-to-come';
@@ -9,10 +10,12 @@ interface Iprops {
 
 const STDContainer = styled.main`
   padding-top: 48px;
+  margin: 0 auto;
+  width: 1240px;
 `;
 
 const BannerSection = styled.section`
-  width: 1240px;
+  width: 100%;
   height: 200px;
   border-radius: 12px;
   background-color: #fff;
@@ -65,6 +68,9 @@ const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
 
           case 'history':
             return <History />;
+
+          case 'way-to-come':
+            return <WayToCome />;
 
           default:
             return null;

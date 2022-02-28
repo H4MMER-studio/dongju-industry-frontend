@@ -43,6 +43,9 @@ const client = new ApolloClient({
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const selectedMenu = router.pathname;
+  const params = router.query as {
+    menu: 'welcome' | 'history' | 'way-to-come';
+  };
   const innerHeight = useResize();
 
   const onClickMenu = (menu: string) => {
@@ -69,8 +72,10 @@ function App({ Component, pageProps }: AppProps) {
         <STDContainer height={innerHeight}>
           <MainNav
             selectedMenu={selectedMenu}
+            params={params}
             onClickMenu={onClickMenu}
             onClickProduct={onClickProduct}
+            onClickCompanyMenu={onClickCompanyMenu}
           />
           <Component {...pageProps} />
         </STDContainer>
