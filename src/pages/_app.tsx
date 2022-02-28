@@ -16,7 +16,7 @@ import { wrapper } from '@/store/configureStore';
 import { useGetStore } from '@/hooks';
 import { mixins } from '@/styles';
 import { homeActions } from '@/store';
-import { useResize } from '@/hooks';
+import useResize from '@/hooks/useResize';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ProductType } from '@/interfaces';
 
@@ -69,7 +69,7 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <ApolloProvider client={client}>
         <CssBaseline />
-        <STDContainer height={innerHeight}>
+        <STDContainer height={innerHeight.height}>
           <MainNav
             selectedMenu={selectedMenu}
             params={params}

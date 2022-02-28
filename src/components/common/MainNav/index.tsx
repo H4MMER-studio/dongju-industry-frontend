@@ -216,7 +216,13 @@ const MainNav: React.FC<IProps> = ({
                 key={value}
                 value={value}
                 onClick={() =>
-                  onClickMenu(id === 'product' ? 'product/air-conditioner' : id)
+                  onClickMenu(
+                    id === 'product'
+                      ? 'product/air-conditioner'
+                      : id === 'company'
+                      ? 'company/welcome'
+                      : id
+                  )
                 }
                 state={selectedMenu.includes(id) ? 'active' : 'default'}
                 cssStyle={
