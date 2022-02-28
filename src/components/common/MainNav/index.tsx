@@ -27,13 +27,17 @@ const STDContainer = styled.nav`
 
 const STDMainMenu = styled.div`
   ${mixins.flexSet('center', 'center', 'column')}
-  flex: 1;
   margin-right: 34px;
 
   > img {
     width: 96px;
     margin-bottom: 36px;
   }
+`;
+
+const STDMenuWrapper = styled.div`
+  ${mixins.flexSet('center', 'center', 'column')}
+  height: 100%;
 `;
 
 const STDProductList = styled.div`
@@ -119,6 +123,25 @@ const STDSideMenuTitleWrapper = styled.div`
   }
 `;
 
+const STDCompanyMenuWrapper = styled.div`
+  ${mixins.flexSet('flex-start', 'center', 'column')}
+  height: calc(100% - 72px);
+  margin-top: 72px;
+  padding: 0 26px 0 46px;
+  border-left: 1px solid #e8e8e8;
+`;
+
+const STDCompanyMenuButton = styled.button<{ isSelected: boolean }>`
+  margin-bottom: 30px;
+  line-height: 24px;
+  font-size: 18px;
+  ${({ isSelected }) => isSelected && 'color: #2979FF;'}
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 const MainNav: React.FC<IProps> = ({
   selectedMenu = '/',
   onClickMenu,
@@ -130,6 +153,12 @@ const MainNav: React.FC<IProps> = ({
     { value: '회사', id: 'company' },
     { value: '공지', id: 'notice' },
     { value: '고객지원', id: 'customer-service' },
+  ];
+
+  const COMPANY_MENU = [
+    { value: '인사말', id: 'intro' },
+    { value: '연혁', id: 'story' },
+    { value: '오시는 길', id: 'map' },
   ];
 
   const PRDUCT_LIST: {
@@ -172,28 +201,47 @@ const MainNav: React.FC<IProps> = ({
             src="/image/main_nav/header_logo.png"
             onClick={() => onClickMenu('')}
           />
-          {MENU_LIST.map(({ id, value }, index) => (
-            <Widgets.Button.Primary
-              key={value}
-              value={value}
-              onClick={() =>
-                onClickMenu(id === 'product' ? 'product/air-conditioner' : id)
-              }
-              state={selectedMenu.includes(id) ? 'active' : 'default'}
-              cssStyle={
-                index === MENU_LIST.length - 1 ? '' : 'margin-bottom: 26px;'
-              }
-            />
-          ))}
+          <STDMenuWrapper>
+            {MENU_LIST.map(({ id, value }, index) => (
+              <Widgets.Button.Primary
+                key={value}
+                value={value}
+                onClick={() =>
+                  onClickMenu(id === 'product' ? 'product/air-conditioner' : id)
+                }
+                state={selectedMenu.includes(id) ? 'active' : 'default'}
+                cssStyle={
+                  index === MENU_LIST.length - 1 ? '' : 'margin-bottom: 20px;'
+                }
+              />
+            ))}
+          </STDMenuWrapper>
         </STDMainMenu>
-        <STDProductList>
-          {PRDUCT_LIST.map(({ imageSrc, name, type }) => (
-            <STDProductWrapper key={name} onClick={() => onClickProduct(type)}>
-              <img alt="product image" src={imageSrc} />
-              <p>{name}</p>
-            </STDProductWrapper>
-          ))}
-        </STDProductList>
+        {selectedMenu.includes('company') ? (
+          <STDCompanyMenuWrapper>
+            {COMPANY_MENU.map(({ id, value }) => (
+              <STDCompanyMenuButton
+                key={id}
+                isSelected={id === 'intro'}
+                onClick={() => {}}
+              >
+                {value}
+              </STDCompanyMenuButton>
+            ))}
+          </STDCompanyMenuWrapper>
+        ) : (
+          <STDProductList>
+            {PRDUCT_LIST.map(({ imageSrc, name, type }) => (
+              <STDProductWrapper
+                key={name}
+                onClick={() => onClickProduct(type)}
+              >
+                <img alt="product image" src={imageSrc} />
+                <p>{name}</p>
+              </STDProductWrapper>
+            ))}
+          </STDProductList>
+        )}
       </STDContainer>
       <STDMiniHeaderWrapper isOpen={isOpen}>
         <STDMiniHeader>
