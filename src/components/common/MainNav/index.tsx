@@ -7,8 +7,12 @@ import { IconHamburg, IconDownArrow, IconClose } from '@svg';
 
 interface IProps {
   selectedMenu: string;
+  params: { menu: 'welcome' | 'history' | 'way-to-come' };
   onClickMenu(menu: string): void;
   onClickProduct(product: ProductType['type']): void;
+  onClickCompanyMenu: (
+    companyMenu: 'welcome' | 'history' | 'way-to-come'
+  ) => void;
 }
 
 const STDContainer = styled.nav`
@@ -144,8 +148,10 @@ const STDCompanyMenuButton = styled.button<{ isSelected: boolean }>`
 
 const MainNav: React.FC<IProps> = ({
   selectedMenu = '/',
+  params,
   onClickMenu,
   onClickProduct,
+  onClickCompanyMenu,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const MENU_LIST = [
@@ -155,10 +161,13 @@ const MainNav: React.FC<IProps> = ({
     { value: '고객지원', id: 'customer-service' },
   ];
 
-  const COMPANY_MENU = [
-    { value: '인사말', id: 'intro' },
-    { value: '연혁', id: 'story' },
-    { value: '오시는 길', id: 'map' },
+  const COMPANY_MENU: {
+    value: string;
+    id: 'welcome' | 'history' | 'way-to-come';
+  }[] = [
+    { value: '인사말', id: 'welcome' },
+    { value: '연혁', id: 'history' },
+    { value: '오시는 길', id: 'way-to-come' },
   ];
 
   const PRDUCT_LIST: {
@@ -222,8 +231,8 @@ const MainNav: React.FC<IProps> = ({
             {COMPANY_MENU.map(({ id, value }) => (
               <STDCompanyMenuButton
                 key={id}
-                isSelected={id === 'intro'}
-                onClick={() => {}}
+                isSelected={id === params.menu}
+                onClick={() => onClickCompanyMenu(id)}
               >
                 {value}
               </STDCompanyMenuButton>
