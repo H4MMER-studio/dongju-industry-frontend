@@ -163,11 +163,13 @@ const MainNav: React.FC<IProps> = ({
 
   const COMPANY_MENU: {
     value: string;
-    id: 'welcome' | 'history' | 'way-to-come';
+    id: 'welcome' | 'history' | 'way-to-come' | 'performance' | 'certification';
   }[] = [
     { value: '인사말', id: 'welcome' },
     { value: '연혁', id: 'history' },
     { value: '오시는 길', id: 'way-to-come' },
+    { value: '납품실적', id: 'performance' },
+    { value: '인증', id: 'certification' },
   ];
 
   const PRDUCT_LIST: {
