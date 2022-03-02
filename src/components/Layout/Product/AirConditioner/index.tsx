@@ -9,8 +9,8 @@ const STDContainer = styled.article`
   flex: 1;
   height: 100%;
   width: 100%;
-  padding: 16px 0;
   overflow: scroll;
+  padding: 24px 0;
 `;
 
 const STDContentBox = styled.div<{ marginBottom?: number }>`
