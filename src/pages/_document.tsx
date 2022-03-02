@@ -53,6 +53,10 @@ export default class MyDocument extends Document {
             charSet="UTF-8"
             href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
           />
+          <script
+            type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0230e081e91dc95d605b7a918f56669a"
+          ></script>
         </Head>
         <body>
           <Main />
