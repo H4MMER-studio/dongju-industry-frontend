@@ -31,7 +31,6 @@ const STDContainer = styled.div<IContainerProps>`
 
   @media (max-width: 1024px) {
     ${mixins.flexSet('flex-start', 'flex-start', 'column')}
-    height: auto;
   }
 `;
 
@@ -46,7 +45,7 @@ function App({ Component, pageProps }: AppProps) {
   const params = router.query as {
     menu: 'welcome' | 'history' | 'way-to-come';
   };
-  const innerHeight = useResize();
+  const { height } = useResize();
 
   const onClickMenu = (menu: string) => {
     router.push(`/${menu}`);
@@ -69,7 +68,7 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <ApolloProvider client={client}>
         <CssBaseline />
-        <STDContainer height={innerHeight.height}>
+        <STDContainer height={height}>
           <MainNav
             selectedMenu={selectedMenu}
             params={params}

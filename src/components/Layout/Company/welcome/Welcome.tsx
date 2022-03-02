@@ -4,15 +4,36 @@ import { Images } from 'public/image';
 
 const WelcomeLayout = styled.main`
   display: flex;
+
+  @media (max-width: 1023px) {
+    display: block;
+  }
 `;
 
 const LeftSection = styled.section`
   width: 608px;
   margin-right: 24px;
+
+  @media (max-width: 1366px) {
+    width: 475px;
+  }
+
+  @media (max-width: 1023px) {
+    width: 100%;
+
+    margin-bottom: 24px;
+  }
 `;
 
 const RightSection = styled.section`
   width: 608px;
+
+  @media (max-width: 1366px) {
+    width: 475px;
+  }
+  @media (max-width: 1023px) {
+    width: 100%;
+  }
 `;
 
 const CardLayout = styled.div`
@@ -28,6 +49,10 @@ const Title = styled.div`
   font-size: 32px;
   color: #2979ff;
   margin-bottom: 24px;
+
+  @media (max-width: 1023px) {
+    font-size: 28px;
+  }
 `;
 
 const MainText = styled.div`
@@ -35,6 +60,10 @@ const MainText = styled.div`
   color: #383838;
   white-space: pre-wrap;
   line-height: 32px;
+
+  @media (max-width: 1023px) {
+    font-size: 17px;
+  }
 
   .bold {
     font-weight: 600;
