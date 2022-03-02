@@ -32,11 +32,9 @@ export const CustomerService = {
 };
 
 //Company
-import PrevCompanyContainer from './Layout/Company/PrevCompanyContainer';
 import CompanyContainer from './Layout/Company/CompanyContainer';
 
 export const Company = {
-  PrevContainer: PrevCompanyContainer,
   Container: CompanyContainer,
 };
 

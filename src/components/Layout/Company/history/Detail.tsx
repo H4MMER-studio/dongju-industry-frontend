@@ -37,6 +37,10 @@ const LeftSection = styled.div`
     color: #448aff;
     display: flex;
     align-items: center;
+
+    @media (max-width: 1023px) {
+      font-size: 24px;
+    }
   }
 `;
 
@@ -53,12 +57,20 @@ const MonthHistoryLayout = styled.div`
     font-size: 19px;
     color: #383838;
     margin-bottom: 4px;
+
+    @media (max-width: 1023px) {
+      font-size: 17px;
+    }
   }
 `;
 
 const DetailContents = styled.div`
   font-size: 19px;
   color: #555555;
+
+  @media (max-width: 1023px) {
+    font-size: 17px;
+  }
 `;
 
 const Detail: React.FC = () => {

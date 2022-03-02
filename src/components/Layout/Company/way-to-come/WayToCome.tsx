@@ -61,7 +61,7 @@ const WayToCome: React.FC = () => {
         <TableLayout>
           {COMPANY_ADDRESS_INFORMATION.map((info) => {
             return (
-              <DataLayout>
+              <DataLayout key={info.type}>
                 <Head>{info.type}</Head>
                 <Value>{info.value}</Value>
               </DataLayout>

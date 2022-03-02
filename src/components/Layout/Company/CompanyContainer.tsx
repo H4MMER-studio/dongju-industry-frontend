@@ -12,6 +12,15 @@ const STDContainer = styled.main`
   padding-top: 48px;
   margin: 0 auto;
   width: 1240px;
+
+  @media (max-width: 1682px) {
+    width: 974px;
+  }
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    padding: 48px 16px 64px 16px;
+  }
 `;
 
 const BannerSection = styled.section`
@@ -24,6 +33,11 @@ const BannerSection = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    padding: 0px 17px 0 15px;
+  }
 `;
 
 const CenterLayout = styled.div``;

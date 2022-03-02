@@ -41,6 +41,11 @@ const ServiceLayout = styled.div`
   background-size: cover;
   padding: 24px;
   border-radius: 20px;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    height: 160px;
+  }
 `;
 
 const Title = styled.div`
