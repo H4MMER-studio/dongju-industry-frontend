@@ -24,6 +24,12 @@ interface IContainerProps {
   height: number;
 }
 
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
 const STDContainer = styled.div<IContainerProps>`
   ${mixins.flexSet('flex-start', 'flex-start')}
   height: ${(props) => props.height}px;

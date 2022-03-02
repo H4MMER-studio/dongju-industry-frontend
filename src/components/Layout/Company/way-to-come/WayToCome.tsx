@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import useResize from '@/hooks/useResize';
 
 const STDWayToComeLayout = styled.section`
   display: flex;
+
+  @media (max-width: 1023px) {
+    display: block;
+  }
 `;
 
 const LeftSection = styled.div`
@@ -11,6 +16,13 @@ const LeftSection = styled.div`
   box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);
   border-radius: 12px;
   margin-right: 24px;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    height: 206px;
+    margin-bottom: 24px;
+    margin-right: 0px;
+  }
 `;
 
 const RightSection = styled.div`
@@ -19,6 +31,11 @@ const RightSection = styled.div`
   border-radius: 12px;
   width: 608px;
   padding: 24px;
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    height: 256px;
+  }
 `;
 
 const DataLayout = styled.div`
@@ -47,6 +64,10 @@ const Value = styled.div`
   color: #383838;
   padding: 0 16px;
   border-bottom: 1px solid #e8e8e8;
+
+  @media (max-width: 1023px) {
+    font-size: 17px;
+  }
 `;
 
 const TableLayout = styled.div`
@@ -54,9 +75,42 @@ const TableLayout = styled.div`
 `;
 0;
 const WayToCome: React.FC = () => {
+  const isMobile = useResize().width < 768;
+
+  useEffect(() => {
+    let mapContainer = document.getElementById('kakao_map');
+    let mapOption = {
+      center: new window.kakao.maps.LatLng(
+        37.21221844319734,
+        126.85351383359696
+      ),
+      level: 4,
+    };
+
+    const map = new window.kakao.maps.Map(mapContainer, mapOption);
+
+    var marker = new window.kakao.maps.Marker({
+      position: map.getCenter(),
+    });
+
+    marker.setMap(map);
+
+    function resizeMap() {
+      var mapContainer = document.getElementById('kakao_map');
+    }
+
+    function relayout() {
+      map.relayout();
+    }
+  }, [isMobile]);
+
   return (
     <STDWayToComeLayout>
-      <LeftSection>지도API 적용 할 곳</LeftSection>
+      <LeftSection>
+        <div id="kakao_map" style={{ width: '100%', height: '100%' }}>
+          <div style={{ width: '100%', height: '100%' }} />
+        </div>
+      </LeftSection>
       <RightSection>
         <TableLayout>
           {COMPANY_ADDRESS_INFORMATION.map((info) => {
