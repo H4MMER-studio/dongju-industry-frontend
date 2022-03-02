@@ -7,11 +7,23 @@ import { IconHamburg, IconDownArrow, IconClose } from '@svg';
 
 interface IProps {
   selectedMenu: string;
-  params: { menu: 'welcome' | 'history' | 'way-to-come' };
+  params: {
+    menu:
+      | 'welcome'
+      | 'history'
+      | 'way-to-come'
+      | 'performance'
+      | 'certification';
+  };
   onClickMenu(menu: string): void;
   onClickProduct(product: ProductType['type']): void;
   onClickCompanyMenu: (
-    companyMenu: 'welcome' | 'history' | 'way-to-come'
+    companyMenu:
+      | 'welcome'
+      | 'history'
+      | 'way-to-come'
+      | 'performance'
+      | 'certification'
   ) => void;
 }
 

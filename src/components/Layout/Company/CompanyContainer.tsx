@@ -3,17 +3,22 @@ import styled, { css } from 'styled-components';
 import Welcome from './welcome';
 import History from './history';
 import WayToCome from './way-to-come';
+import Certificate from './certification';
 import { Images } from 'public/image';
 import useResize from '@/hooks/useResize';
+import { certificationMenuType } from '@/interfaces';
 
 interface Iprops {
-  menu: 'welcome' | 'history' | 'way-to-come';
+  menu: 'welcome' | 'history' | 'way-to-come' | 'performance' | 'certification';
+  clickCertificationTypeMenu: (type: certificationMenuType) => void;
 }
 
 const STDContainer = styled.main`
   padding-top: 48px;
   margin: 0 auto;
   width: 1240px;
+  height: 100%;
+  overflow-y: scroll;
 
   @media (max-width: 1682px) {
     width: 974px;
@@ -81,10 +86,20 @@ const Title = styled.div`
   }
 `;
 
-const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
+const CompanyContainer: React.FC<Iprops> = ({
+  menu,
+  clickCertificationTypeMenu,
+}) => {
   const { width } = useResize();
 
-  const displayTitle = (menu: 'welcome' | 'history' | 'way-to-come') => {
+  const displayTitle = (
+    menu:
+      | 'welcome'
+      | 'history'
+      | 'way-to-come'
+      | 'performance'
+      | 'certification'
+  ) => {
     switch (menu) {
       case 'welcome':
         return '인사말';
@@ -93,6 +108,11 @@ const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
 
       case 'way-to-come':
         return '오시는 길';
+
+      case 'performance':
+        return '납품실적';
+      case 'certification':
+        return '인증';
       default:
         return '';
     }
@@ -123,6 +143,13 @@ const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
 
           case 'way-to-come':
             return <WayToCome />;
+
+          case 'certification':
+            return (
+              <Certificate
+                clickCertificationTypeMenu={clickCertificationTypeMenu}
+              />
+            );
 
           default:
             return null;

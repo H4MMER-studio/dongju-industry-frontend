@@ -5,7 +5,7 @@ import { Company } from '@/components';
 const CompanyPage: NextPage = () => {
   return (
     <>
-      <Company.Container />
+      <div>여긴 없음</div>
     </>
   );
 };
