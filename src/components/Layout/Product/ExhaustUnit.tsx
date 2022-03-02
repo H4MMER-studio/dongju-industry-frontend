@@ -4,6 +4,7 @@ import * as ProductComponents from './components';
 
 const ExhaustUnitLayout = styled.section`
   width: 100%;
+  padding: 24px 0;
 `;
 
 const OverviewCardLayout = styled.div`

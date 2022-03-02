@@ -48,6 +48,7 @@ const STDMainMenu = styled.div`
   > img {
     width: 96px;
     margin-bottom: 36px;
+    cursor: pointer;
   }
 `;
 
