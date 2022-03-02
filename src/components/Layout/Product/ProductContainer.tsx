@@ -27,7 +27,7 @@ const ProductContainerLayout = styled.div`
 `;
 
 const ProductManualLayout = styled.div`
-  padding: 16px 24px 0 0;
+  padding: 24px 24px 0 0;
 
   @media (max-width: 1365px) {
     padding-right: 0px;

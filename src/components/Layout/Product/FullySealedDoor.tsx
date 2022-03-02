@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import * as ProductComponents from './components';
 
-const FullySealedDoorLayout = styled.div``;
+const FullySealedDoorLayout = styled.div`
+  padding: 24px 0;
+`;
 
 const OverviewCardLayout = styled.div`
   margin-bottom: 36px;
