@@ -3,11 +3,13 @@ import styled, { css } from 'styled-components';
 import Welcome from './welcome';
 import History from './history';
 import WayToCome from './way-to-come';
+import Performance from './Performance';
+import Certification from './Certification';
 import { Images } from 'public/image';
 import useResize from '@/hooks/useResize';
 
 interface Iprops {
-  menu: 'welcome' | 'history' | 'way-to-come';
+  menu: 'welcome' | 'history' | 'way-to-come' | 'performance' | 'certification';
 }
 
 const STDContainer = styled.main`
@@ -25,13 +27,13 @@ const STDContainer = styled.main`
   }
 `;
 
-const BannerSection = styled.section`
+const BannerSection = styled.section<{ marginBottom?: number }>`
   position: relative;
   width: 100%;
   height: 200px;
   border-radius: 12px;
   background-color: #fff;
-  margin-bottom: 48px;
+  margin-bottom: ${({ marginBottom }) => marginBottom ?? 48}px;
 
   display: flex;
   align-items: center;
@@ -84,15 +86,25 @@ const Title = styled.div`
 const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
   const { width } = useResize();
 
-  const displayTitle = (menu: 'welcome' | 'history' | 'way-to-come') => {
+  const displayTitle = (
+    menu:
+      | 'welcome'
+      | 'history'
+      | 'way-to-come'
+      | 'performance'
+      | 'certification'
+  ) => {
     switch (menu) {
       case 'welcome':
         return '인사말';
       case 'history':
         return '연혁';
-
       case 'way-to-come':
         return '오시는 길';
+      case 'performance':
+        return '납품실적';
+      case 'certification':
+        return '인증';
       default:
         return '';
     }
@@ -100,7 +112,7 @@ const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
 
   return (
     <STDContainer>
-      <BannerSection>
+      <BannerSection marginBottom={menu === 'performance' ? 24 : undefined}>
         <BannerImage
           src={
             width > 1023
@@ -123,6 +135,12 @@ const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
 
           case 'way-to-come':
             return <WayToCome />;
+
+          case 'performance':
+            return <Performance />;
+
+          case 'certification':
+            return <Certification />;
 
           default:
             return null;
