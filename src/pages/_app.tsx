@@ -49,7 +49,12 @@ function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const selectedMenu = router.pathname;
   const params = router.query as {
-    menu: 'welcome' | 'history' | 'way-to-come';
+    menu:
+      | 'welcome'
+      | 'history'
+      | 'way-to-come'
+      | 'performance'
+      | 'certification';
   };
   const { height } = useResize();
 
@@ -62,7 +67,12 @@ function App({ Component, pageProps }: AppProps) {
   };
 
   const onClickCompanyMenu = (
-    companyMenu: 'welcome' | 'history' | 'way-to-come'
+    companyMenu:
+      | 'welcome'
+      | 'history'
+      | 'way-to-come'
+      | 'performance'
+      | 'certification'
   ) => {
     router.push(`/company/${companyMenu}`);
   };

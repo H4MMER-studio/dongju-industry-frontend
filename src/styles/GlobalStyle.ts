@@ -15,7 +15,8 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
     padding: 0;
-    
+
+ 
     @media ${device.laptop} {
       font-size:calc(100% * 1.25)
     }
@@ -28,6 +29,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color: transparent;
     background: #fff;
   }
+
 
   body,
   p,

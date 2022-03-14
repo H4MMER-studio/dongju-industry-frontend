@@ -3,19 +3,23 @@ import styled, { css } from 'styled-components';
 import Welcome from './welcome';
 import History from './history';
 import WayToCome from './way-to-come';
+import Certification from './certification';
 import Performance from './Performance';
-import Certification from './Certification';
 import { Images } from 'public/image';
 import useResize from '@/hooks/useResize';
+import { certificationMenuType } from '@/interfaces';
 
 interface Iprops {
   menu: 'welcome' | 'history' | 'way-to-come' | 'performance' | 'certification';
+  clickCertificationTypeMenu: (type: certificationMenuType) => void;
 }
 
 const STDContainer = styled.main`
   padding-top: 48px;
   margin: 0 auto;
   width: 1240px;
+  height: 100%;
+  overflow-y: scroll;
 
   @media (max-width: 1682px) {
     width: 974px;
@@ -83,7 +87,10 @@ const Title = styled.div`
   }
 `;
 
-const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
+const CompanyContainer: React.FC<Iprops> = ({
+  menu,
+  clickCertificationTypeMenu,
+}) => {
   const { width } = useResize();
 
   const displayTitle = (
@@ -101,6 +108,7 @@ const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
         return '연혁';
       case 'way-to-come':
         return '오시는 길';
+
       case 'performance':
         return '납품실적';
       case 'certification':
@@ -136,11 +144,14 @@ const CompanyContainer: React.FC<Iprops> = ({ menu }) => {
           case 'way-to-come':
             return <WayToCome />;
 
+          case 'certification':
+            return (
+              <Certification
+                clickCertificationTypeMenu={clickCertificationTypeMenu}
+              />
+            );
           case 'performance':
             return <Performance />;
-
-          case 'certification':
-            return <Certification />;
 
           default:
             return null;
