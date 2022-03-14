@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components';
 import Welcome from './welcome';
 import History from './history';
 import WayToCome from './way-to-come';
-import Certificate from './certification';
+import Certification from './certification';
+import Performance from './Performance';
 import { Images } from 'public/image';
 import useResize from '@/hooks/useResize';
 import { certificationMenuType } from '@/interfaces';
@@ -30,13 +31,13 @@ const STDContainer = styled.main`
   }
 `;
 
-const BannerSection = styled.section`
+const BannerSection = styled.section<{ marginBottom?: number }>`
   position: relative;
   width: 100%;
   height: 200px;
   border-radius: 12px;
   background-color: #fff;
-  margin-bottom: 48px;
+  margin-bottom: ${({ marginBottom }) => marginBottom ?? 48}px;
 
   display: flex;
   align-items: center;
@@ -105,7 +106,6 @@ const CompanyContainer: React.FC<Iprops> = ({
         return '인사말';
       case 'history':
         return '연혁';
-
       case 'way-to-come':
         return '오시는 길';
 
@@ -120,7 +120,7 @@ const CompanyContainer: React.FC<Iprops> = ({
 
   return (
     <STDContainer>
-      <BannerSection>
+      <BannerSection marginBottom={menu === 'performance' ? 24 : undefined}>
         <BannerImage
           src={
             width > 1023
@@ -146,10 +146,12 @@ const CompanyContainer: React.FC<Iprops> = ({
 
           case 'certification':
             return (
-              <Certificate
+              <Certification
                 clickCertificationTypeMenu={clickCertificationTypeMenu}
               />
             );
+          case 'performance':
+            return <Performance />;
 
           default:
             return null;
