@@ -111,7 +111,8 @@ const STDLongTitle = styled.div`
 `;
 
 const STDShortTitle = styled.div`
-  width: 120px;
+  flex: 0.45;
+  max-width: 120px;
   padding: 12px 12px 12px 16px;
   font-weight: 600;
   font-size: 15px;
@@ -132,7 +133,8 @@ const STDLongContent = styled.div`
 `;
 
 const STDShortContent = styled.div`
-  width: 120px;
+  flex: 0.45;
+  max-width: 120px;
   padding: 12px 12px 12px 16px;
   font-weight: 400;
   font-size: 15px;

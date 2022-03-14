@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Welcome from './welcome';
 import History from './history';
 import WayToCome from './way-to-come';
@@ -8,6 +8,7 @@ import Performance from './Performance';
 import { Images } from 'public/image';
 import useResize from '@/hooks/useResize';
 import { certificationMenuType } from '@/interfaces';
+import { mixins } from '@/styles';
 
 interface Iprops {
   menu: 'welcome' | 'history' | 'way-to-come' | 'performance' | 'certification';
@@ -32,16 +33,14 @@ const STDContainer = styled.main`
 `;
 
 const BannerSection = styled.section<{ marginBottom?: number }>`
+  ${mixins.flexSet()}
   position: relative;
   width: 100%;
   height: 200px;
   border-radius: 12px;
   background-color: #fff;
   margin-bottom: ${({ marginBottom }) => marginBottom ?? 48}px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -62,7 +61,7 @@ const BannerImage = styled.img`
   width: 100%;
   height: 100%;
   z-index: 1;
-  object-fit: contain;
+  object-fit: cover;
 `;
 
 const BreadCrum = styled.div`

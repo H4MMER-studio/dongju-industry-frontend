@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useRef } from 'react';
+import styled, { css } from 'styled-components';
 import { Widgets } from '@/components';
 import { mixins } from '@/styles';
 import { ProductType } from '@/interfaces';
@@ -127,7 +127,11 @@ const STDSideMenuList = styled.ul`
   }
 `;
 
-const STDSideMenuTitleWrapper = styled.div`
+const STDSideMenuTitleContainer = styled.div`
+  overflow: hidden;
+`;
+
+const STDSideMenuTitleWrapper = styled.div<{ isOpen: boolean }>`
   ${mixins.flexSet('space-between')}
   width: 100%;
   padding: 18px 20px 18px 28px;
@@ -137,6 +141,49 @@ const STDSideMenuTitleWrapper = styled.div`
     width: 16px;
     height: 8px;
     object-fit: contain;
+    ${({ isOpen }) =>
+      isOpen &&
+      css`
+        transform: rotate(180deg);
+      `}
+  }
+`;
+
+type sideProductListProps = {
+  isOpen?: boolean;
+  maxHeight: number;
+};
+
+const STDSideProductListWrapper = styled.div<sideProductListProps>`
+  max-height: ${({ isOpen, maxHeight }) => (isOpen ? maxHeight : 0)}px;
+  padding: 0 16px;
+  transition: max-height 0.3s ease-in-out;
+`;
+
+const STDProductTwinWrapper = styled.div`
+  ${mixins.flexSet()}
+  margin-bottom: 16px;
+`;
+
+const STDSideProductItem = styled.div<{ marginRight?: number }>`
+  ${mixins.flexSet('center', 'center', 'column')}
+  margin-right: ${({ marginRight }) => marginRight ?? 0}px;
+  flex: 1;
+  padding: 24px 4px 20px;
+  background: #f5f5f5;
+  border-radius: 12px;
+
+  img {
+    width: 100%;
+    margin-bottom: 11px;
+  }
+
+  p {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: #383838;
   }
 `;
 
@@ -167,6 +214,8 @@ const MainNav: React.FC<IProps> = ({
   onClickCompanyMenu,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedSubMenu, setSelectedSubMenu] = useState<string | null>(null);
+  const productList_ref = useRef<HTMLDivElement | null>(null);
   const MENU_LIST = [
     { value: '제품', id: 'product' },
     { value: '회사', id: 'company' },
@@ -286,16 +335,80 @@ const MainNav: React.FC<IProps> = ({
         </STDMiniHeader>
         {isOpen && (
           <STDSideMenuList>
-            <STDSideMenuTitleWrapper>
-              제품 <IconDownArrow />
-            </STDSideMenuTitleWrapper>
-            <STDSideMenuTitleWrapper>
+            <STDSideMenuTitleContainer>
+              <STDSideMenuTitleWrapper
+                isOpen={selectedSubMenu === 'product'}
+                onClick={() =>
+                  setSelectedSubMenu(
+                    selectedSubMenu === 'product' ? '' : 'product'
+                  )
+                }
+              >
+                제품 <IconDownArrow />
+              </STDSideMenuTitleWrapper>
+              <STDSideProductListWrapper
+                ref={productList_ref}
+                isOpen={selectedSubMenu === 'product'}
+                maxHeight={productList_ref.current?.scrollHeight ?? 0}
+              >
+                <STDProductTwinWrapper>
+                  <STDSideProductItem marginRight={11}>
+                    <img src="/image/main_nav/sub_product1.png" />
+                    <p>공기 조화기</p>
+                  </STDSideProductItem>
+                  <STDSideProductItem>
+                    <img src="/image/main_nav/sub_product2.png" />
+                    <p>공기 조화기</p>
+                  </STDSideProductItem>
+                </STDProductTwinWrapper>
+                <STDProductTwinWrapper>
+                  <STDSideProductItem marginRight={11}>
+                    <img src="/image/main_nav/sub_product3.png" />
+                    <p>공기 조화기</p>
+                  </STDSideProductItem>
+                  <STDSideProductItem>
+                    <img src="/image/main_nav/sub_product4.png" />
+                    <p>공기 조화기</p>
+                  </STDSideProductItem>
+                </STDProductTwinWrapper>
+                <STDProductTwinWrapper>
+                  <STDSideProductItem marginRight={11}>
+                    <img src="/image/main_nav/sub_product5.png" />
+                    <p>공기 조화기</p>
+                  </STDSideProductItem>
+                  <STDSideProductItem>
+                    <img src="/image/main_nav/sub_product6.png" />
+                    <p>공기 조화기</p>
+                  </STDSideProductItem>
+                </STDProductTwinWrapper>
+              </STDSideProductListWrapper>
+            </STDSideMenuTitleContainer>
+            <STDSideMenuTitleWrapper
+              isOpen={selectedSubMenu === 'company'}
+              onClick={() =>
+                setSelectedSubMenu(
+                  selectedSubMenu === 'company' ? '' : 'company'
+                )
+              }
+            >
               회사 <IconDownArrow />
             </STDSideMenuTitleWrapper>
-            <STDSideMenuTitleWrapper>
+            <STDSideMenuTitleWrapper
+              isOpen={selectedSubMenu === 'notice'}
+              onClick={() =>
+                setSelectedSubMenu(selectedSubMenu === 'notice' ? '' : 'notice')
+              }
+            >
               공지 <IconDownArrow />
             </STDSideMenuTitleWrapper>
-            <STDSideMenuTitleWrapper>
+            <STDSideMenuTitleWrapper
+              isOpen={selectedSubMenu === 'customer'}
+              onClick={() =>
+                setSelectedSubMenu(
+                  selectedSubMenu === 'customer' ? '' : 'customer'
+                )
+              }
+            >
               고객지원 <IconDownArrow />
             </STDSideMenuTitleWrapper>
           </STDSideMenuList>
