@@ -11,9 +11,14 @@ const SDTCertificateContentsLayout = styled.div`
   height: 841px;
   background-color: #555555;
   padding: 36px;
+  border-radius: 20px;
 `;
 
-const LeftNavSide = styled.nav``;
+const LeftNavSide = styled.nav`
+  width: 217px;
+  height: 100%;
+  border-right: 1px solid #777777;
+`;
 
 const MenuValue = styled.div`
   font-size: 28px;
