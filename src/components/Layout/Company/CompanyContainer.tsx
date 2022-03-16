@@ -111,7 +111,7 @@ const CompanyContainer: React.FC<Iprops> = ({
       case 'performance':
         return '납품실적';
       case 'certification':
-        return '인증';
+        return '인증서';
       default:
         return '';
     }
