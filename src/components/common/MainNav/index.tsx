@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import { useRouter } from 'next/router';
 import { Widgets } from '@/components';
 import { mixins } from '@/styles';
 import { ProductType } from '@/interfaces';
@@ -119,12 +120,11 @@ const STDEmptySpace = styled.div`
   height: 62px;
 `;
 
-const STDSideMenuList = styled.ul`
+const STDSideMenuList = styled.div`
   width: 100%;
+  height: 100%;
   background: white;
-
-  li {
-  }
+  overflow-y: scroll;
 `;
 
 const STDSideMenuTitleContainer = styled.div`
@@ -135,6 +135,9 @@ const STDSideMenuTitleWrapper = styled.div<{ isOpen: boolean }>`
   ${mixins.flexSet('space-between')}
   width: 100%;
   padding: 18px 20px 18px 28px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
   cursor: pointer;
 
   svg {
@@ -155,8 +158,8 @@ type sideProductListProps = {
 };
 
 const STDSideProductListWrapper = styled.div<sideProductListProps>`
-  max-height: ${({ isOpen, maxHeight }) => (isOpen ? maxHeight : 0)}px;
   padding: 0 16px;
+  max-height: ${({ isOpen, maxHeight }) => (isOpen ? maxHeight : 0)}px;
   transition: max-height 0.3s ease-in-out;
 `;
 
@@ -172,6 +175,7 @@ const STDSideProductItem = styled.div<{ marginRight?: number }>`
   padding: 24px 4px 20px;
   background: #f5f5f5;
   border-radius: 12px;
+  cursor: pointer;
 
   img {
     width: 100%;
@@ -197,12 +201,27 @@ const STDCompanyMenuWrapper = styled.div`
 
 const STDCompanyMenuButton = styled.button<{ isSelected: boolean }>`
   margin-bottom: 30px;
+  padding: 10px 0;
   line-height: 24px;
   font-size: 18px;
   ${({ isSelected }) => isSelected && 'color: #2979FF;'}
 
   &:last-child {
     margin-bottom: 0;
+  }
+`;
+
+const STDSideListWrapper = styled.ul<sideProductListProps>`
+  max-height: ${({ isOpen, maxHeight }) => (isOpen ? maxHeight : 0)}px;
+  transition: max-height 0.3s ease-in-out;
+
+  li {
+    padding: 12px 36px;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+    color: #555555;
+    margin-bottom: 10px;
   }
 `;
 
@@ -213,9 +232,13 @@ const MainNav: React.FC<IProps> = ({
   onClickProduct,
   onClickCompanyMenu,
 }) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSubMenu, setSelectedSubMenu] = useState<string | null>(null);
   const productList_ref = useRef<HTMLDivElement | null>(null);
+  const companyList_ref = useRef<HTMLUListElement | null>(null);
+  const noticeList_ref = useRef<HTMLUListElement | null>(null);
+  const customerList_ref = useRef<HTMLUListElement | null>(null);
   const MENU_LIST = [
     { value: '제품', id: 'product' },
     { value: '회사', id: 'company' },
@@ -231,8 +254,15 @@ const MainNav: React.FC<IProps> = ({
     { value: '연혁', id: 'history' },
     { value: '오시는 길', id: 'way-to-come' },
     { value: '납품실적', id: 'performance' },
-    { value: '인증', id: 'certification' },
+    { value: '인증서', id: 'certification' },
   ];
+
+  const NOTICE_MENU = [
+    { value: '공지', id: 'notice' },
+    { value: '자료실', id: 'data' },
+  ];
+
+  const CUSTOMER_LIST = [{ value: '문의', id: 'inquiry' }];
 
   const PRDUCT_LIST: {
     imageSrc: string;
@@ -264,7 +294,28 @@ const MainNav: React.FC<IProps> = ({
       name: '완전밀폐도어',
       type: 'fully-sealed-door',
     },
+    {
+      imageSrc: '/image/main_nav/product_6.png',
+      name: '송풍기',
+      type: 'fully-sealed-door',
+    },
   ];
+
+  useEffect(() => {
+    if (!isOpen && selectedSubMenu) {
+      setSelectedSubMenu(null);
+    }
+  }, [isOpen]);
+
+  const onClickSideMenuProduct = (product: ProductType['type']) => {
+    setIsOpen(false);
+    onClickProduct(product);
+  };
+
+  const onClickGoToPage = (page: string) => {
+    setIsOpen(false);
+    router.push(page);
+  };
 
   return (
     <>
@@ -285,6 +336,8 @@ const MainNav: React.FC<IProps> = ({
                       ? 'product/air-conditioner'
                       : id === 'company'
                       ? 'company/welcome'
+                      : id === 'notice'
+                      ? 'notice/notice'
                       : id
                   )
                 }
@@ -340,7 +393,7 @@ const MainNav: React.FC<IProps> = ({
                 isOpen={selectedSubMenu === 'product'}
                 onClick={() =>
                   setSelectedSubMenu(
-                    selectedSubMenu === 'product' ? '' : 'product'
+                    selectedSubMenu === 'product' ? null : 'product'
                   )
                 }
               >
@@ -352,65 +405,127 @@ const MainNav: React.FC<IProps> = ({
                 maxHeight={productList_ref.current?.scrollHeight ?? 0}
               >
                 <STDProductTwinWrapper>
-                  <STDSideProductItem marginRight={11}>
+                  <STDSideProductItem
+                    marginRight={11}
+                    onClick={() => onClickSideMenuProduct('air-conditioner')}
+                  >
                     <img src="/image/main_nav/sub_product1.png" />
                     <p>공기 조화기</p>
                   </STDSideProductItem>
-                  <STDSideProductItem>
+                  <STDSideProductItem
+                    onClick={() =>
+                      onClickSideMenuProduct('freeze-protection-damper-coil')
+                    }
+                  >
                     <img src="/image/main_nav/sub_product2.png" />
-                    <p>공기 조화기</p>
+                    <p>동파방지댐퍼코일</p>
                   </STDSideProductItem>
                 </STDProductTwinWrapper>
                 <STDProductTwinWrapper>
-                  <STDSideProductItem marginRight={11}>
+                  <STDSideProductItem
+                    marginRight={11}
+                    onClick={() => onClickSideMenuProduct('exhaust-unit')}
+                  >
                     <img src="/image/main_nav/sub_product3.png" />
-                    <p>공기 조화기</p>
+                    <p>배기유니트</p>
                   </STDSideProductItem>
-                  <STDSideProductItem>
+                  <STDSideProductItem
+                    onClick={() => onClickSideMenuProduct('bubble-damper')}
+                  >
                     <img src="/image/main_nav/sub_product4.png" />
-                    <p>공기 조화기</p>
+                    <p>버블댐퍼</p>
                   </STDSideProductItem>
                 </STDProductTwinWrapper>
                 <STDProductTwinWrapper>
-                  <STDSideProductItem marginRight={11}>
+                  <STDSideProductItem
+                    marginRight={11}
+                    onClick={() => onClickSideMenuProduct('fully-sealed-door')}
+                  >
                     <img src="/image/main_nav/sub_product5.png" />
-                    <p>공기 조화기</p>
+                    <p>완전밀폐도어</p>
                   </STDSideProductItem>
                   <STDSideProductItem>
                     <img src="/image/main_nav/sub_product6.png" />
-                    <p>공기 조화기</p>
+                    <p>송풍기</p>
                   </STDSideProductItem>
                 </STDProductTwinWrapper>
               </STDSideProductListWrapper>
             </STDSideMenuTitleContainer>
-            <STDSideMenuTitleWrapper
-              isOpen={selectedSubMenu === 'company'}
-              onClick={() =>
-                setSelectedSubMenu(
-                  selectedSubMenu === 'company' ? '' : 'company'
-                )
-              }
-            >
-              회사 <IconDownArrow />
-            </STDSideMenuTitleWrapper>
-            <STDSideMenuTitleWrapper
-              isOpen={selectedSubMenu === 'notice'}
-              onClick={() =>
-                setSelectedSubMenu(selectedSubMenu === 'notice' ? '' : 'notice')
-              }
-            >
-              공지 <IconDownArrow />
-            </STDSideMenuTitleWrapper>
-            <STDSideMenuTitleWrapper
-              isOpen={selectedSubMenu === 'customer'}
-              onClick={() =>
-                setSelectedSubMenu(
-                  selectedSubMenu === 'customer' ? '' : 'customer'
-                )
-              }
-            >
-              고객지원 <IconDownArrow />
-            </STDSideMenuTitleWrapper>
+            <STDSideMenuTitleContainer>
+              <STDSideMenuTitleWrapper
+                isOpen={selectedSubMenu === 'company'}
+                onClick={() =>
+                  setSelectedSubMenu(
+                    selectedSubMenu === 'company' ? null : 'company'
+                  )
+                }
+              >
+                회사 <IconDownArrow />
+              </STDSideMenuTitleWrapper>
+              <STDSideListWrapper
+                ref={companyList_ref}
+                isOpen={selectedSubMenu === 'company'}
+                maxHeight={companyList_ref.current?.scrollHeight ?? 0}
+              >
+                {COMPANY_MENU.map(({ id, value }) => (
+                  <li
+                    key={id}
+                    onClick={() => onClickGoToPage(`/company/${id}`)}
+                  >
+                    {value}
+                  </li>
+                ))}
+              </STDSideListWrapper>
+            </STDSideMenuTitleContainer>
+            <STDSideMenuTitleContainer>
+              <STDSideMenuTitleWrapper
+                isOpen={selectedSubMenu === 'notice'}
+                onClick={() =>
+                  setSelectedSubMenu(
+                    selectedSubMenu === 'notice' ? null : 'notice'
+                  )
+                }
+              >
+                공지 <IconDownArrow />
+              </STDSideMenuTitleWrapper>
+              <STDSideListWrapper
+                ref={noticeList_ref}
+                isOpen={selectedSubMenu === 'notice'}
+                maxHeight={noticeList_ref.current?.scrollHeight ?? 0}
+              >
+                {NOTICE_MENU.map(({ id, value }) => (
+                  <li key={id} onClick={() => onClickGoToPage(`/notice/${id}`)}>
+                    {value}
+                  </li>
+                ))}
+              </STDSideListWrapper>
+            </STDSideMenuTitleContainer>
+            <STDSideMenuTitleContainer>
+              <STDSideMenuTitleWrapper
+                isOpen={selectedSubMenu === 'customer'}
+                onClick={() =>
+                  setSelectedSubMenu(
+                    selectedSubMenu === 'customer' ? null : 'customer'
+                  )
+                }
+              >
+                고객지원 <IconDownArrow />
+              </STDSideMenuTitleWrapper>
+              <STDSideListWrapper
+                ref={customerList_ref}
+                isOpen={selectedSubMenu === 'customer'}
+                maxHeight={customerList_ref.current?.scrollHeight ?? 0}
+              >
+                {CUSTOMER_LIST.map(({ id, value }) => (
+                  <li
+                    key={id}
+                    onClick={() => onClickGoToPage(`/customer-service`)}
+                  >
+                    {value}
+                  </li>
+                ))}
+              </STDSideListWrapper>
+            </STDSideMenuTitleContainer>
           </STDSideMenuList>
         )}
       </STDMiniHeaderWrapper>

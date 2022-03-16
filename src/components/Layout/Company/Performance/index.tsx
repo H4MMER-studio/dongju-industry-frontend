@@ -5,7 +5,6 @@ import { IconDownArrowSmall, IconSearch, IconDownArrowGray } from '@svg';
 
 const STDContainer = styled.article`
   width: 100%;
-  height: 50px;
 `;
 
 const STDFilterWrapper = styled.div`
