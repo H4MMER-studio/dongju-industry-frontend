@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Slider, { Settings } from 'react-slick';
+import { Icon } from 'public/image';
 
 interface Iprops {
   detailImages: string[];
@@ -44,6 +45,20 @@ const ProductImagesLayout = styled.div`
   .slick-active .custom-dot-layout .custom-dot {
     background-color: #2979ff;
   }
+
+  .slick-prev {
+    position: absolute;
+    left: 20px;
+    bottom: 50%;
+    z-index: 10;
+  }
+
+  .slick-next {
+    position: absolute;
+    right: 20px;
+    bottom: 50%;
+    z-index: 10;
+  }
 `;
 
 const ImageLayout = styled.div`
@@ -71,6 +86,10 @@ const DetailImageLayout = styled.div`
   height: 448px;
 `;
 
+const SlideIconLayout = styled.div`
+  cursor: pointer;
+`;
+
 const ProductImages: React.FC<Iprops> = ({ detailImages }) => {
   const settings: Settings = {
     dots: true,
@@ -78,13 +97,23 @@ const ProductImages: React.FC<Iprops> = ({ detailImages }) => {
     speed: 150,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     autoplay: false,
     appendDots: (dots) => <ul>{dots}</ul>,
     customPaging: () => (
       <div className="custom-dot-layout">
         <div className="custom-dot" />
       </div>
+    ),
+    prevArrow: (
+      <SlideIconLayout>
+        <Icon.LeftArrow />
+      </SlideIconLayout>
+    ),
+    nextArrow: (
+      <SlideIconLayout>
+        <Icon.RightArrow />
+      </SlideIconLayout>
     ),
   };
 

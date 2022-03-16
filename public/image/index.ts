@@ -19,5 +19,13 @@ export const Images = {
 import DownloadIcon from './download-icon.svg';
 import ShareIcon from './share-icon.svg';
 import CloseIcon from './close-icon.svg';
+import RightArrow from './right-arrow.svg';
+import LeftArrow from './left-arrow.svg';
 
-export const Icon = { DownloadIcon, ShareIcon, CloseIcon };
+export const Icon = {
+  DownloadIcon,
+  ShareIcon,
+  CloseIcon,
+  RightArrow,
+  LeftArrow,
+};
