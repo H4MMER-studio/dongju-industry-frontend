@@ -70,7 +70,7 @@ const Menu: React.FC<Iprops> = ({ productMenu }) => {
       <BottomLayout>
         <MenuButtonGroup>
           {productMenu.menuList.map((menu) => {
-            return <MenuButton>{menu}</MenuButton>;
+            return <MenuButton key={menu}>{menu}</MenuButton>;
           })}
         </MenuButtonGroup>
       </BottomLayout>

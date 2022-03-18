@@ -18,6 +18,8 @@ interface IProps {
   };
   onClickMenu(menu: string): void;
   onClickProduct(product: ProductType['type']): void;
+  onClickNoticeMenu(noticeMenu: 'notice' | 'data'): void;
+  onClickCustomerMenu(customerMenu: 'inquiry'): void;
   onClickCompanyMenu: (
     companyMenu:
       | 'welcome'
@@ -30,6 +32,7 @@ interface IProps {
 
 const STDContainer = styled.nav`
   ${mixins.flexSet('center', 'flex-start')}
+  flex-shrink:0;
   height: calc(100% - 48px);
   padding: 36px 20px 20px 30px;
   margin: 24px;
@@ -191,17 +194,17 @@ const STDSideProductItem = styled.div<{ marginRight?: number }>`
   }
 `;
 
-const STDCompanyMenuWrapper = styled.div`
+const STDSubListMenuWrapper = styled.div`
   ${mixins.flexSet('flex-start', 'center', 'column')}
   height: calc(100% - 72px);
-  margin-top: 72px;
+  margin-top: 66px;
   padding: 0 26px 0 46px;
   border-left: 1px solid #e8e8e8;
 `;
 
-const STDCompanyMenuButton = styled.button<{ isSelected: boolean }>`
-  margin-bottom: 30px;
-  padding: 10px 0;
+const STDSubListMenuButton = styled.button<{ isSelected: boolean }>`
+  margin-bottom: 20px;
+  padding: 6px 0;
   line-height: 24px;
   font-size: 18px;
   ${({ isSelected }) => isSelected && 'color: #2979FF;'}
@@ -229,8 +232,10 @@ const MainNav: React.FC<IProps> = ({
   selectedMenu = '/',
   params,
   onClickMenu,
+  onClickNoticeMenu,
   onClickProduct,
   onClickCompanyMenu,
+  onClickCustomerMenu,
 }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -257,12 +262,14 @@ const MainNav: React.FC<IProps> = ({
     { value: '인증서', id: 'certification' },
   ];
 
-  const NOTICE_MENU = [
+  const NOTICE_MENU: { value: string; id: 'notice' | 'data' }[] = [
     { value: '공지', id: 'notice' },
     { value: '자료실', id: 'data' },
   ];
 
-  const CUSTOMER_LIST = [{ value: '문의', id: 'inquiry' }];
+  const CUSTOMER_LIST: { value: string; id: 'inquiry' }[] = [
+    { value: '문의', id: 'inquiry' },
+  ];
 
   const PRDUCT_LIST: {
     imageSrc: string;
@@ -338,6 +345,8 @@ const MainNav: React.FC<IProps> = ({
                       ? 'company/welcome'
                       : id === 'notice'
                       ? 'notice/notice'
+                      : id === 'customer-service'
+                      ? 'customer-service/inquiry'
                       : id
                   )
                 }
@@ -349,19 +358,20 @@ const MainNav: React.FC<IProps> = ({
             ))}
           </STDMenuWrapper>
         </STDMainMenu>
-        {selectedMenu.includes('company') ? (
-          <STDCompanyMenuWrapper>
+        {selectedMenu.includes('company') && (
+          <STDSubListMenuWrapper>
             {COMPANY_MENU.map(({ id, value }) => (
-              <STDCompanyMenuButton
+              <STDSubListMenuButton
                 key={id}
                 isSelected={id === params.menu}
                 onClick={() => onClickCompanyMenu(id)}
               >
                 {value}
-              </STDCompanyMenuButton>
+              </STDSubListMenuButton>
             ))}
-          </STDCompanyMenuWrapper>
-        ) : (
+          </STDSubListMenuWrapper>
+        )}
+        {selectedMenu.includes('product') && (
           <STDProductList>
             {PRDUCT_LIST.map(({ imageSrc, name, type }) => (
               <STDProductWrapper
@@ -373,6 +383,32 @@ const MainNav: React.FC<IProps> = ({
               </STDProductWrapper>
             ))}
           </STDProductList>
+        )}
+        {selectedMenu.includes('notice') && (
+          <STDSubListMenuWrapper>
+            {NOTICE_MENU.map(({ id, value }) => (
+              <STDSubListMenuButton
+                key={id}
+                isSelected={router.asPath.includes(`notice/${id}`)}
+                onClick={() => onClickNoticeMenu(id)}
+              >
+                {value}
+              </STDSubListMenuButton>
+            ))}
+          </STDSubListMenuWrapper>
+        )}
+        {selectedMenu.includes('customer-service') && (
+          <STDSubListMenuWrapper>
+            {CUSTOMER_LIST.map(({ id, value }) => (
+              <STDSubListMenuButton
+                key={id}
+                isSelected={router.asPath.includes(id)}
+                onClick={() => onClickCustomerMenu(id)}
+              >
+                {value}
+              </STDSubListMenuButton>
+            ))}
+          </STDSubListMenuWrapper>
         )}
       </STDContainer>
       <STDMiniHeaderWrapper isOpen={isOpen}>
@@ -519,7 +555,7 @@ const MainNav: React.FC<IProps> = ({
                 {CUSTOMER_LIST.map(({ id, value }) => (
                   <li
                     key={id}
-                    onClick={() => onClickGoToPage(`/customer-service`)}
+                    onClick={() => onClickGoToPage(`/customer-service/${id}`)}
                   >
                     {value}
                   </li>
