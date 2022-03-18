@@ -64,6 +64,14 @@ function App({ Component, pageProps }: AppProps) {
     router.push(`/company/${companyMenu}`);
   };
 
+  const onClickNoticeMenu = (noticeMenu: 'notice' | 'data') => {
+    router.push(`/notice/${noticeMenu}`);
+  };
+
+  const onClickCustomerMenu = (customerMenu: 'inquiry') => {
+    router.push(`/customer-service/${customerMenu}`);
+  };
+
   return (
     <>
       <Head>
@@ -76,7 +84,9 @@ function App({ Component, pageProps }: AppProps) {
           params={params}
           onClickMenu={onClickMenu}
           onClickProduct={onClickProduct}
+          onClickNoticeMenu={onClickNoticeMenu}
           onClickCompanyMenu={onClickCompanyMenu}
+          onClickCustomerMenu={onClickCustomerMenu}
         />
         <Component {...pageProps} />
       </STDContainer>
