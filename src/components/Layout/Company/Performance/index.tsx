@@ -10,20 +10,28 @@ const STDContainer = styled.article`
 const STDFilterWrapper = styled.div`
   ${mixins.flexSet('space-between')}
   margin-bottom: 12px;
+
+  @media (max-width: 1024px) {
+    ${mixins.flexSet('center', 'flex-end', 'column')}
+  }
 `;
 
 const STDSearchBox = styled.div`
-  ${mixins.flexSet()}
+  ${mixins.flexSet('flex-start')}
+  position: relative;
   height: 48px;
   background: white;
   border: 1px solid #dfdfdf;
   box-sizing: border-box;
   border-radius: 12px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const STDDeliveryBox = styled.div`
   ${mixins.flexSet()}
-  flex: 1;
   padding: 14px 0 14px 16px;
   cursor: pointer;
   font-size: 17px;
@@ -39,13 +47,11 @@ const STDDeliveryBox = styled.div`
   > p {
     width: 1px;
     height: 25px;
-
     background-color: #c8c8c8;
   }
 `;
 
 const STDSearchWrapper = styled.div`
-  position: relative;
   width: 238px;
   padding: 14px;
 
@@ -64,7 +70,7 @@ const STDSearchWrapper = styled.div`
   svg {
     position: absolute;
     right: 16.74px;
-    top: 21px;
+    top: 15px;
     width: 15.59px;
     height: 15.59px;
   }
@@ -86,6 +92,19 @@ const STDOrderButton = styled.div`
   svg {
     width: 13.33px;
     height: 6.67px;
+  }
+
+  @media (max-width: 1024px) {
+    width: auto;
+    padding: 0;
+    background: none;
+    border: none;
+
+    svg {
+      width: 13.33px;
+      height: 6.67px;
+      margin-left: 11.33px;
+    }
   }
 `;
 

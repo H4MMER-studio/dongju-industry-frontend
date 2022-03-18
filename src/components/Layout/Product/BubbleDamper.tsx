@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import * as ProductComponents from './components';
 
-const BubbleDamperLayout = styled.section``;
+const BubbleDamperLayout = styled.section`
+  margin-top: 24px;
+`;
 
 const OverviewCardLayout = styled.section`
   margin-bottom: 36px;
