@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { mixins } from '@/styles';
 import { IconDownArrowSmall, IconSearch, IconDownArrowGray } from '@svg';
@@ -31,23 +31,28 @@ const STDSearchBox = styled.div`
 `;
 
 const STDDeliveryBox = styled.div`
-  ${mixins.flexSet()}
+  ${mixins.flexSet('space-between')}
+  width: 101px;
   padding: 14px 0 14px 16px;
   cursor: pointer;
   font-size: 17px;
   line-height: 20px;
   color: #949494;
 
-  svg {
-    width: 9.33px;
-    height: 5.33px;
-    margin: 0 15.33px;
-  }
+  div {
+    ${mixins.flexSet()}
 
-  > p {
-    width: 1px;
-    height: 25px;
-    background-color: #c8c8c8;
+    svg {
+      width: 9.33px;
+      height: 5.33px;
+      margin-right: 15.33px;
+    }
+
+    > p {
+      width: 1px;
+      height: 25px;
+      background-color: #c8c8c8;
+    }
   }
 `;
 
@@ -78,6 +83,7 @@ const STDSearchWrapper = styled.div`
 
 const STDOrderButton = styled.div`
   ${mixins.flexSet('space-between')}
+  position: relative;
   width: 120px;
   height: 48px;
   padding: 0 20.67px 0 14px;
@@ -88,6 +94,7 @@ const STDOrderButton = styled.div`
   font-size: 17px;
   line-height: 20px;
   color: #777777;
+  cursor: pointer;
 
   svg {
     width: 13.33px;
@@ -159,24 +166,174 @@ const STDShortContent = styled.div`
   line-height: 25px;
 `;
 
+const STDDeliverySelectBox = styled.div`
+  position: absolute;
+  top: 56px;
+  left: 0;
+  min-width: 100px;
+  padding: 18px 22px;
+  background: #ffffff;
+  box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);
+  border-radius: 12px;
+`;
+
+const STDDeliverySelectText = styled.p<{ isSelected?: boolean }>`
+  margin-bottom: 24px;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 20px;
+  color: ${({ isSelected }) => (isSelected ? '#383838' : '#949494')};
+  cursor: pointer;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const STDDeliverySearchTextBox = styled.div`
+  position: absolute;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  padding: 18px 22px;
+  background: #ffffff;
+  box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);
+  border-radius: 12px;
+`;
+
+const STDDeliverySearchText = styled.p`
+  margin-bottom: 24px;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 20px;
+  cursor: pointer;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const STDSelectOrderBox = styled.div`
+  position: absolute;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  padding: 18px 22px;
+  background: #ffffff;
+  box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);
+  border-radius: 12px;
+`;
+
 const Performance: React.FC = () => {
+  const [selectedSearchTitle, setSelectedSearchTitle] = useState('납품처');
+  const [modalOnAt, setModalOnAt] = useState('');
+  const [searchText, setSearchText] = useState('');
+  const [orderModalOn, setOrderModalOn] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState('new');
+
+  useEffect(() => {
+    document.onclick = onClickCloseModal;
+
+    return () => {
+      document.onmousedown = null;
+    };
+  }, []);
+
+  const onClickCloseModal = () => {
+    setModalOnAt('');
+    setOrderModalOn(false);
+  };
+
   return (
     <STDContainer>
       <STDFilterWrapper>
         <STDSearchBox>
-          <STDDeliveryBox>
-            납품처
-            <IconDownArrowSmall />
-            <p />
+          <STDDeliveryBox
+            onClick={(e) => {
+              e.stopPropagation();
+              setModalOnAt(modalOnAt === 'searchTitle' ? '' : 'searchTitle');
+            }}
+          >
+            {selectedSearchTitle}
+            <div>
+              <IconDownArrowSmall />
+              <p />
+            </div>
           </STDDeliveryBox>
           <STDSearchWrapper>
-            <input placeholder="검색어를 입력하세요." />
+            <input
+              onClick={(e) => {
+                e.stopPropagation();
+                setModalOnAt('searchText');
+              }}
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              placeholder="검색어를 입력하세요."
+            />
             <IconSearch />
           </STDSearchWrapper>
+          {modalOnAt === 'searchTitle' && (
+            <STDDeliverySelectBox onClick={(e) => e.stopPropagation()}>
+              <STDDeliverySelectText
+                isSelected={selectedSearchTitle === '납품처'}
+                onClick={() => setSelectedSearchTitle('납품처')}
+              >
+                납품처
+              </STDDeliverySelectText>
+              <STDDeliverySelectText
+                isSelected={selectedSearchTitle === '품명'}
+                onClick={() => setSelectedSearchTitle('품명')}
+              >
+                품명
+              </STDDeliverySelectText>
+            </STDDeliverySelectBox>
+          )}
+          {modalOnAt === 'searchText' && (
+            <STDDeliverySearchTextBox onClick={(e) => e.stopPropagation()}>
+              {['예시1', '예시2', '예시3', '예시4'].map((text) => (
+                <STDDeliverySearchText
+                  key={text}
+                  onClick={() => {
+                    setSearchText(text);
+                    setModalOnAt('');
+                  }}
+                >
+                  {text}
+                </STDDeliverySearchText>
+              ))}
+            </STDDeliverySearchTextBox>
+          )}
         </STDSearchBox>
-        <STDOrderButton>
-          최신순
+        <STDOrderButton
+          onClick={(e) => {
+            e.stopPropagation();
+            setOrderModalOn(orderModalOn ? false : true);
+          }}
+        >
+          {selectedOrder === 'new' ? '최신순' : '오래된순'}
           <IconDownArrowGray />
+          {orderModalOn && (
+            <STDSelectOrderBox onClick={(e) => e.stopPropagation()}>
+              <STDDeliverySelectText
+                isSelected={selectedOrder === 'new'}
+                onClick={(e) => {
+                  setSelectedOrder('new');
+                  setOrderModalOn(false);
+                }}
+              >
+                최신순
+              </STDDeliverySelectText>
+              <STDDeliverySelectText
+                isSelected={selectedOrder === 'old'}
+                onClick={(e) => {
+                  setSelectedOrder('old');
+                  setOrderModalOn(false);
+                }}
+              >
+                오래된순
+              </STDDeliverySelectText>
+            </STDSelectOrderBox>
+          )}
         </STDOrderButton>
       </STDFilterWrapper>
       <STDTableContainer>
