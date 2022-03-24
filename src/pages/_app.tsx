@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import { MainNav } from '@/components';
+import { MainNav, Footer } from '@/components';
 import { AppProps } from 'next/app';
 import withReduxSaga from 'next-redux-saga';
 import { wrapper } from '@/store/configureStore';
@@ -90,6 +90,7 @@ function App({ Component, pageProps }: AppProps) {
         />
         <Component {...pageProps} />
       </STDContainer>
+      {selectedMenu === '/' && <Footer />}
     </>
   );
 }

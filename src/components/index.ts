@@ -1,7 +1,8 @@
 //common
 import MainNav from './common/MainNav';
+import Footer from './common/Footer';
 
-export { MainNav };
+export { MainNav, Footer };
 
 // Home
 import HomeContainter from './Layout/Home/HomeContainter';

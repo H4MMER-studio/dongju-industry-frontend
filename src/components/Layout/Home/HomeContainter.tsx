@@ -9,7 +9,7 @@ interface IProps {
 const STDContainer = styled.article`
   ${mixins.flexSet()}
   width: 100%;
-  height: calc(100% - 48px);
+  height: calc(100% - 183px);
   margin: 24px;
   border-radius: 20px;
   background: url('/image/main_page/main_company.png') no-repeat center;

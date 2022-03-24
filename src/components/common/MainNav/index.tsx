@@ -30,10 +30,17 @@ interface IProps {
   ) => void;
 }
 
-const STDContainer = styled.nav`
+const STDContainer = styled.nav<{ isMain?: boolean }>`
   ${mixins.flexSet('center', 'flex-start')}
   flex-shrink:0;
-  height: calc(100% - 48px);
+  ${({ isMain }) =>
+    isMain
+      ? css`
+          height: calc(100% - 183px);
+        `
+      : css`
+          height: calc(100% - 48px);
+        `};
   padding: 36px 20px 20px 30px;
   margin: 24px;
   background-color: white;
@@ -67,10 +74,30 @@ const STDProductList = styled.div`
   overflow-y: scroll;
 `;
 
-const STDProductWrapper = styled.div`
+const STDProductWrapper = styled.div<{ isSelected: boolean }>`
   ${mixins.flexSet('center', 'center', 'column')}
-  margin-bottom: 51px;
+  margin-bottom: 16px;
+  padding: 20px 4px 15px;
+  border-radius: 12px;
   cursor: pointer;
+  ${({ isSelected }) =>
+    isSelected &&
+    css`
+      background-color: #e8e8e8;
+    `}
+
+  &:hover {
+    background: #efefef;
+    box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);
+
+    p {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 18px;
+      text-decoration-line: underline;
+      color: #383838;
+    }
+  }
 
   img {
     width: 138px;
@@ -79,9 +106,15 @@ const STDProductWrapper = styled.div`
 
   p {
     font-size: 15px;
-    font-weight: 600px;
+    font-weight: 600;
     line-height: 18px;
     color: #777777;
+    ${({ isSelected }) =>
+      isSelected &&
+      css`
+        text-decoration-line: underline;
+        color: #383838;
+      `}
   }
 `;
 
@@ -199,7 +232,13 @@ const STDSubListMenuWrapper = styled.div`
   height: calc(100% - 72px);
   margin-top: 66px;
   padding: 0 26px 0 46px;
-  border-left: 1px solid #e8e8e8;
+`;
+
+const STDMiddleLine = styled.div`
+  width: 1px;
+  height: calc(100% - 74px);
+  margin: 68px 0 6px;
+  background: #e8e8e8;
 `;
 
 const STDSubListMenuButton = styled.button<{ isSelected: boolean }>`
@@ -326,7 +365,7 @@ const MainNav: React.FC<IProps> = ({
 
   return (
     <>
-      <STDContainer>
+      <STDContainer isMain={selectedMenu === '/'}>
         <STDMainMenu>
           <img
             src="/image/main_nav/header_logo.png"
@@ -358,6 +397,9 @@ const MainNav: React.FC<IProps> = ({
             ))}
           </STDMenuWrapper>
         </STDMainMenu>
+        {!(selectedMenu.includes('product') || selectedMenu === '/') && (
+          <STDMiddleLine />
+        )}
         {selectedMenu.includes('company') && (
           <STDSubListMenuWrapper>
             {COMPANY_MENU.map(({ id, value }) => (
@@ -371,11 +413,12 @@ const MainNav: React.FC<IProps> = ({
             ))}
           </STDSubListMenuWrapper>
         )}
-        {selectedMenu.includes('product') && (
+        {(selectedMenu.includes('product') || selectedMenu === '/') && (
           <STDProductList>
             {PRDUCT_LIST.map(({ imageSrc, name, type }) => (
               <STDProductWrapper
                 key={name}
+                isSelected={router.asPath.includes(type)}
                 onClick={() => onClickProduct(type)}
               >
                 <img alt="product image" src={imageSrc} />
