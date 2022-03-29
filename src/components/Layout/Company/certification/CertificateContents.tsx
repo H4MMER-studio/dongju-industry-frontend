@@ -12,6 +12,7 @@ const SDTCertificateContentsLayout = styled.div`
   background-color: #555555;
   padding: 36px;
   border-radius: 20px;
+  margin-bottom: 24px;
 `;
 
 const LeftNavSide = styled.nav`

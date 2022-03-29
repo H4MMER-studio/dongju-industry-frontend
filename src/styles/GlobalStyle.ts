@@ -9,6 +9,17 @@ export const GlobalStyle = createGlobalStyle`
     &:focus {
       outline: none;
     }
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #babac0;
+      border-radius: 16px;
+   }
+
+
   }
 
   html {
@@ -29,6 +40,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color: transparent;
     background: #fff;
   }
+  
 
 
   body,
@@ -194,5 +206,8 @@ export const GlobalStyle = createGlobalStyle`
     background: transparent;
     -webkit-appearance: none;
   }
+
+  
+
 
 `;

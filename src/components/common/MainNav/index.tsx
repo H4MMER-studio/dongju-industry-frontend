@@ -72,6 +72,8 @@ const STDProductList = styled.div`
   flex: 1;
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
+
 `;
 
 const STDProductWrapper = styled.div<{ isSelected: boolean }>`
