@@ -4,7 +4,6 @@ import * as NoticeComponents from './components';
 import { Images } from 'public/image';
 
 interface IProps {
-  type: '';
   clickNoticeItem: (id: string) => void;
 }
 
