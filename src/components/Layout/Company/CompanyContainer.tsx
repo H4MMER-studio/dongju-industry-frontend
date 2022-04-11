@@ -7,12 +7,12 @@ import Certification from './certification';
 import Performance from './Performance';
 import { Images } from 'public/image';
 import useResize from '@/hooks/useResize';
-import { certificationMenuType } from '@/interfaces';
+import { ICertificationMenuType } from '@/interfaces';
 import { mixins } from '@/styles';
 
 interface Iprops {
   menu: 'welcome' | 'history' | 'way-to-come' | 'performance' | 'certification';
-  clickCertificationTypeMenu: (type: certificationMenuType) => void;
+  clickCertificationTypeMenu: (type: ICertificationMenuType) => void;
 }
 
 const STDContainer = styled.main`
@@ -20,7 +20,7 @@ const STDContainer = styled.main`
   margin: 0 auto;
   width: 1240px;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   @media (max-width: 1682px) {
     width: 974px;

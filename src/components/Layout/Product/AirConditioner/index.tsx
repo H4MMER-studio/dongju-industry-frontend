@@ -9,7 +9,7 @@ const STDContainer = styled.article`
   flex: 1;
   height: 100%;
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
   padding: 24px 0;
 `;
 

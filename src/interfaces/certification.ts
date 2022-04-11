@@ -5,3 +5,9 @@ export interface ICertificationInitialState {
 export interface ICertification {
   type: string;
 }
+
+export type ICertificationMenuType =
+  | 'registration'
+  | 'key-certifications'
+  | 'patent'
+  | 'test-report';

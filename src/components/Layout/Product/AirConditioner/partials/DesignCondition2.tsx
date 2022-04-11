@@ -5,7 +5,7 @@ import { mixins } from '@/styles';
 const STDContainer = styled.div<{ marginBottom?: number }>`
   width: 100%;
   ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}px;`}
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const STDTableWrapper = styled.table`
