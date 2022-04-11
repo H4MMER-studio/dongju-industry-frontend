@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './index.style';
+import { useDispatch } from 'react-redux';
+import { performanceActions } from '@/store';
+import { useGetStore } from '@/hooks';
 import { IconDownArrowSmall, IconSearch, IconDownArrowGray } from '@svg';
 
 const Performance: React.FC = () => {
@@ -8,14 +11,21 @@ const Performance: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [orderModalOn, setOrderModalOn] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState('new');
+  const dispatch = useDispatch();
+  const { deliveryList } = useGetStore.performance();
 
   useEffect(() => {
     document.onclick = onClickCloseModal;
+    dispatch(performanceActions.getDeliveryList());
 
     return () => {
       document.onmousedown = null;
     };
   }, []);
+
+  useEffect(() => {
+    console.log(deliveryList);
+  }, [deliveryList]);
 
   const onClickCloseModal = () => {
     setModalOnAt('');
