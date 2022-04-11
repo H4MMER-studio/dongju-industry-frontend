@@ -6,7 +6,7 @@ const NoticeView: React.FC = () => {
   const route = Router;
 
   const clickNoticeItem = (id: string) => {
-    route.push(`/notice/${id}`);
+    route.push(`/notice/list/${id}`);
   };
 
   return <Notice.Container clickNoticeItem={clickNoticeItem} />;
