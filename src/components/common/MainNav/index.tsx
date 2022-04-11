@@ -314,8 +314,8 @@ const MainNav: React.FC<IProps> = ({
     { value: '인증서', id: 'certification' },
   ];
 
-  const NOTICE_MENU: { value: string; id: 'notice' | 'data' }[] = [
-    { value: '공지', id: 'notice' },
+  const NOTICE_MENU: { value: string; id: 'list' | 'data' }[] = [
+    { value: '공지', id: 'list' },
     { value: '자료실', id: 'data' },
   ];
 
@@ -402,7 +402,7 @@ const MainNav: React.FC<IProps> = ({
                       : id === 'company'
                       ? 'company/welcome'
                       : id === 'notice'
-                      ? 'notice/notice'
+                      ? 'notice/list'
                       : id === 'customer-service'
                       ? 'customer-service/inquiry'
                       : id

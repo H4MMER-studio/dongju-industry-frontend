@@ -1,3 +1,3 @@
-import AttachedFile from './AttachedFile';
+import LatestNotice from './LatestNotice';
 
-export { AttachedFile };
+export { LatestNotice };
