@@ -1,7 +1,7 @@
 import React from 'react';
 import Router, { useRouter } from 'next/router';
 import { Company } from '@/components';
-import { certificationMenuType } from '@/interfaces';
+import { ICertificationMenuType } from '@/interfaces';
 
 const CompanyView: React.FC = () => {
   const router = useRouter();
@@ -9,7 +9,7 @@ const CompanyView: React.FC = () => {
     menu: 'welcome' | 'history' | 'way-to-come';
   };
 
-  const clickCertificationTypeMenu = (type: certificationMenuType) => {
+  const clickCertificationTypeMenu = (type: ICertificationMenuType) => {
     router.push(`?type=${type}`);
   };
 

@@ -9,15 +9,15 @@ const CustomerServiceView: React.FC = () => {
   const clickContact = (type: 'estimate' | 'A/S' | 'ETC') => {
     switch (type) {
       case 'estimate':
-        route.push('/customer-service?question=estimate');
+        route.push('/customer-service/inquiry?question=estimate');
         break;
 
       case 'A/S':
-        route.push('/customer-service?question=A/S');
+        route.push('/customer-service/inquiry?question=A/S');
         break;
 
       case 'ETC':
-        route.push('/customer-service?question=ETC');
+        route.push('/customer-service/inquiry?question=ETC');
         break;
 
       default:
@@ -26,7 +26,7 @@ const CustomerServiceView: React.FC = () => {
   };
 
   const closeForm = () => {
-    route.push('/customer-service');
+    route.push('/customer-service/inquiry');
   };
 
   return (
