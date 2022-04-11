@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Widgets } from '@/components';
 import { mixins } from '@/styles';
 import { ProductType } from '@/interfaces';
+import { toBodyStyleHidden } from '@/utils';
 import { IconHamburg, IconDownArrow, IconClose } from '@svg';
 
 interface IProps {
@@ -71,9 +72,8 @@ const STDMenuWrapper = styled.div`
 const STDProductList = styled.div`
   flex: 1;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
-
 `;
 
 const STDProductWrapper = styled.div<{ isSelected: boolean }>`
@@ -162,11 +162,12 @@ const STDSideMenuList = styled.div`
   width: 100%;
   height: 100%;
   background: white;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
-const STDSideMenuTitleContainer = styled.div`
+const STDSideMenuTitleContainer = styled.div<{ marginBottom?: number }>`
   overflow: hidden;
+  margin-bottom: ${({ marginBottom }) => marginBottom ?? 0}px;
 `;
 
 const STDSideMenuTitleWrapper = styled.div<{ isOpen: boolean }>`
@@ -176,6 +177,7 @@ const STDSideMenuTitleWrapper = styled.div<{ isOpen: boolean }>`
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
+  background-color: white;
   cursor: pointer;
 
   svg {
@@ -198,12 +200,17 @@ type sideProductListProps = {
 const STDSideProductListWrapper = styled.div<sideProductListProps>`
   padding: 0 16px;
   max-height: ${({ isOpen, maxHeight }) => (isOpen ? maxHeight : 0)}px;
+  -webkit-max-height: ${({ isOpen, maxHeight }) => (isOpen ? maxHeight : 0)}px;
   transition: max-height 0.3s ease-in-out;
 `;
 
 const STDProductTwinWrapper = styled.div`
   ${mixins.flexSet()}
   margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const STDSideProductItem = styled.div<{ marginRight?: number }>`
@@ -266,6 +273,10 @@ const STDSideListWrapper = styled.ul<sideProductListProps>`
     line-height: 20px;
     color: #555555;
     margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -352,6 +363,12 @@ const MainNav: React.FC<IProps> = ({
   useEffect(() => {
     if (!isOpen && selectedSubMenu) {
       setSelectedSubMenu(null);
+    }
+
+    if (isOpen) {
+      toBodyStyleHidden(true);
+    } else {
+      toBodyStyleHidden(false);
     }
   }, [isOpen]);
 
@@ -581,7 +598,7 @@ const MainNav: React.FC<IProps> = ({
                 ))}
               </STDSideListWrapper>
             </STDSideMenuTitleContainer>
-            <STDSideMenuTitleContainer>
+            <STDSideMenuTitleContainer marginBottom={100}>
               <STDSideMenuTitleWrapper
                 isOpen={selectedSubMenu === 'customer'}
                 onClick={() =>

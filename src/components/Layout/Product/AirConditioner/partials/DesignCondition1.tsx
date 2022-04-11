@@ -25,7 +25,7 @@ const h3Style = css`
 `;
 
 const STDContainer = styled.div`
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const STDWrapper = styled.div`
