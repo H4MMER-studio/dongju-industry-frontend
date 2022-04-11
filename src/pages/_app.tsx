@@ -64,7 +64,7 @@ function App({ Component, pageProps }: AppProps) {
     router.push(`/company/${companyMenu}`);
   };
 
-  const onClickNoticeMenu = (noticeMenu: 'notice' | 'data') => {
+  const onClickNoticeMenu = (noticeMenu: 'list' | 'data') => {
     router.push(`/notice/${noticeMenu}`);
   };
 

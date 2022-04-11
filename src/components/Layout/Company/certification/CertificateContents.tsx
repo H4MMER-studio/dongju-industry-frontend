@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { certificationMenuType } from '@/interfaces';
+import { ICertificationMenuType } from '@/interfaces';
 
 interface IProps {
-  clickCertificationTypeMenu: (type: certificationMenuType) => void;
+  clickCertificationTypeMenu: (type: ICertificationMenuType) => void;
 }
 
 const SDTCertificateContentsLayout = styled.div`

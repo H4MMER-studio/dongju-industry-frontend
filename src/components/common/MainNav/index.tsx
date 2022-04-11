@@ -19,7 +19,7 @@ interface IProps {
   };
   onClickMenu(menu: string): void;
   onClickProduct(product: ProductType['type']): void;
-  onClickNoticeMenu(noticeMenu: 'notice' | 'data'): void;
+  onClickNoticeMenu(noticeMenu: 'list' | 'data'): void;
   onClickCustomerMenu(customerMenu: 'inquiry'): void;
   onClickCompanyMenu: (
     companyMenu:
