@@ -1,4 +1,4 @@
-export type certificationMenuType =
+export type ICertificationMenuType =
   | 'registration'
   | 'key-certifications'
   | 'patent'
