@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://api.forour.space/api',
+  baseURL: 'https://api.dongju-industry.co.kr/api/vi',
   timeout: 40000,
 
   // responseType:"json",
