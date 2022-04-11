@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://13.209.19.236:8000/api/vi',
+  baseURL: 'http://13.209.19.236:8000/api/v1',
   timeout: 40000,
 
   // responseType:"json",

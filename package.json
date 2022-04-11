@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "dongju-industry-frontend",
   "scripts": {
-    "dev": "next dev ",
+    "dev": "next dev -p 5500",
     "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
