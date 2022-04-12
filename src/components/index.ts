@@ -46,6 +46,7 @@ import AirConditioner from './Layout/Product/AirConditioner';
 import ExhaustUnit from './Layout/Product/ExhaustUnit';
 import BubbleDamper from './Layout/Product/BubbleDamper';
 import FullySealedDoor from './Layout/Product/FullySealedDoor';
+import AirBlower from './Layout/Product/AirBlower';
 
 export const Product = {
   Container: ProductContainer,
@@ -54,6 +55,7 @@ export const Product = {
   ExhaustUnit,
   BubbleDamper,
   FullySealedDoor,
+  AirBlower,
 };
 //Wigets
 import * as Widgets from './widgets';

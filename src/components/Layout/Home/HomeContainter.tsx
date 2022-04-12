@@ -28,6 +28,10 @@ const STDMainLogoWrapper = styled.div`
   img {
     width: 352px;
     margin-bottom: 24px;
+
+    @media (max-width: 768px) {
+      width: 196px;
+    }
   }
 
   p {
@@ -36,6 +40,10 @@ const STDMainLogoWrapper = styled.div`
     line-height: 60px;
     color: white;
     text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 24px;
+    }
   }
 `;
 
