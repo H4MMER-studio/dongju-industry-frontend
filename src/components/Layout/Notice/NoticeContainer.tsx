@@ -2,22 +2,39 @@ import React from 'react';
 import styled from 'styled-components';
 import * as NoticeComponents from './components';
 import { Images } from 'public/image';
+import { propsToClassKey } from '@mui/styles';
 
 interface IProps {
+  title: string;
   clickNoticeItem: (id: string) => void;
 }
 
 const NoticeContainerLayout = styled.div`
-  width: 100%;
+  width: 1240px;
   height: 100%;
-  padding: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
+  padding-right: 24px;
+
+  @media (max-width: 1366px) {
+    width: 100%;
+  }
+
+  @media (max-width: 1023px) {
+    padding: 0 16px;
+    height: calc(100vh - 64px);
+    align-items: stretch;
+  }
 `;
 
 const ContentsLayout = styled.div`
   width: 100%;
+
+  @media (max-width: 1023px) {
+    margin-top: 64px;
+  }
 `;
 
 const Title = styled.div`
@@ -26,9 +43,15 @@ const Title = styled.div`
   margin-bottom: 16px;
   color: #2979ff;
   text-align: center;
+
+  @media (max-width: 1023px) {
+    font-size: 32px;
+    margin-bottom: 48px;
+  }
 `;
 
 const ListLayout = styled.div`
+  height: 304px;
   margin-bottom: 48px;
 `;
 
@@ -59,11 +82,11 @@ const PageNumber = styled.div<{ isSelected: boolean }>`
   }
 `;
 
-const NoticeContainer: React.FC<IProps> = ({ clickNoticeItem }) => {
+const NoticeContainer: React.FC<IProps> = ({ title, clickNoticeItem }) => {
   return (
     <NoticeContainerLayout>
       <ContentsLayout>
-        <Title>공지사항</Title>
+        <Title>{title}</Title>
         <ListLayout>
           <NoticeComponents.Item
             title={'IFB동파 방지'}

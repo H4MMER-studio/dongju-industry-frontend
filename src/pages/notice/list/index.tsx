@@ -9,7 +9,9 @@ const NoticeView: React.FC = () => {
     route.push(`/notice/list/${id}`);
   };
 
-  return <Notice.Container clickNoticeItem={clickNoticeItem} />;
+  return (
+    <Notice.Container title="공지사항" clickNoticeItem={clickNoticeItem} />
+  );
 };
 
 export default NoticeView;

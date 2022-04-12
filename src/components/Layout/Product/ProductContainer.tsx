@@ -66,6 +66,8 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
         return <Product.BubbleDamper />;
       case 'fully-sealed-door':
         return <Product.FullySealedDoor />;
+      case 'air-blower':
+        return <Product.AirBlower />;
     }
   };
 
