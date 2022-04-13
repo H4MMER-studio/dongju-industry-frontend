@@ -5,17 +5,19 @@ import { ICertificationMenuType } from '@/interfaces';
 
 const CompanyView: React.FC = () => {
   const router = useRouter();
-  const { menu } = router.query as {
+  const { menu, type } = router.query as {
     menu: 'welcome' | 'history' | 'way-to-come';
+    type: ICertificationMenuType;
   };
 
   const clickCertificationTypeMenu = (type: ICertificationMenuType) => {
-    router.push(`?type=${type}`);
+    router.push(`/company/certification/?type=${type}`);
   };
 
   return (
     <Company.Container
       menu={menu}
+      type={type}
       clickCertificationTypeMenu={clickCertificationTypeMenu}
     />
   );

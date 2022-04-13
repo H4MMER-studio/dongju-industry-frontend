@@ -61,7 +61,11 @@ function App({ Component, pageProps }: AppProps) {
       | 'performance'
       | 'certification'
   ) => {
-    router.push(`/company/${companyMenu}`);
+    if (companyMenu === 'certification') {
+      router.push(`/company/${companyMenu}?type=registration`);
+    } else {
+      router.push(`/company/${companyMenu}`);
+    }
   };
 
   const onClickNoticeMenu = (noticeMenu: 'list' | 'data') => {

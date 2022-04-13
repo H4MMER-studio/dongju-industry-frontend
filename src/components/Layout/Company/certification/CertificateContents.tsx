@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ICertificationMenuType } from '@/interfaces';
 
 interface IProps {
+  type: ICertificationMenuType;
   clickCertificationTypeMenu: (type: ICertificationMenuType) => void;
 }
 
@@ -21,22 +22,29 @@ const LeftNavSide = styled.nav`
   border-right: 1px solid #777777;
 `;
 
-const MenuValue = styled.div`
+const MenuValue = styled.div<{ selected: boolean }>`
   font-size: 28px;
-  color: #949494;
+  color: ${(props) => (props.selected ? '#fff' : '#949494')};
   font-weight: 600;
   margin-bottom: 36px;
   cursor: pointer;
 `;
 
 const CertificateContents: React.FC<IProps> = ({
+  type,
   clickCertificationTypeMenu,
 }) => {
   return (
     <SDTCertificateContentsLayout>
       <LeftNavSide>
         {MENU_LIST.map((menu) => (
-          <MenuValue key={menu.value}>{menu.value}</MenuValue>
+          <MenuValue
+            key={menu.value}
+            selected={menu.type === type}
+            onClick={() => clickCertificationTypeMenu(menu.type)}
+          >
+            {menu.value}
+          </MenuValue>
         ))}
       </LeftNavSide>
     </SDTCertificateContentsLayout>
@@ -45,17 +53,21 @@ const CertificateContents: React.FC<IProps> = ({
 
 export default CertificateContents;
 
-const MENU_LIST = [
+const MENU_LIST: { value: string; type: ICertificationMenuType }[] = [
   {
     value: '등록증',
+    type: 'registration',
   },
   {
     value: '주요인증',
+    type: 'key-certifications',
   },
   {
     value: '특허증',
+    type: 'patent',
   },
   {
     value: '시험성적서',
+    type: 'test-report',
   },
 ];
