@@ -3,6 +3,7 @@ import {
   selectHomeState,
   selectPerformanceState,
   selectCertificationState,
+  selectNoticeState,
 } from '@/store';
 import { selectHistoryState } from '@/store/module/history';
 
@@ -18,6 +19,7 @@ export const useGetStore = {
   history: () => selectHistoryState(useGetRootState().history),
   certification: () =>
     selectCertificationState(useGetRootState().certification),
+  notice: () => selectNoticeState(useGetRootState().notice),
 };
 
 export * from './useResize';

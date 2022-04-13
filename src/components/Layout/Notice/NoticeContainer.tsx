@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as NoticeComponents from './components';
+import { useGetStore } from '@/hooks';
 import { Images } from 'public/image';
 import { propsToClassKey } from '@mui/styles';
 
 interface IProps {
+  page: number;
   title: string;
   clickNoticeItem: (id: string) => void;
 }
@@ -82,7 +84,15 @@ const PageNumber = styled.div<{ isSelected: boolean }>`
   }
 `;
 
-const NoticeContainer: React.FC<IProps> = ({ title, clickNoticeItem }) => {
+const NoticeContainer: React.FC<IProps> = ({
+  page,
+  title,
+  clickNoticeItem,
+}) => {
+  const { dataList } = useGetStore.notice();
+
+  console.log(dataList);
+
   return (
     <NoticeContainerLayout>
       <ContentsLayout>
