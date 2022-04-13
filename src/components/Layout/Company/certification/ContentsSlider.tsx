@@ -44,6 +44,10 @@ const SliderLayout = styled.div`
 `;
 
 const SlideIconLayout = styled.div`
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,6 +70,9 @@ const PrevArrowLayout = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
 `;
 
 const InfoLayout = styled.div`
