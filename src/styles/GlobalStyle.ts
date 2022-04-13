@@ -13,14 +13,16 @@ export const GlobalStyle = createGlobalStyle`
     &::-webkit-scrollbar {
       width: 8px;
       height: 8px;
+
+      @media(max-width:768px){
+        display:none;
+      }
     }
 
     &::-webkit-scrollbar-thumb {
       background-color: #babac0;
       border-radius: 16px;
    }
-
-
   }
 
   html {

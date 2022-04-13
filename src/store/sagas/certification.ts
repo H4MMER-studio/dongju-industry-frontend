@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { API, CERTIFICATIONS_API } from '@/utils';
 import { certificationActions } from '../module/certification';
-import { ICertification, ICertificationMenuType } from '@/interfaces';
+import { ICertificationMenuType, ICertificationList } from '@/interfaces';
 
 export function* getCertificationListSaga({
   payload,
@@ -9,7 +9,7 @@ export function* getCertificationListSaga({
   payload: ICertificationMenuType;
 }) {
   try {
-    const certificationList: ICertification[] = yield call(
+    const certificationList: ICertificationList = yield call(
       API.GET,
       `${CERTIFICATIONS_API}?value=${payload}&skip=0&limit=100&sort=certification-date%20asc`
     );

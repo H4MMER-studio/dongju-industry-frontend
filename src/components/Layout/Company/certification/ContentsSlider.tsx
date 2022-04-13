@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Slider, { Settings } from 'react-slick';
 import { Icon } from 'public/image';
+import { ICertificationMenuType, ICertification } from '@/interfaces';
+
+interface Iprops {
+  type: ICertificationMenuType;
+  certificationList: ICertification[];
+}
 
 const ContentsSliderLayout = styled.div`
   width: 100%;
@@ -85,7 +91,22 @@ const ListScrollLayout = styled.div`
   overflow-y: hidden;
 `;
 
-const ContentsSlider: React.VFC = () => {
+const Layout = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
+  // const [certificationInfo, setCertificationInfo] = useState<ICertification>();
+
+  // console.log(certificationList, '아 왜');
+
+  // useEffect(() => {
+  //   if (certificationList?.length > 0) {
+  //     setCertificationInfo(certificationList[0]);
+  //   }
+  // }, [type]);
+
   const settings: Settings = {
     dots: true,
     infinite: true,
@@ -116,13 +137,30 @@ const ContentsSlider: React.VFC = () => {
 
   return (
     <ContentsSliderLayout>
-      <div>
-        <Title>버블댐퍼</Title>
+      <Slider {...settings}>
+        {certificationList.map((certification) => {
+          return (
+            <Layout key={certification._id}>
+              <Title>{certification.certification_title}</Title>
+              <CertificationImage
+                src={certification.certification_images[0]?.url}
+                alt={'인증서 사진'}
+              />
+            </Layout>
+          );
+        })}
+      </Slider>
+      {/* <div>
+        <Title>{certificationInfo?.certification_title}</Title>
         <SliderLayout>
           <Slider {...settings}>
-            <CertificationImage />
-            <CertificationImage />
-            <CertificationImage />
+            {certificationInfo?.certification_images.map((image) => (
+              <CertificationImage
+                src={image.url}
+                id={image.url}
+                alt={'인증서 사진'}
+              />
+            ))}
           </Slider>
         </SliderLayout>
         <InfoLayout>
@@ -133,7 +171,7 @@ const ContentsSlider: React.VFC = () => {
           <span className="contents">(주)한국필터시험원</span>
         </InfoLayout>
         <ListScrollLayout></ListScrollLayout>
-      </div>
+      </div> */}
     </ContentsSliderLayout>
   );
 };
