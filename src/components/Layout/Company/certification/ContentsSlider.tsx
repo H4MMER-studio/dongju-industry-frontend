@@ -56,6 +56,7 @@ const CertificationImage = styled.img`
   width: 356px;
   height: 503px;
   background-color: red;
+  margin: 0 auto;
 `;
 
 const PrevArrowLayout = styled.div`
@@ -64,6 +65,7 @@ const PrevArrowLayout = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
 `;
 
 const InfoLayout = styled.div`
@@ -92,6 +94,7 @@ const ListScrollLayout = styled.div`
 `;
 
 const Layout = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
 `;

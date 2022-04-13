@@ -42,7 +42,11 @@ const MenuValue = styled.div<{ selected: boolean }>`
 `;
 
 const RightSide = styled.div`
-  width: 100%;
+  width: 1023px;
+
+  @media (max-width: 1366px) {
+    width: 757px;
+  }
 `;
 
 const MobileNavList = styled.div`

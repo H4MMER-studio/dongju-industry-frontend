@@ -18,7 +18,6 @@ interface Iprops {
 
 const STDContainer = styled.main`
   padding-top: 48px;
-  padding-right: 24px;
   margin: 0 auto;
   width: 1240px;
   height: 100%;
