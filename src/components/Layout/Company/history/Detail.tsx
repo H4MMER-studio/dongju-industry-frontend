@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useGetStore } from '@/hooks';
 
 const STDDetailLayout = styled.div`
   padding-bottom: 30px;
@@ -74,6 +75,10 @@ const DetailContents = styled.div`
 `;
 
 const Detail: React.FC = () => {
+  const { historyList } = useGetStore.history();
+
+  console.log(historyList);
+
   return (
     <STDDetailLayout>
       <YearRange>2010~2019</YearRange>

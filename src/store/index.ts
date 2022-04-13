@@ -2,11 +2,13 @@ import { combineReducers } from '@reduxjs/toolkit';
 import home from './module/home';
 import performance from './module/performance';
 import certification from './module/certification';
+import history from './module/history';
 
 const rootReducer = combineReducers({
   home,
   performance,
   certification,
+  history,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
