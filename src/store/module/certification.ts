@@ -1,8 +1,11 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICertificationInitialState, ICertificationMenuType } from '@/interfaces';
+import {
+  ICertificationInitialState,
+  ICertificationMenuType,
+} from '@/interfaces';
 
 const initialState: ICertificationInitialState = {
-  certificationList: [],
+  certificationList: { data: [], size: 0 },
 };
 
 const slice = createSlice({

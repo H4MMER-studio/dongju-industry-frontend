@@ -18,7 +18,6 @@ interface Iprops {
 
 const STDContainer = styled.main`
   padding-top: 48px;
-  padding-right: 24px;
   margin: 0 auto;
   width: 1240px;
   height: 100%;
@@ -30,7 +29,7 @@ const STDContainer = styled.main`
 
   @media (max-width: 1023px) {
     width: 100%;
-    padding: 48px 16px 64px 16px;
+    padding: 0px;
   }
 `;
 
@@ -54,6 +53,12 @@ const BannerSection = styled.section<{ marginBottom?: number }>`
     width: 100%;
     height: 120px;
     padding: 0px 17px 0 15px;
+  }
+`;
+
+const MobileBannerPadding = styled.div`
+  @media (max-width: 1023px) {
+    padding: 48px 16px 0px;
   }
 `;
 
@@ -129,19 +134,21 @@ const CompanyContainer: React.FC<Iprops> = ({
   return (
     <ScollLayout>
       <STDContainer>
-        <BannerSection marginBottom={menu === 'performance' ? 24 : undefined}>
-          <BannerImage
-            src={
-              width > 1023
-                ? Images.CompanyInfoBannerLarge
-                : Images.CompanyInfoBannerSmall
-            }
-          />
-          <CenterLayout>
-            <BreadCrum>{`홈/회사/${displayTitle(menu)}`}</BreadCrum>
-            <Title>{displayTitle(menu)}</Title>
-          </CenterLayout>
-        </BannerSection>
+        <MobileBannerPadding>
+          <BannerSection marginBottom={menu === 'performance' ? 24 : undefined}>
+            <BannerImage
+              src={
+                width > 1023
+                  ? Images.CompanyInfoBannerLarge
+                  : Images.CompanyInfoBannerSmall
+              }
+            />
+            <CenterLayout>
+              <BreadCrum>{`홈/회사/${displayTitle(menu)}`}</BreadCrum>
+              <Title>{displayTitle(menu)}</Title>
+            </CenterLayout>
+          </BannerSection>
+        </MobileBannerPadding>
         {(() => {
           switch (menu) {
             case 'welcome':

@@ -28,6 +28,7 @@ const Certification: React.FC<Iprops> = ({
     <SDTCertificationLayout>
       <CertificateContents
         type={type}
+        certificationList={certificationList.data}
         clickCertificationTypeMenu={clickCertificationTypeMenu}
       />
     </SDTCertificationLayout>
