@@ -1,9 +1,14 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { INoticeInitialState, IGetNoticeDataParams } from '@/interfaces';
+import {
+  INoticeInitialState,
+  IGetNoticeDataParams,
+  IGetNoticeDataDetail,
+} from '@/interfaces';
 
 const initialState: INoticeInitialState = {
   noticeList: [],
   dataList: [],
+  noticeDetail: null,
 };
 
 const slice = createSlice({
@@ -22,17 +27,26 @@ const slice = createSlice({
     ) => {
       state.dataList = payload;
     },
+    setNoticeDetail: (
+      state,
+      { payload }: PayloadAction<INoticeInitialState['noticeDetail']>
+    ) => {
+      state.noticeDetail = payload;
+    },
     getNoticeDataList: (_, __: PayloadAction<IGetNoticeDataParams>) => {},
+    getNoticeDataDetail: (_, __: PayloadAction<IGetNoticeDataDetail>) => {},
   },
 });
 
 export const selectNoticeState = createSelector(
   (state: INoticeInitialState) => state.noticeList,
   (state: INoticeInitialState) => state.dataList,
-  (noticeList, dataList) => {
+  (state: INoticeInitialState) => state.noticeDetail,
+  (noticeList, dataList, noticeDetail) => {
     return {
       noticeList,
       dataList,
+      noticeDetail,
     };
   }
 );

@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import * as NoticeDetailComponents from './components';
 import { Icon } from 'public/image';
+import { INoticeDetail } from '@/interfaces';
+
+interface IProps {
+  detail: INoticeDetail;
+}
 
 const ScrollLayout = styled.div`
   width: 100%;
@@ -108,7 +113,7 @@ const DownloadFileName = styled.div`
   font-size: 15px;
   color: #2979ff;
 `;
-const NoticeDetailContainer: React.FC = () => {
+const NoticeDetailContainer: React.FC<IProps> = ({ detail }) => {
   return (
     <ScrollLayout>
       <NoticeDetailContainerLayout>

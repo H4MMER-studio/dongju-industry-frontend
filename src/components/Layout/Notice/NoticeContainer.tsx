@@ -91,8 +91,6 @@ const NoticeContainer: React.FC<IProps> = ({
 }) => {
   const { dataList } = useGetStore.notice();
 
-  console.log(dataList);
-
   return (
     <NoticeContainerLayout>
       <ContentsLayout>
@@ -106,8 +104,7 @@ const NoticeContainer: React.FC<IProps> = ({
         </ListLayout>
         <PageNationLayout>
           <ArrowIcon src={Images.PagenationLeft} style={{ marginRight: 20 }} />
-          <PageNumber isSelected={true}>1</PageNumber>
-          <PageNumber isSelected={false}>2</PageNumber>
+          <PageNumber isSelected={page === 1}>1</PageNumber>
           <ArrowIcon src={Images.PagenationRight} style={{ marginLeft: 8 }} />
         </PageNationLayout>
       </ContentsLayout>
