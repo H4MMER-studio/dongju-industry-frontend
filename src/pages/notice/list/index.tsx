@@ -11,7 +11,11 @@ const NoticeView: React.FC = () => {
 
   useEffect(() => {
     dispatch(
-      noticeActions.getNoticeDataList({ skip: 5 * page - 4, limit: 5 * page })
+      noticeActions.getNoticeDataList({
+        skip: 5 * page - 4,
+        limit: 5 * page,
+        type: 'notification',
+      })
     );
   }, [page]);
 

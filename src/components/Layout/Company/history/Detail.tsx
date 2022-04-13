@@ -77,8 +77,6 @@ const DetailContents = styled.div`
 const Detail: React.FC = () => {
   const { historyList } = useGetStore.history();
 
-  console.log(historyList);
-
   return (
     <STDDetailLayout>
       <YearRange>2010~2019</YearRange>

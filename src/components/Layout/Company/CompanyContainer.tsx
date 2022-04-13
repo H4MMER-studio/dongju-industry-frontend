@@ -25,7 +25,7 @@ const STDContainer = styled.main`
   /* overflow-y: auto; */
 
   @media (max-width: 1682px) {
-    width: 974px;
+    width: 100%;
   }
 
   @media (max-width: 1023px) {
