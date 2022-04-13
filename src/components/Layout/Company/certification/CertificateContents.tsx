@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ICertificationMenuType } from '@/interfaces';
+import ContentsSlider from './ContentsSlider';
 
 interface IProps {
   type: ICertificationMenuType;
@@ -8,6 +9,7 @@ interface IProps {
 }
 
 const SDTCertificateContentsLayout = styled.div`
+  display: flex;
   width: 100%;
   height: 841px;
   background-color: #555555;
@@ -30,6 +32,10 @@ const MenuValue = styled.div<{ selected: boolean }>`
   cursor: pointer;
 `;
 
+const RightSide = styled.div`
+  width: 100%;
+`;
+
 const CertificateContents: React.FC<IProps> = ({
   type,
   clickCertificationTypeMenu,
@@ -47,6 +53,9 @@ const CertificateContents: React.FC<IProps> = ({
           </MenuValue>
         ))}
       </LeftNavSide>
+      <RightSide>
+        <ContentsSlider />
+      </RightSide>
     </SDTCertificateContentsLayout>
   );
 };
