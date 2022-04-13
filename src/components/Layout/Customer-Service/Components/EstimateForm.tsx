@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'public/image';
 import InputBox from './InputBox';
+import SelectBox from './SelectBox';
 
 interface Iprops {
   closeForm: () => void;
@@ -74,6 +75,10 @@ const TextArea = styled.textarea`
   font-size: 17px;
 `;
 
+const SelectBoxLayout = styled.div`
+  width: 332px;
+`;
+
 const EstimateForm: React.FC<Iprops> = ({ closeForm }) => {
   return (
     <EstimateFormLayout>
@@ -100,7 +105,9 @@ const EstimateForm: React.FC<Iprops> = ({ closeForm }) => {
           <InputBoxLayout>
             <InputBox type="e-mail" placeholder="e-mail을 입력해주세요" />
           </InputBoxLayout>
-          <InputBox type="회사명" placeholder="회사명을 입력해주세요" />
+          <SelectBoxLayout>
+            <SelectBox type="회사명" />
+          </SelectBoxLayout>
         </Layout>
         <TextAreaLayout>
           <TextAreaLabel>상세내용</TextAreaLabel>
