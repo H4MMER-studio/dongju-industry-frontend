@@ -12,6 +12,7 @@ import { mixins } from '@/styles';
 
 interface Iprops {
   menu: 'welcome' | 'history' | 'way-to-come' | 'performance' | 'certification';
+  type: ICertificationMenuType;
   clickCertificationTypeMenu: (type: ICertificationMenuType) => void;
 }
 
@@ -20,7 +21,7 @@ const STDContainer = styled.main`
   margin: 0 auto;
   width: 1240px;
   height: 100%;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 
   @media (max-width: 1682px) {
     width: 974px;
@@ -30,6 +31,12 @@ const STDContainer = styled.main`
     width: 100%;
     padding: 48px 16px 64px 16px;
   }
+`;
+
+const ScollLayout = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
 `;
 
 const BannerSection = styled.section<{ marginBottom?: number }>`
@@ -87,6 +94,7 @@ const Title = styled.div`
 `;
 
 const CompanyContainer: React.FC<Iprops> = ({
+  type,
   menu,
   clickCertificationTypeMenu,
 }) => {
@@ -118,45 +126,48 @@ const CompanyContainer: React.FC<Iprops> = ({
   };
 
   return (
-    <STDContainer>
-      <BannerSection marginBottom={menu === 'performance' ? 24 : undefined}>
-        <BannerImage
-          src={
-            width > 1023
-              ? Images.CompanyInfoBannerLarge
-              : Images.CompanyInfoBannerSmall
+    <ScollLayout>
+      <STDContainer>
+        <BannerSection marginBottom={menu === 'performance' ? 24 : undefined}>
+          <BannerImage
+            src={
+              width > 1023
+                ? Images.CompanyInfoBannerLarge
+                : Images.CompanyInfoBannerSmall
+            }
+          />
+          <CenterLayout>
+            <BreadCrum>{`홈/회사/${displayTitle(menu)}`}</BreadCrum>
+            <Title>{displayTitle(menu)}</Title>
+          </CenterLayout>
+        </BannerSection>
+        {(() => {
+          switch (menu) {
+            case 'welcome':
+              return <Welcome />;
+
+            case 'history':
+              return <History />;
+
+            case 'way-to-come':
+              return <WayToCome />;
+
+            case 'certification':
+              return (
+                <Certification
+                  type={type}
+                  clickCertificationTypeMenu={clickCertificationTypeMenu}
+                />
+              );
+            case 'performance':
+              return <Performance />;
+
+            default:
+              return null;
           }
-        />
-        <CenterLayout>
-          <BreadCrum>{`홈/회사/${displayTitle(menu)}`}</BreadCrum>
-          <Title>{displayTitle(menu)}</Title>
-        </CenterLayout>
-      </BannerSection>
-      {(() => {
-        switch (menu) {
-          case 'welcome':
-            return <Welcome />;
-
-          case 'history':
-            return <History />;
-
-          case 'way-to-come':
-            return <WayToCome />;
-
-          case 'certification':
-            return (
-              <Certification
-                clickCertificationTypeMenu={clickCertificationTypeMenu}
-              />
-            );
-          case 'performance':
-            return <Performance />;
-
-          default:
-            return null;
-        }
-      })()}
-    </STDContainer>
+        })()}
+      </STDContainer>
+    </ScollLayout>
   );
 };
 

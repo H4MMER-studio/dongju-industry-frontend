@@ -7,12 +7,16 @@ import { certificationActions } from '@/store';
 import { useGetStore } from '@/hooks';
 
 interface Iprops {
+  type: ICertificationMenuType;
   clickCertificationTypeMenu: (type: ICertificationMenuType) => void;
 }
 
 const SDTCertificationLayout = styled.section``;
 
-const Certification: React.FC<Iprops> = ({ clickCertificationTypeMenu }) => {
+const Certification: React.FC<Iprops> = ({
+  type,
+  clickCertificationTypeMenu,
+}) => {
   const dispatch = useDispatch();
   const { certificationList } = useGetStore.certification();
 
@@ -25,6 +29,7 @@ const Certification: React.FC<Iprops> = ({ clickCertificationTypeMenu }) => {
   return (
     <SDTCertificationLayout>
       <CertificateContents
+        type={type}
         clickCertificationTypeMenu={clickCertificationTypeMenu}
       />
     </SDTCertificationLayout>
