@@ -1,5 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPerformanceInitialState } from '@/interfaces';
+import { IPerformanceInitialState, IGetDeliveryListParams } from '@/interfaces';
 
 const initialState: IPerformanceInitialState = {
   deliveryList: [],
@@ -15,7 +15,7 @@ const slice = createSlice({
     ) => {
       state.deliveryList = payload;
     },
-    getDeliveryList: (_, __: PayloadAction) => {},
+    getDeliveryList: (_, __: PayloadAction<IGetDeliveryListParams>) => {},
   },
 });
 

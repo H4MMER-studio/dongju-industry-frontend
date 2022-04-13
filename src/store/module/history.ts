@@ -1,5 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IHistoryInitialState } from '@/interfaces';
+import { IHistoryInitialState, IGetHistoryParams } from '@/interfaces';
 
 const initialState: IHistoryInitialState = {
   historyList: [],
@@ -15,7 +15,7 @@ const slice = createSlice({
     ) => {
       state.historyList = payload;
     },
-    getHistoryList: (_, __: PayloadAction) => {},
+    getHistoryList: (_, __: PayloadAction<IGetHistoryParams>) => {},
   },
 });
 
@@ -28,8 +28,8 @@ export const selectHistoryState = createSelector(
   }
 );
 
-export const historyList = slice.name;
-export const historyListReducer = slice.reducer;
-export const historyListActions = slice.actions;
+export const history = slice.name;
+export const historyReducer = slice.reducer;
+export const historyActions = slice.actions;
 
-export default historyListReducer;
+export default historyReducer;
