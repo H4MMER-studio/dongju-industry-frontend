@@ -11,7 +11,7 @@ export function* getCertificationListSaga({
   try {
     const certificationList: ICertification[] = yield call(
       API.GET,
-      `${CERTIFICATIONS_API}?value=${payload}&skip=0&limit=30&sort=certification-date%20asc`
+      `${CERTIFICATIONS_API}?value=${payload}&skip=0&limit=100&sort=certification-date%20asc`
     );
     yield put(certificationActions.setCertificationList(certificationList));
   } catch (error) {
