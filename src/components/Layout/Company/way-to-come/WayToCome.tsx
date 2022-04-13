@@ -78,6 +78,7 @@ const WayToCome: React.FC = () => {
   const isMobile = useResize().width < 768;
 
   useEffect(() => {
+    if (!window.kakao) return;
     let mapContainer = document.getElementById('kakao_map');
     let mapOption = {
       center: new window.kakao.maps.LatLng(

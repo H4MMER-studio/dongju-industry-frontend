@@ -1,19 +1,26 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { API, HISTORIES_API } from '@/utils';
-import { historyListActions } from '../module/history';
-import { IHistory } from '@/interfaces';
+import { historyActions } from '../module/history';
+import { IHistory, ActionType, IGetHistoryParams } from '@/interfaces';
 
-export function* getHistoryListSaga() {
+export function* getHistoryListSaga({
+  payload,
+}: ActionType & { payload: IGetHistoryParams }) {
   try {
-    const historyList: IHistory[] = yield call(API.GET, `${HISTORIES_API}`);
-    yield put(historyListActions.setHistoryList(historyList));
+    const historyList: { data: IHistory[] } = yield call(
+      API.GET,
+      `${HISTORIES_API}?${
+        payload.isAsc ? '' : 'sort=history-year+desc&sort=history-month+desc'
+      }`
+    );
+    yield put(historyActions.setHistoryList(historyList.data));
   } catch (error) {
     console.log(error);
   }
 }
 
 export function* watchHistoryList() {
-  yield takeEvery(historyListActions.getHistoryList, getHistoryListSaga);
+  yield takeEvery(historyActions.getHistoryList, getHistoryListSaga);
 }
 
 export default [watchHistoryList].map((fn) => fn());

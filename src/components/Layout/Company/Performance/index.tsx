@@ -16,7 +16,6 @@ const Performance: React.FC = () => {
 
   useEffect(() => {
     document.onclick = onClickCloseModal;
-    dispatch(performanceActions.getDeliveryList());
 
     return () => {
       document.onmousedown = null;
@@ -24,8 +23,10 @@ const Performance: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log(deliveryList);
-  }, [deliveryList]);
+    dispatch(
+      performanceActions.getDeliveryList({ isAsc: selectedOrder !== 'new' })
+    );
+  }, [selectedOrder]);
 
   const onClickCloseModal = () => {
     setModalOnAt('');
@@ -133,17 +134,27 @@ const Performance: React.FC = () => {
           <S.LongTitle>비고</S.LongTitle>
         </S.TitleWrapper>
         <div>
-          {Array(10)
-            .fill(0)
-            .map((_, index) => (
-              <S.ContentWrapper key={index}>
-                <S.LongContent>(주)세진에스.이</S.LongContent>
-                <S.LongContent>COOK FAN</S.LongContent>
-                <S.ShortContent>3</S.ShortContent>
-                <S.ShortContent>2012.2</S.ShortContent>
-                <S.LongContent>연세대학교</S.LongContent>
+          {deliveryList?.map(
+            ({
+              _id,
+              delivery_amount,
+              delivery_month,
+              delivery_year,
+              delivery_product,
+              delivery_supplier,
+              delivery_reference,
+            }) => (
+              <S.ContentWrapper key={_id}>
+                <S.LongContent>{delivery_supplier}</S.LongContent>
+                <S.LongContent>{delivery_product}</S.LongContent>
+                <S.ShortContent>{delivery_amount}</S.ShortContent>
+                <S.ShortContent>
+                  {delivery_year}.{delivery_month}
+                </S.ShortContent>
+                <S.LongContent>{delivery_reference}</S.LongContent>
               </S.ContentWrapper>
-            ))}
+            )
+          )}
         </div>
       </S.TableContainer>
     </S.Container>
