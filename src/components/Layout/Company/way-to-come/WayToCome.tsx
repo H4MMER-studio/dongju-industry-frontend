@@ -7,6 +7,7 @@ const STDWayToComeLayout = styled.section`
 
   @media (max-width: 1023px) {
     display: block;
+    padding: 0 16px 30px;
   }
 `;
 
@@ -47,7 +48,7 @@ const Head = styled.div`
   align-items: center;
   justify-content: center;
   width: 78px;
-  height: 52px;
+  min-height: 52px;
   background: #f5f5f5;
   color: #2979ff;
   font-size: 17px;
@@ -64,6 +65,7 @@ const Value = styled.div`
   color: #383838;
   padding: 0 16px;
   border-bottom: 1px solid #e8e8e8;
+  word-break: keep-all;
 
   @media (max-width: 1023px) {
     font-size: 17px;

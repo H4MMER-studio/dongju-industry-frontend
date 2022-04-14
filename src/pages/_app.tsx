@@ -62,7 +62,7 @@ function App({ Component, pageProps }: AppProps) {
       | 'certification'
   ) => {
     if (companyMenu === 'certification') {
-      router.push(`/company/${companyMenu}?type=registration`);
+      router.push(`/company/${companyMenu}?type=license`);
     } else {
       router.push(`/company/${companyMenu}`);
     }

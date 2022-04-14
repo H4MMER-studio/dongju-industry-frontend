@@ -72,7 +72,7 @@ const DetailImage = styled.img`
   object-fit: contain;
 
   @media (max-width: 1365px) {
-    width: auto;
+    width: 100%;
     height: 260px;
   }
 `;

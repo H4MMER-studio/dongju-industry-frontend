@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Slider, { Settings } from 'react-slick';
 import { Icon } from 'public/image';
+import { mixins } from '@/styles';
 import { ICertificationMenuType, ICertification } from '@/interfaces';
 
 interface Iprops {
@@ -44,13 +45,7 @@ const SliderLayout = styled.div`
 `;
 
 const SlideIconLayout = styled.div`
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${mixins.flexSet()}
   cursor: pointer;
   width: 72px;
   height: 72px;
@@ -59,20 +54,29 @@ const SlideIconLayout = styled.div`
 const CertificationImage = styled.img`
   width: 356px;
   height: 503px;
-  background-color: red;
+  background-color: gray;
   margin: 0 auto;
 `;
 
 const PrevArrowLayout = styled.div`
-  width: 72px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${mixins.flexSet()}
   position: absolute;
   left: 0px;
   top: 50%;
+  z-index: 10000;
+  width: 72px;
+  height: 72px;
   transform: translateY(-50%);
+`;
+
+const NextArrowLayout = styled.div`
+  ${mixins.flexSet()}
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 72px;
+  height: 72px;
 `;
 
 const InfoLayout = styled.div`
@@ -139,9 +143,11 @@ const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
       </PrevArrowLayout>
     ),
     nextArrow: (
-      <SlideIconLayout>
-        <Icon.LargeRightArrow />
-      </SlideIconLayout>
+      <NextArrowLayout>
+        <SlideIconLayout>
+          <Icon.LargeRightArrow />
+        </SlideIconLayout>
+      </NextArrowLayout>
     ),
   };
 

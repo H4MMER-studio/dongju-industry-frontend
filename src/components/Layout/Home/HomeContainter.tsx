@@ -34,7 +34,7 @@ const STDMainLogoWrapper = styled.div`
     }
   }
 
-  p {
+  > p {
     font-size: 40px;
     font-weight: bold;
     line-height: 60px;
@@ -42,8 +42,10 @@ const STDMainLogoWrapper = styled.div`
     text-align: center;
 
     @media (max-width: 768px) {
+      padding: 0 16px;
       font-size: 24px;
       line-height: 36px;
+      word-break: keep-all;
     }
   }
 `;

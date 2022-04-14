@@ -42,6 +42,12 @@ const NoticeText = styled.div`
 const NoticeTitle = styled.div`
   color: #383838;
   font-weight: 600;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 `;
 
 const DateText = styled.div`

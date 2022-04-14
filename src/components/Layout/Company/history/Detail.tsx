@@ -8,6 +8,10 @@ const STDDetailLayout = styled.div`
   padding-bottom: 30px;
   margin-bottom: 30px;
   border-bottom: 1px solid #c8c8c8;
+
+  @media (max-width: 1023px) {
+    padding: 0 16px 30px;
+  }
 `;
 
 const YearRange = styled.div`

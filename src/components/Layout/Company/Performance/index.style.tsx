@@ -3,6 +3,10 @@ import { mixins } from '@/styles';
 
 export const Container = styled.article`
   width: 100%;
+
+  @media (max-width: 1024px) {
+    padding: 0 16px;
+  }
 `;
 
 export const FilterWrapper = styled.div`
@@ -196,6 +200,7 @@ export const DeliverySearchTextBox = styled.div`
   position: absolute;
   top: 56px;
   left: 0;
+  z-index: 1000;
   width: 100%;
   padding: 18px 22px;
   background: #ffffff;
@@ -218,7 +223,7 @@ export const DeliverySearchText = styled.p`
 export const SelectOrderBox = styled.div`
   position: absolute;
   top: 56px;
-  left: 0;
+  right: 0;
   width: 100%;
   padding: 18px 22px;
   background: #ffffff;
@@ -226,6 +231,7 @@ export const SelectOrderBox = styled.div`
   border-radius: 12px;
 
   @media (max-width: 1024px) {
+    width: 110%;
     padding: 18px 16px;
   }
 `;
