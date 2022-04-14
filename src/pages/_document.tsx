@@ -47,6 +47,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="ko">
         <Head>
+          <link rel="shortcut icon" href="/image/favi.png" />
           <link
             rel="stylesheet"
             type="text/css"

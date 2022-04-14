@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface IProps {
+  onClickGoToList(): void;
+}
+
 const LatestNoticeLayout = styled.div`
   margin-bottom: 75px;
 
@@ -92,7 +96,7 @@ const GoToList = styled.div`
   cursor: pointer;
 `;
 
-const LatestNotice: React.VFC = () => {
+const LatestNotice: React.VFC<IProps> = ({ onClickGoToList }) => {
   return (
     <LatestNoticeLayout>
       <Title>최신글</Title>
@@ -118,7 +122,7 @@ const LatestNotice: React.VFC = () => {
         </LeftSide>
         <ContentImage src={undefined} />
       </ContentLayout>
-      <GoToList>목록으로</GoToList>
+      <GoToList onClick={onClickGoToList}>목록으로</GoToList>
     </LatestNoticeLayout>
   );
 };

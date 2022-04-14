@@ -15,7 +15,18 @@ const NoticeDetailView: React.FC = () => {
     dispatch(noticeActions.getNoticeDataDetail({ id }));
   }, []);
 
-  return <NoticeDetail.Container detail={noticeDetail} />;
+  const onClickGoToList = () => {
+    router.push('/notice/list');
+  };
+
+  return noticeDetail ? (
+    <NoticeDetail.Container
+      detail={noticeDetail}
+      onClickGoToList={onClickGoToList}
+    />
+  ) : (
+    <></>
+  );
 };
 
 export default NoticeDetailView;

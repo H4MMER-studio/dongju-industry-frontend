@@ -6,6 +6,7 @@ import { INoticeDetail } from '@/interfaces';
 
 interface IProps {
   detail: INoticeDetail;
+  onClickGoToList(): void;
 }
 
 const ScrollLayout = styled.div`
@@ -113,12 +114,15 @@ const DownloadFileName = styled.div`
   font-size: 15px;
   color: #2979ff;
 `;
-const NoticeDetailContainer: React.FC<IProps> = ({ detail }) => {
+const NoticeDetailContainer: React.FC<IProps> = ({
+  detail,
+  onClickGoToList,
+}) => {
   return (
     <ScrollLayout>
       <NoticeDetailContainerLayout>
         <Header>
-          <Title>동파방지 댐퍼코일 관련 카타로그 입니다.</Title>
+          <Title>{detail.notice_title}</Title>
           <WriterLayout>
             <WriterProfilImage src={undefined} />
             <div>
@@ -127,20 +131,24 @@ const NoticeDetailContainer: React.FC<IProps> = ({ detail }) => {
             </div>
           </WriterLayout>
         </Header>
-        <ContentImage src={undefined} />
-        <DownloadFileLayout>
-          <DownloadFileName>첨부파일 명</DownloadFileName>
-          <Icon.DownloadIconBlue />
-        </DownloadFileLayout>
+        {(detail.notice_images?.length ?? 0) > 0 && (
+          <ContentImage
+            alt={detail.notice_images[0].name}
+            src={detail.notice_images[0].url}
+          />
+        )}
+        {(detail.notice_files?.length ?? 0) > 0 && (
+          <DownloadFileLayout>
+            <DownloadFileName>{detail.notice_files[0].name}</DownloadFileName>
+            <Icon.DownloadIconBlue />
+          </DownloadFileLayout>
+        )}
 
-        <SubText>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim praesent
-          velit turpis aenean vestibulum id lectus urna, in. Urna risus nulla
-          nulla condimentum lorem nunc. Lectus in lobortis tellus tincidunt. At
-          libero ultrices lorem sed felis gravida commodo eget integer.
-        </SubText>
+        <SubText>{detail.notice_content}</SubText>
 
-        <NoticeDetailComponents.LatestNotice />
+        <NoticeDetailComponents.LatestNotice
+          onClickGoToList={onClickGoToList}
+        />
       </NoticeDetailContainerLayout>
     </ScrollLayout>
   );

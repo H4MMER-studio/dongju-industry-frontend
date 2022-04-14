@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as NoticeComponents from './components';
-import { useGetStore } from '@/hooks';
+import { IDataList } from '@/interfaces';
 import { Images } from 'public/image';
 import { propsToClassKey } from '@mui/styles';
 
 interface IProps {
   page: number;
   title: string;
+  dataList: IDataList[];
   clickNoticeItem: (id: string) => void;
 }
 
@@ -88,19 +89,25 @@ const NoticeContainer: React.FC<IProps> = ({
   page,
   title,
   clickNoticeItem,
+  dataList,
 }) => {
-  const { dataList } = useGetStore.notice();
-
   return (
     <NoticeContainerLayout>
       <ContentsLayout>
         <Title>{title}</Title>
         <ListLayout>
-          <NoticeComponents.Item
-            title={'IFB동파 방지'}
-            date={'2020.01.26'}
-            clickNoticeItem={() => clickNoticeItem('id')}
-          />
+          {dataList?.map(({ _id, notice_title, created_at }) => {
+            const date = created_at.split('T')[0].split('-').join('.');
+
+            return (
+              <NoticeComponents.Item
+                key={_id}
+                title={notice_title}
+                date={date}
+                clickNoticeItem={() => clickNoticeItem(_id)}
+              />
+            );
+          })}
         </ListLayout>
         <PageNationLayout>
           <ArrowIcon src={Images.PagenationLeft} style={{ marginRight: 20 }} />

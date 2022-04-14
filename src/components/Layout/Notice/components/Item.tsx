@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { mixins } from '@/styles';
 
 interface Iprops {
   title: string;
@@ -8,19 +9,21 @@ interface Iprops {
 }
 
 const ItemLayout = styled.div`
+  ${mixins.flexSet('space-between')}
   width: 100%;
   height: 64px;
+  margin-bottom: 16px;
   background: #fff;
   border-radius: 8px;
   padding: 20px;
   cursor: pointer;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
   &:hover {
     background-color: #e8e8e8;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
   }
 `;
 

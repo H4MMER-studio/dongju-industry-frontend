@@ -1,6 +1,6 @@
 export interface INoticeInitialState {
-  noticeList: (INoticeDetail & { size: number })[];
-  dataList: (INoticeDetail & { size: number })[];
+  noticeList: IDataList[];
+  dataList: IDataList[];
   noticeDetail: INoticeDetail | null;
 }
 
@@ -26,7 +26,9 @@ export interface INoticeImage {
   url: string;
 }
 
-export interface IDataList {}
+export interface IDataList extends INoticeDetail {
+  size: number;
+}
 
 export interface IGetNoticeDataParams {
   skip: number;

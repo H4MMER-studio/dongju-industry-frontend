@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { API, NOTICE_API } from '@/utils';
+import { API, NOTICE_DETAIL_API, NOTICE_API } from '@/utils';
 import {
   ActionType,
   IGetNoticeDataDetail,
@@ -29,7 +29,10 @@ export function* getNoticeDataDetailSaga({
   payload,
 }: ActionType & { payload: IGetNoticeDataDetail }) {
   try {
-    const noticeDetail = yield call(API.GET, `${NOTICE_API}/${payload.id}`);
+    const noticeDetail = yield call(
+      API.GET,
+      `${NOTICE_DETAIL_API}/${payload.id}`
+    );
     yield put(noticeActions.setNoticeDetail(noticeDetail.data));
   } catch (error) {
     console.log(error);
