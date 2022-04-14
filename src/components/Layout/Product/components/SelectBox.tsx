@@ -110,6 +110,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
         <MenuLayout>
           {PRDUCT_LIST.map((product) => (
             <MenuItem
+              key={product.name}
               onClick={() => {
                 handleClose();
                 onClick(product.type);

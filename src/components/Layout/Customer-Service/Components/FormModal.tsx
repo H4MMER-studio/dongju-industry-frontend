@@ -3,17 +3,23 @@ import styled from 'styled-components';
 import { Widgets } from '@/components';
 import EstimateForm from './EstimateForm';
 import useResize from '@/hooks/useResize';
+import { IForm } from '@/interfaces';
 
 interface Iprops {
   questionType?: 'estimate' | 'A/S' | 'ETC';
   closeForm: () => void;
+  clickSubmit: (form: IForm) => void;
 }
 
-const FormModal: React.FC<Iprops> = ({ questionType, closeForm }) => {
+const FormModal: React.FC<Iprops> = ({
+  questionType,
+  closeForm,
+  clickSubmit,
+}) => {
   const { width } = useResize();
 
   const displayForm = (type?: 'estimate' | 'A/S' | 'ETC') => {
-    return <EstimateForm closeForm={closeForm} />;
+    return <EstimateForm closeForm={closeForm} clickSubmit={clickSubmit} />;
     // switch (type) {
     //   case 'estimate':
     //     return <EstimateForm closeForm={closeForm} />;

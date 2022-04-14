@@ -1,6 +1,8 @@
 import { ProductType } from '@/interfaces';
 
-export interface ICustomerServiceInitialState {}
+export interface ICustomerServiceInitialState {
+  isSubmitSuccess: string;
+}
 
 export interface IForm {
   inquiry_type: 'estimate';

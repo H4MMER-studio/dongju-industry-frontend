@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import * as CustomerServiceComponents from './Components';
 import { Images } from 'public/image';
 import useResize from '@/hooks/useResize';
+import { IForm } from '@/interfaces';
+import { useDispatch } from 'react-redux';
+import { customerServiceActions } from '@/store';
+import { useRouter } from 'next/router';
+import { useGetStore } from '@/hooks';
 
 interface Iprops {
   questionType: 'estimate' | 'A/S' | 'ETC';
@@ -58,7 +63,21 @@ const CustomerServiceContainer: React.FC<Iprops> = ({
   clickContact,
   closeForm,
 }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { isSubmitSuccess } = useGetStore.customerService();
   const { width } = useResize();
+
+  useEffect(() => {
+    if (Boolean(isSubmitSuccess)) {
+      router.push('/customer-service/inquiry');
+      dispatch(customerServiceActions.setIsSubmitSuccess(''));
+    }
+  }, [isSubmitSuccess]);
+
+  const clickSubmit = (form: IForm) => {
+    dispatch(customerServiceActions.postInquiryProduct(form));
+  };
 
   return (
     <CustomerServiceContainerLayout>
@@ -97,6 +116,7 @@ const CustomerServiceContainer: React.FC<Iprops> = ({
         <CustomerServiceComponents.FormModal
           questionType={questionType}
           closeForm={closeForm}
+          clickSubmit={clickSubmit}
         />
       )}
     </CustomerServiceContainerLayout>

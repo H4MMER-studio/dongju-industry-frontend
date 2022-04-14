@@ -1,33 +1,30 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICustomerServiceInitialState } from '@/interfaces';
+import { ICustomerServiceInitialState, IForm } from '@/interfaces';
 
-const initialState: ICustomerServiceInitialState = {};
+const initialState: ICustomerServiceInitialState = { isSubmitSuccess: '' };
 
 const slice = createSlice({
-  name: 'historyReducer',
+  name: 'customerServiceReducer',
   initialState,
   reducers: {
-    setHistoryList: (
-      state,
-      { payload }: PayloadAction<IHistoryInitialState['historyList']>
-    ) => {
-      state.historyList = payload;
+    setIsSubmitSuccess: (state, { payload }: PayloadAction<string>) => {
+      state.isSubmitSuccess = payload;
     },
-    getHistoryList: (_, __: PayloadAction<IGetHistoryParams>) => {},
+    postInquiryProduct: (_, __: PayloadAction<IForm>) => {},
   },
 });
 
-export const selectHistoryState = createSelector(
-  (state: IHistoryInitialState) => state.historyList,
-  (historyList) => {
+export const selectCustomerServiceState = createSelector(
+  (state: ICustomerServiceInitialState) => state.isSubmitSuccess,
+  (isSubmitSuccess) => {
     return {
-      historyList,
+      isSubmitSuccess,
     };
   }
 );
 
-export const history = slice.name;
-export const historyReducer = slice.reducer;
-export const historyActions = slice.actions;
+export const customerService = slice.name;
+export const customerServiceReducer = slice.reducer;
+export const customerServiceActions = slice.actions;
 
-export default historyReducer;
+export default customerServiceReducer;

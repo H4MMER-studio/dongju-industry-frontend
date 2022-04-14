@@ -8,6 +8,7 @@ import { ProductType } from '@/interfaces/product';
 
 interface Iprops {
   closeForm: () => void;
+  clickSubmit: (form: IForm) => void;
 }
 
 const EstimateFormLayout = styled.div`
@@ -129,7 +130,7 @@ const Layouts = styled.div`
   position: relative;
 `;
 
-const EstimateForm: React.FC<Iprops> = ({ closeForm }) => {
+const EstimateForm: React.FC<Iprops> = ({ clickSubmit, closeForm }) => {
   const [form, setForm] = useState<IForm>({
     inquiry_type: 'estimate',
     inquiry_title: '',
@@ -153,7 +154,7 @@ const EstimateForm: React.FC<Iprops> = ({ closeForm }) => {
       form.inquiry_email &&
       form.inquiry_product_type
     ) {
-      //통신 할것
+      clickSubmit(form);
     } else {
       setIsCheckValue(true);
     }

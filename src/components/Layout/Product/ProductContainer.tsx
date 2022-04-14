@@ -4,6 +4,11 @@ import { ProductType, ProductMenu } from '@/interfaces';
 import * as ProductComponents from './components';
 import { Product } from '@/components';
 import { mixins } from '@/styles';
+import { useDispatch } from 'react-redux';
+import { customerServiceActions } from '@/store';
+import { IForm } from '@/interfaces';
+import { useRouter } from 'next/router';
+import { useGetStore } from '@/hooks';
 
 interface Iprops {
   productType: ProductType['type'];
@@ -52,6 +57,17 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
 
   const [openContact, setOpenContact] = useState(false);
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { isSubmitSuccess } = useGetStore.customerService();
+
+  useEffect(() => {
+    if (Boolean(isSubmitSuccess)) {
+      setOpenContact(false);
+      dispatch(customerServiceActions.setIsSubmitSuccess(''));
+    }
+  }, [isSubmitSuccess]);
+
   useEffect(() => {
     setSelectedProductManual(PRODUCT_MANUAL_DATA[productType]);
   }, [productType]);
@@ -77,6 +93,10 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
     setOpenContact(true);
   };
 
+  const clickSubmit = (form: IForm) => {
+    dispatch(customerServiceActions.postInquiryProduct(form));
+  };
+
   return (
     <>
       <ProductContainerLayout>
@@ -92,6 +112,7 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
         <ProductComponents.FormModal
           selectedProduct={productType}
           closeForm={() => setOpenContact(false)}
+          clickSubmit={clickSubmit}
         />
       )}
     </>

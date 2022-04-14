@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { Icon } from 'public/image';
 import InputBox from './InputBox';
 import SelectBox from './SelectBox';
-import { IForm } from '@/interfaces';
-import { ProductType } from '@/interfaces/product';
+import { ProductType, IForm } from '@/interfaces';
 
 interface Iprops {
   selectedProduct: ProductType['type'];
   closeForm: () => void;
+  clickSubmit: (form: IForm) => void;
 }
 
 const EstimateFormLayout = styled.div`
@@ -130,7 +130,11 @@ const Layouts = styled.div`
   position: relative;
 `;
 
-const EstimateForm: React.FC<Iprops> = ({ selectedProduct, closeForm }) => {
+const EstimateForm: React.FC<Iprops> = ({
+  selectedProduct,
+  closeForm,
+  clickSubmit,
+}) => {
   const [form, setForm] = useState<IForm>({
     inquiry_type: 'estimate',
     inquiry_title: '',
@@ -154,7 +158,7 @@ const EstimateForm: React.FC<Iprops> = ({ selectedProduct, closeForm }) => {
       form.inquiry_email &&
       form.inquiry_product_type
     ) {
-      //통신 할것
+      clickSubmit(form);
     } else {
       setIsCheckValue(true);
     }

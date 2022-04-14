@@ -4,6 +4,7 @@ import {
   selectPerformanceState,
   selectCertificationState,
   selectNoticeState,
+  selectCustomerServiceState,
 } from '@/store';
 import { selectHistoryState } from '@/store/module/history';
 
@@ -20,6 +21,8 @@ export const useGetStore = {
   certification: () =>
     selectCertificationState(useGetRootState().certification),
   notice: () => selectNoticeState(useGetRootState().notice),
+  customerService: () =>
+    selectCustomerServiceState(useGetRootState().cutomerService),
 };
 
 export * from './useResize';
