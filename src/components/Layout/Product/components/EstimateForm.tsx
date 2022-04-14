@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Icon } from 'public/image';
 import InputBox from './InputBox';
 import SelectBox from './SelectBox';
-import { IForm } from '@/interfaces';
-import { ProductType } from '@/interfaces/product';
+import { ProductType, IForm } from '@/interfaces';
 
 interface Iprops {
+  selectedProduct: ProductType['type'];
   closeForm: () => void;
   clickSubmit: (form: IForm) => void;
 }
@@ -130,7 +130,11 @@ const Layouts = styled.div`
   position: relative;
 `;
 
-const EstimateForm: React.FC<Iprops> = ({ clickSubmit, closeForm }) => {
+const EstimateForm: React.FC<Iprops> = ({
+  selectedProduct,
+  closeForm,
+  clickSubmit,
+}) => {
   const [form, setForm] = useState<IForm>({
     inquiry_type: 'estimate',
     inquiry_title: '',
@@ -139,7 +143,7 @@ const EstimateForm: React.FC<Iprops> = ({ clickSubmit, closeForm }) => {
     inquiry_company_name: '',
     inquiry_phone_number: '',
     inquiry_email: '',
-    inquiry_product_type: null,
+    inquiry_product_type: selectedProduct,
   });
 
   const [isCheckValue, setIsCheckValue] = useState(false);

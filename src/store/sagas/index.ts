@@ -4,6 +4,7 @@ import watchCertification from './certification';
 import watchHistory from './history';
 import watchPerformance from './performance';
 import watchNotice from './notice';
+import watchCustomerService from './customerService';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     ...watchHistory,
     ...watchPerformance,
     ...watchNotice,
+    ...watchCustomerService,
   ]);
 }
