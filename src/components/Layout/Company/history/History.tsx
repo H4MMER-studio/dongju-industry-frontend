@@ -8,6 +8,7 @@ const HistoryLayout = styled.main``;
 
 const History: React.FC = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(historyActions.getHistoryList({ isAsc: false }));
   }, []);

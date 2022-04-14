@@ -1,5 +1,10 @@
 export interface IHistoryInitialState {
-  historyList: IHistory[];
+  historyList: IHistoryList[];
+}
+
+export interface IHistoryList {
+  start_year: string;
+  value: IHistory[];
 }
 
 export interface IHistory {
