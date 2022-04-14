@@ -5,6 +5,7 @@ import { ProductMenu } from '@/interfaces';
 
 interface Iprops {
   productMenu: ProductMenu;
+  clickContact: () => void;
 }
 
 const MenuLayout = styled.div`
@@ -52,17 +53,17 @@ const MenuButton = styled.button`
   font-weight: 400;
 `;
 
-const Menu: React.FC<Iprops> = ({ productMenu }) => {
+const Menu: React.FC<Iprops> = ({ productMenu, clickContact }) => {
   return (
     <MenuLayout>
       <TopLayout>
-        <BreadCrumb>홈/제품/댐퍼 코일</BreadCrumb>
+        <BreadCrumb>홈/제품/{productMenu.productName}</BreadCrumb>
         <ProductNameLayout>
           <ProductName>{productMenu.productName}</ProductName>
           <Button.Primary
             value="문의하기"
             state="active"
-            onClick={() => {}}
+            onClick={clickContact}
             cssStyle={'width:72px; height:32px; font-size:16px; padding:0px'}
           />
         </ProductNameLayout>

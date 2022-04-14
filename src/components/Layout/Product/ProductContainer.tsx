@@ -50,6 +50,8 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
     PRODUCT_MANUAL_DATA['air-conditioner']
   );
 
+  const [openContact, setOpenContact] = useState(false);
+
   useEffect(() => {
     setSelectedProductManual(PRODUCT_MANUAL_DATA[productType]);
   }, [productType]);
@@ -71,13 +73,28 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
     }
   };
 
+  const clickContact = () => {
+    setOpenContact(true);
+  };
+
   return (
-    <ProductContainerLayout>
-      <ProductManualLayout>
-        <ProductComponents.ProductManual productMenu={selectedProductManual} />
-      </ProductManualLayout>
-      <TableLocation>{renderProduct(productType)}</TableLocation>
-    </ProductContainerLayout>
+    <>
+      <ProductContainerLayout>
+        <ProductManualLayout>
+          <ProductComponents.ProductManual
+            productMenu={selectedProductManual}
+            clickContact={clickContact}
+          />
+        </ProductManualLayout>
+        <TableLocation>{renderProduct(productType)}</TableLocation>
+      </ProductContainerLayout>
+      {openContact && (
+        <ProductComponents.FormModal
+          selectedProduct={productType}
+          closeForm={() => setOpenContact(false)}
+        />
+      )}
+    </>
   );
 };
 
