@@ -8,8 +8,9 @@ import { propsToClassKey } from '@mui/styles';
 interface IProps {
   page: number;
   title: string;
-  dataList: IDataList[];
+  dataList: IDataList;
   clickNoticeItem: (id: string) => void;
+  onClickPageHandler(page: number): void;
 }
 
 const NoticeContainerLayout = styled.div`
@@ -88,15 +89,16 @@ const PageNumber = styled.div<{ isSelected: boolean }>`
 const NoticeContainer: React.FC<IProps> = ({
   page,
   title,
-  clickNoticeItem,
   dataList,
+  clickNoticeItem,
+  onClickPageHandler,
 }) => {
   return (
     <NoticeContainerLayout>
       <ContentsLayout>
         <Title>{title}</Title>
         <ListLayout>
-          {dataList?.map(({ _id, notice_title, created_at }) => {
+          {dataList.list?.map(({ _id, notice_title, created_at }) => {
             const date = created_at.split('T')[0].split('-').join('.');
 
             return (
@@ -110,9 +112,34 @@ const NoticeContainer: React.FC<IProps> = ({
           })}
         </ListLayout>
         <PageNationLayout>
-          <ArrowIcon src={Images.PagenationLeft} style={{ marginRight: 20 }} />
-          <PageNumber isSelected={page === 1}>1</PageNumber>
-          <ArrowIcon src={Images.PagenationRight} style={{ marginLeft: 8 }} />
+          <ArrowIcon
+            onClick={() => {
+              if (page !== 1) {
+                onClickPageHandler(page - 1);
+              }
+            }}
+            src={Images.PagenationLeft}
+            style={{ marginRight: 20 }}
+          />
+          {Array(Math.round(dataList.size / 4))
+            .fill(0)
+            .map((_, index) => (
+              <PageNumber
+                isSelected={page === index + 1}
+                onClick={() => onClickPageHandler(index + 1)}
+              >
+                {index + 1}
+              </PageNumber>
+            ))}
+          <ArrowIcon
+            onClick={() => {
+              if (page !== Math.round(dataList.size / 4)) {
+                onClickPageHandler(page + 1);
+              }
+            }}
+            src={Images.PagenationRight}
+            style={{ marginLeft: 8 }}
+          />
         </PageNationLayout>
       </ContentsLayout>
     </NoticeContainerLayout>

@@ -121,6 +121,7 @@ export const TableContainer = styled.div`
   border-top: 1px solid #777777;
   border-bottom: 1px solid #777777;
   background: white;
+  margin-bottom: 24px;
 `;
 
 export const TitleWrapper = styled.div`
@@ -233,5 +234,28 @@ export const SelectOrderBox = styled.div`
   @media (max-width: 1024px) {
     width: 110%;
     padding: 18px 16px;
+  }
+`;
+
+export const PageNationLayout = styled.div`
+  ${mixins.flexSet()}
+`;
+
+export const ArrowIcon = styled.img`
+  cursor: pointer;
+`;
+
+export const PageNumber = styled.div<{ isSelected: boolean }>`
+  ${mixins.flexSet()}
+  width: 32px;
+  height: 32px;
+  background-color: ${(props) => (props.isSelected ? '#2979ff' : 'none')};
+  border-radius: 8px;
+  color: ${(props) => (props.isSelected ? '#fff' : '#383838')};
+  margin-right: 12px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => (props.isSelected ? 'none' : '#DFDFDF')};
   }
 `;

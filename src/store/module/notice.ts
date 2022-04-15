@@ -6,8 +6,8 @@ import {
 } from '@/interfaces';
 
 const initialState: INoticeInitialState = {
-  noticeList: [],
-  dataList: [],
+  noticeList: { list: [], size: 0 },
+  dataList: { list: [], size: 0 },
   noticeDetail: null,
 };
 

@@ -16,9 +16,19 @@ export function* getNoticeDataListSaga({
       `${NOTICE_API}?value=${payload.type}&skip=${payload.skip}&limit=${payload.limit}`
     );
     if (payload.type === 'archive') {
-      yield put(noticeActions.setDataList(noticeDataList.data));
+      yield put(
+        noticeActions.setDataList({
+          list: noticeDataList.data,
+          size: noticeDataList.size,
+        })
+      );
     } else {
-      yield put(noticeActions.setNoticeList(noticeDataList.data));
+      yield put(
+        noticeActions.setNoticeList({
+          list: noticeDataList.data,
+          size: noticeDataList.size,
+        })
+      );
     }
   } catch (error) {
     console.log(error);

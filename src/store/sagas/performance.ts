@@ -9,11 +9,16 @@ export function* getDeliveryListSaga({
   try {
     const deliveryList = yield call(
       API.GET,
-      `${DELIVERY_API}?${
-        payload.isAsc ? '' : 'sort=delivery-year+desc&sort=delivery-month+desc'
+      `${DELIVERY_API}?skip=${payload.skip}&limit=${payload.limit}${
+        payload.isAsc ? '' : '&sort=delivery-year+desc&sort=delivery-month+desc'
       }`
     );
-    yield put(performanceActions.setDeliveryList(deliveryList.data));
+    yield put(
+      performanceActions.setDeliveryList({
+        list: deliveryList.data,
+        size: deliveryList.size,
+      })
+    );
   } catch (error) {
     console.error(error);
   }

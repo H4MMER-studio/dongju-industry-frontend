@@ -3,10 +3,12 @@ import * as S from './index.style';
 import { useDispatch } from 'react-redux';
 import { performanceActions } from '@/store';
 import { useGetStore } from '@/hooks';
+import { Images } from 'public/image';
 import { IconDownArrowSmall, IconSearch, IconDownArrowGray } from '@svg';
 
 const Performance: React.FC = () => {
   const [selectedSearchTitle, setSelectedSearchTitle] = useState('납품처');
+  const [page, setPage] = useState(1);
   const [modalOnAt, setModalOnAt] = useState('');
   const [searchText, setSearchText] = useState('');
   const [orderModalOn, setOrderModalOn] = useState(false);
@@ -24,13 +26,21 @@ const Performance: React.FC = () => {
 
   useEffect(() => {
     dispatch(
-      performanceActions.getDeliveryList({ isAsc: selectedOrder !== 'new' })
+      performanceActions.getDeliveryList({
+        isAsc: selectedOrder !== 'new',
+        skip: 10 * page - 9,
+        limit: 10 * page,
+      })
     );
-  }, [selectedOrder]);
+  }, [selectedOrder, page]);
 
   const onClickCloseModal = () => {
     setModalOnAt('');
     setOrderModalOn(false);
+  };
+
+  const onClickPageHandler = (page: number) => {
+    setPage(page);
   };
 
   return (
@@ -65,13 +75,19 @@ const Performance: React.FC = () => {
             <S.DeliverySelectBox onClick={(e) => e.stopPropagation()}>
               <S.DeliverySelectText
                 isSelected={selectedSearchTitle === '납품처'}
-                onClick={() => setSelectedSearchTitle('납품처')}
+                onClick={() => {
+                  setSelectedSearchTitle('납품처');
+                  setModalOnAt('');
+                }}
               >
                 납품처
               </S.DeliverySelectText>
               <S.DeliverySelectText
                 isSelected={selectedSearchTitle === '품명'}
-                onClick={() => setSelectedSearchTitle('품명')}
+                onClick={() => {
+                  setSelectedSearchTitle('품명');
+                  setModalOnAt('');
+                }}
               >
                 품명
               </S.DeliverySelectText>
@@ -134,7 +150,7 @@ const Performance: React.FC = () => {
           <S.LongTitle>비고</S.LongTitle>
         </S.TitleWrapper>
         <div>
-          {deliveryList?.map(
+          {deliveryList?.list?.map(
             ({
               _id,
               delivery_amount,
@@ -157,6 +173,37 @@ const Performance: React.FC = () => {
           )}
         </div>
       </S.TableContainer>
+      <S.PageNationLayout>
+        <S.ArrowIcon
+          onClick={() => {
+            if (page !== 1) {
+              onClickPageHandler(page - 1);
+            }
+          }}
+          src={Images.PagenationLeft}
+          style={{ marginRight: 20 }}
+        />
+        {Array(Math.round(deliveryList.size / 10))
+          .fill(0)
+          .map((_, index) => (
+            <S.PageNumber
+              isSelected={page === index + 1}
+              onClick={() => setPage(index + 1)}
+            >
+              {index + 1}
+            </S.PageNumber>
+          ))}
+
+        <S.ArrowIcon
+          onClick={() => {
+            if (page !== Math.round(deliveryList.size / 10)) {
+              onClickPageHandler(page + 1);
+            }
+          }}
+          src={Images.PagenationRight}
+          style={{ marginLeft: 8 }}
+        />
+      </S.PageNationLayout>
     </S.Container>
   );
 };

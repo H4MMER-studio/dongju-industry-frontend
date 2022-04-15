@@ -96,7 +96,7 @@ const ContentImage = styled.img`
   }
 `;
 
-const DownloadFileLayout = styled.div`
+const DownloadFileLayout = styled.a`
   width: 100%;
   height: 48px;
   background-color: #fff;
@@ -110,7 +110,7 @@ const DownloadFileLayout = styled.div`
   cursor: pointer;
 `;
 
-const DownloadFileName = styled.div`
+const DownloadFileName = styled.p`
   font-size: 15px;
   color: #2979ff;
 `;
@@ -118,6 +118,8 @@ const NoticeDetailContainer: React.FC<IProps> = ({
   detail,
   onClickGoToList,
 }) => {
+  const newDate = detail.created_at.split('T')[0].split('-').join('.');
+
   return (
     <ScrollLayout>
       <NoticeDetailContainerLayout>
@@ -127,7 +129,7 @@ const NoticeDetailContainer: React.FC<IProps> = ({
             <WriterProfilImage src={undefined} />
             <div>
               <Writer>{`글쓴이`}작성</Writer>
-              <DateText>2020.01.20</DateText>
+              <DateText>{newDate}</DateText>
             </div>
           </WriterLayout>
         </Header>
@@ -137,12 +139,17 @@ const NoticeDetailContainer: React.FC<IProps> = ({
             src={detail.notice_images[0].url}
           />
         )}
-        {(detail.notice_files?.length ?? 0) > 0 && (
-          <DownloadFileLayout>
-            <DownloadFileName>{detail.notice_files[0].name}</DownloadFileName>
-            <Icon.DownloadIconBlue />
-          </DownloadFileLayout>
-        )}
+        {(detail.notice_files?.length ?? 0) > 0 &&
+          detail.notice_files.map(({ name, url }) => {
+            return (
+              <DownloadFileLayout href={url} download={name} target="_blank">
+                <DownloadFileName>
+                  {detail.notice_files[0].name}
+                </DownloadFileName>
+                <Icon.DownloadIconBlue />
+              </DownloadFileLayout>
+            );
+          })}
 
         <SubText>{detail.notice_content}</SubText>
 

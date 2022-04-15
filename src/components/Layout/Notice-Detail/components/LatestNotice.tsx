@@ -1,3 +1,4 @@
+import { mixins } from '@/styles';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -46,13 +47,14 @@ const DateText = styled.div`
   margin-bottom: 4px;
 `;
 
-const ContentTItle = styled.div`
+const ContentTitle = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   height: 28px;
   font-weight: 600;
   margin-bottom: 8px;
+  ${mixins.ellipsis()}
 
   @media (max-width: 1024px) {
     align-items: stretch;
@@ -64,9 +66,9 @@ const ContentText = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 24px;
   font-size: 15px;
   color: #555555;
+  ${mixins.ellipsis(2)}
 
   @media (max-width: 1024px) {
     align-items: stretch;
@@ -103,7 +105,7 @@ const LatestNotice: React.VFC<IProps> = ({ onClickGoToList }) => {
       <ContentLayout>
         <LeftSide>
           <DateText>22.02.17</DateText>
-          <ContentTItle>동파방지 댐퍼코일 카타로그 입니다.</ContentTItle>
+          <ContentTitle>동파방지 댐퍼코일 카타로그 입니다.</ContentTitle>
           <ContentText>
             권사를 영어로 Brokerage Firm 이라고도 한다. 증권사가 고객과 투자처를
             이어주는 중개인(broker)
@@ -114,7 +116,7 @@ const LatestNotice: React.VFC<IProps> = ({ onClickGoToList }) => {
       <ContentLayout>
         <LeftSide>
           <DateText>22.02.17</DateText>
-          <ContentTItle>동파방지 댐퍼코일 카타로그 입니다.</ContentTItle>
+          <ContentTitle>동파방지 댐퍼코일 카타로그 입니다.</ContentTitle>
           <ContentText>
             권사를 영어로 Brokerage Firm 이라고도 한다. 증권사가 고객과 투자처를
             이어주는 중개인(broker)

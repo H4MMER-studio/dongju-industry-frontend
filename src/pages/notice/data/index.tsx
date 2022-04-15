@@ -14,8 +14,8 @@ const NoticeView: React.FC = () => {
   useEffect(() => {
     dispatch(
       noticeActions.getNoticeDataList({
-        skip: 5 * page - 4,
-        limit: 5 * page,
+        skip: 4 * page - 3,
+        limit: 4 * page,
         type: 'archive',
       })
     );
@@ -25,12 +25,17 @@ const NoticeView: React.FC = () => {
     router.push(`/notice/data/${id}`);
   };
 
+  const onClickPageHandler = (page: number) => {
+    setPage(page);
+  };
+
   return (
     <Notice.Container
       page={page}
       dataList={dataList}
       title="자료실"
       clickNoticeItem={clickNoticeItem}
+      onClickPageHandler={onClickPageHandler}
     />
   );
 };

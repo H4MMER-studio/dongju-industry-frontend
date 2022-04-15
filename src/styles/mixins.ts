@@ -27,4 +27,12 @@ export const mixins = {
     align-items: ${alignItems};
     flex-direction: ${flexDirection};
   `,
+  ellipsis: (line = 1) => css`
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* autoprefixer: ignore next */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: ${line};
+  `,
 };

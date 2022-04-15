@@ -1,5 +1,5 @@
 export interface IPerformanceInitialState {
-  deliveryList: IDeliveryList[];
+  deliveryList: { list: IDeliveryList[]; size: number };
 }
 
 export interface IDeliveryList {
@@ -16,5 +16,7 @@ export interface IDeliveryList {
 }
 
 export interface IGetDeliveryListParams {
+  skip: number;
+  limit: number;
   isAsc: boolean;
 }

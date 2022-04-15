@@ -1,6 +1,6 @@
 export interface INoticeInitialState {
-  noticeList: IDataList[];
-  dataList: IDataList[];
+  noticeList: IDataList;
+  dataList: IDataList;
   noticeDetail: INoticeDetail | null;
 }
 
@@ -16,6 +16,11 @@ export interface INoticeDetail {
   updated_at: string | null;
 }
 
+export interface IDataList {
+  list: INoticeDetail[];
+  size: number;
+}
+
 export interface INoticeFile {
   name: string;
   url: string;
@@ -24,10 +29,6 @@ export interface INoticeFile {
 export interface INoticeImage {
   name: string;
   url: string;
-}
-
-export interface IDataList extends INoticeDetail {
-  size: number;
 }
 
 export interface IGetNoticeDataParams {
