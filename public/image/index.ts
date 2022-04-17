@@ -29,6 +29,8 @@ import DownloadIconBlue from './download-icon-blue.svg';
 import ExpandArrowIcon from './ExpandArrorIcon.svg';
 import LargeLeftArrow from './large-Left-arrow.svg';
 import LargeRightArrow from './large-right-arrow.svg';
+import SmallLeftArrow from './LeftArrowSmall.svg';
+import SmallRightArrow from './small-right-arrow.svg';
 
 export const Icon = {
   DownloadIcon,
@@ -40,4 +42,6 @@ export const Icon = {
   ExpandArrowIcon,
   LargeLeftArrow,
   LargeRightArrow,
+  SmallLeftArrow,
+  SmallRightArrow,
 };

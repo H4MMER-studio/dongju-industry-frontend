@@ -20,7 +20,7 @@ const SDTCertificateContentsLayout = styled.div`
 
   @media (max-width: 768px) {
     display: block;
-    min-height: 897px;
+    min-height: 920px;
     border-radius: 0px;
     padding: 0px;
   }
@@ -86,12 +86,8 @@ const MobileMenu = styled.div<{ selected: boolean }>`
   }
 `;
 
-const MobileTitle = styled.div`
-  width: 100%;
-  text-align: center;
-  margin: 20px 0px;
-  font-size: 20px;
-  color: #e8e8e8;
+const MobileSliderLayout = styled.div`
+  margin-top: 20px;
 `;
 
 const CertificateContents: React.FC<IProps> = ({
@@ -135,7 +131,9 @@ const CertificateContents: React.FC<IProps> = ({
               ))}
             </MobileScrollLayout>
           </MobileNavList>
-          <MobileTitle>버블댐퍼</MobileTitle>
+          <MobileSliderLayout>
+            <ContentsSlider type={type} certificationList={certificationList} />
+          </MobileSliderLayout>
         </>
       )}
     </SDTCertificateContentsLayout>
