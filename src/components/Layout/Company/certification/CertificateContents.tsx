@@ -68,7 +68,8 @@ const MobileNavList = styled.div`
   height: 72px;
   padding: 24px 0px;
   margin: 0 24px;
-  overflow: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
   border-bottom: 1px solid #777777;
 `;
 
