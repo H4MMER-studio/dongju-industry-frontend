@@ -11,7 +11,9 @@ interface Iprops {
   clickCertificationTypeMenu: (type: ICertificationMenuType) => void;
 }
 
-const SDTCertificationLayout = styled.section``;
+const SDTCertificationLayout = styled.section`
+  padding-bottom: 24px;
+`;
 
 const Certification: React.FC<Iprops> = ({
   type,

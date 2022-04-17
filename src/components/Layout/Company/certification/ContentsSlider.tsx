@@ -58,7 +58,7 @@ const CertificationImage = styled.img`
   margin: 0 auto;
 `;
 
-const PrevArrowLayout = styled.div`
+const PrevArrowLayout = styled.div<{ isDisplay: boolean }>`
   ${mixins.flexSet()}
   position: absolute;
   left: 0px;
@@ -67,6 +67,12 @@ const PrevArrowLayout = styled.div`
   width: 72px;
   height: 72px;
   transform: translateY(-50%);
+  display: ${(props) => (props.isDisplay ? 'block' : 'none')};
+
+  @media (max-width: 1154px) {
+    left: 85px;
+    background: rgba(85, 85, 85, 0.2);
+  }
 `;
 
 const NextArrowLayout = styled.div`
@@ -77,6 +83,12 @@ const NextArrowLayout = styled.div`
   transform: translateY(-50%);
   width: 72px;
   height: 72px;
+
+  @media (max-width: 1154px) {
+    right: 85px;
+    top: 49.8%;
+    /* background: rgba(85, 85, 85, 0.2); */
+  }
 `;
 
 const InfoLayout = styled.div`
@@ -85,6 +97,7 @@ const InfoLayout = styled.div`
   white-space: pre-wrap;
   margin-top: 20px;
   margin-bottom: 34px;
+  min-height: 51px;
 
   .title {
     font-size: 20px;
@@ -110,16 +123,70 @@ const Layout = styled.div`
   height: 100%;
 `;
 
+const CertificationListScrollLayout = styled.div`
+  width: 100%;
+  padding: 0 25px;
+  overflow-x: scroll;
+`;
+
+const CertificationListLayout = styled.div<{ width: number }>`
+  display: flex;
+  align-items: center;
+  width: ${(props) => props.width}px;
+  /* flex-wrap: nowrap; */
+`;
+
+const CertificationSmllImage = styled.img<{ selected: boolean }>`
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-right: 24px;
+  border-radius: 12px;
+  border: ${(props) => (props.selected ? '3px solid #2979FF' : 'none')};
+  cursor: pointer;
+
+  &:nth-last-child(1) {
+    margin-right: 0px;
+  }
+`;
+
+const LoadingLayout = styled.div`
+  height: 100%;
+  width: 951px;
+  height: 656px;
+`;
+
 const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
-  // const [certificationInfo, setCertificationInfo] = useState<ICertification>();
+  const [slide, setSlide] = useState<Slider>();
+  const [slideNumber, setSlideNumber] = useState(0);
+  const [initRender, setInitRender] = useState(false);
 
-  // console.log(certificationList, '아 왜');
+  useEffect(() => {
+    if (slide) {
+      slide.slickGoTo(0);
+    }
 
-  // useEffect(() => {
-  //   if (certificationList?.length > 0) {
-  //     setCertificationInfo(certificationList[0]);
-  //   }
-  // }, [type]);
+    if (!initRender) {
+      setInitRender(true);
+
+      setTimeout(() => {
+        setInitRender(false);
+      }, 300);
+    }
+
+    setSlideNumber(0);
+  }, [type]);
+
+  const setDate = (date: string) => {
+    const yearMonthDay = date.substring(0, 10);
+
+    return yearMonthDay.replaceAll('-', '.');
+  };
+
+  const clickCertification = (index: number) => {
+    slide.slickGoTo(index);
+    setSlideNumber(index);
+  };
 
   const settings: Settings = {
     dots: true,
@@ -135,13 +202,17 @@ const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
         <div className="custom-dot" />
       </div>
     ),
+    afterChange: (currentSlider) => {
+      setSlideNumber(currentSlider);
+    },
     prevArrow: (
-      <PrevArrowLayout>
+      <PrevArrowLayout isDisplay={slideNumber > 0}>
         <SlideIconLayout>
           <Icon.LargeLeftArrow />
         </SlideIconLayout>
       </PrevArrowLayout>
     ),
+
     nextArrow: (
       <NextArrowLayout>
         <SlideIconLayout>
@@ -153,41 +224,57 @@ const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
 
   return (
     <ContentsSliderLayout>
-      <Slider {...settings}>
+      <Slider {...settings} ref={(slider) => setSlide(slider)}>
         {certificationList.map((certification) => {
-          return (
+          return !initRender ? (
             <Layout key={certification._id}>
               <Title>{certification.certification_title}</Title>
               <CertificationImage
                 src={certification.certification_images[0]?.url}
                 alt={'인증서 사진'}
               />
+              <InfoLayout>
+                {certification.certification_organization && (
+                  <>
+                    <span className="title">시험기관: </span>
+                    <span className="contents">
+                      {certification.certification_organization}
+                    </span>
+                  </>
+                )}
+                <br />
+                {certification.certification_start_date && (
+                  <>
+                    <span className="title">시험기간: </span>
+                    <span className="contents">
+                      {setDate(certification.certification_start_date)}
+                    </span>
+                  </>
+                )}
+              </InfoLayout>
             </Layout>
+          ) : (
+            <LoadingLayout />
           );
         })}
       </Slider>
-      {/* <div>
-        <Title>{certificationInfo?.certification_title}</Title>
-        <SliderLayout>
-          <Slider {...settings}>
-            {certificationInfo?.certification_images.map((image) => (
-              <CertificationImage
-                src={image.url}
-                id={image.url}
-                alt={'인증서 사진'}
-              />
+      <CertificationListScrollLayout>
+        {
+          <CertificationListLayout width={certificationList.length * 144 - 24}>
+            {certificationList.map((certification, index) => (
+              <>
+                <CertificationSmllImage
+                  src={certification.certification_images[0]?.url}
+                  alt={'인증서 리스트에 보여지는 사진'}
+                  key={certification._id}
+                  selected={slideNumber === index}
+                  onClick={() => clickCertification(index)}
+                />
+              </>
             ))}
-          </Slider>
-        </SliderLayout>
-        <InfoLayout>
-          <span className="title">시험기간: </span>
-          <span className="contents">(주)한국필터시험원</span>
-          <br />
-          <span className="title">시험기관: </span>
-          <span className="contents">(주)한국필터시험원</span>
-        </InfoLayout>
-        <ListScrollLayout></ListScrollLayout>
-      </div> */}
+          </CertificationListLayout>
+        }
+      </CertificationListScrollLayout>
     </ContentsSliderLayout>
   );
 };

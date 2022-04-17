@@ -15,9 +15,8 @@ const SDTCertificateContentsLayout = styled.div`
   width: 100%;
   height: 841px;
   background-color: #555555;
-  padding: 36px;
+  padding: 24px 36px;
   border-radius: 20px;
-  margin-bottom: 24px;
 
   @media (max-width: 768px) {
     display: block;
@@ -42,10 +41,26 @@ const MenuValue = styled.div<{ selected: boolean }>`
 `;
 
 const RightSide = styled.div`
-  width: 1023px;
+  width: 951px;
+
+  @media (max-width: 1612px) {
+    width: 882px;
+  }
+
+  @media (max-width: 1475px) {
+    width: 801px;
+  }
+
+  @media (max-width: 1400px) {
+    width: 726px;
+  }
 
   @media (max-width: 1366px) {
-    width: 757px;
+    width: 594px;
+  }
+
+  @media (max-width: 1193px) {
+    width: 526px;
   }
 `;
 
