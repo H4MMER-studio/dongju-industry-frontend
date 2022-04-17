@@ -13,6 +13,10 @@ interface Iprops {
 
 const SDTCertificationLayout = styled.section`
   padding-bottom: 24px;
+
+  @media (max-width: 768px) {
+    padding-bottom: 0px;
+  }
 `;
 
 const Certification: React.FC<Iprops> = ({

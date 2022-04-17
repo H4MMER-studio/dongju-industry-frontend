@@ -4,6 +4,7 @@ import Slider, { Settings } from 'react-slick';
 import { Icon } from 'public/image';
 import { mixins } from '@/styles';
 import { ICertificationMenuType, ICertification } from '@/interfaces';
+import useResize from '@/hooks/useResize';
 
 interface Iprops {
   type: ICertificationMenuType;
@@ -22,6 +23,10 @@ const Title = styled.div`
   font-weight: 600;
   width: 100%;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const SliderLayout = styled.div`
@@ -44,11 +49,18 @@ const SliderLayout = styled.div`
   }
 `;
 
-const SlideIconLayout = styled.div`
+const SlideIconLayout = styled.div<{ getPadding: 'LEFT' | 'RIGHT' }>`
   ${mixins.flexSet()}
   cursor: pointer;
   width: 72px;
   height: 72px;
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    padding-right: ${(props) => (props.getPadding === 'RIGHT' ? 2 : 0)}px;
+    padding-left: ${(props) => (props.getPadding === 'LEFT' ? 2 : 0)}px;
+  }
 `;
 
 const CertificationImage = styled.img`
@@ -73,6 +85,12 @@ const PrevArrowLayout = styled.div<{ isDisplay: boolean }>`
     left: 85px;
     background: rgba(85, 85, 85, 0.2);
   }
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    left: 21px;
+  }
 `;
 
 const NextArrowLayout = styled.div`
@@ -87,7 +105,14 @@ const NextArrowLayout = styled.div`
   @media (max-width: 1154px) {
     right: 85px;
     top: 49.8%;
-    /* background: rgba(85, 85, 85, 0.2); */
+  }
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    right: 21px;
+    z-index: 10000;
+    background: rgba(85, 85, 85, 0.2);
   }
 `;
 
@@ -103,18 +128,20 @@ const InfoLayout = styled.div`
     font-size: 20px;
     color: #e8e8e8;
     font-weight: 600;
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
   }
 
   .contents {
     font-size: 20px;
     color: #e8e8e8;
-  }
-`;
 
-const ListScrollLayout = styled.div`
-  width: 100%;
-  overflow-x: scroll;
-  overflow-y: hidden;
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
 `;
 
 const Layout = styled.div`
@@ -160,6 +187,7 @@ const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
   const [slide, setSlide] = useState<Slider>();
   const [slideNumber, setSlideNumber] = useState(0);
   const [initRender, setInitRender] = useState(false);
+  const { width } = useResize();
 
   useEffect(() => {
     if (slide) {
@@ -189,14 +217,13 @@ const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
   };
 
   const settings: Settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 150,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
     autoplay: false,
-    appendDots: (dots) => <ul>{dots}</ul>,
     customPaging: () => (
       <div className="custom-dot-layout">
         <div className="custom-dot" />
@@ -207,16 +234,16 @@ const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
     },
     prevArrow: (
       <PrevArrowLayout isDisplay={slideNumber > 0}>
-        <SlideIconLayout>
-          <Icon.LargeLeftArrow />
+        <SlideIconLayout getPadding="RIGHT">
+          {width > 768 ? <Icon.LargeLeftArrow /> : <Icon.SmallLeftArrow />}
         </SlideIconLayout>
       </PrevArrowLayout>
     ),
 
     nextArrow: (
       <NextArrowLayout>
-        <SlideIconLayout>
-          <Icon.LargeRightArrow />
+        <SlideIconLayout getPadding="LEFT">
+          {width > 768 ? <Icon.LargeRightArrow /> : <Icon.SmallRightArrow />}
         </SlideIconLayout>
       </NextArrowLayout>
     ),
