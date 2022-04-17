@@ -570,7 +570,13 @@ const MainNav: React.FC<IProps> = ({
                 {COMPANY_MENU.map(({ id, value }) => (
                   <li
                     key={id}
-                    onClick={() => onClickGoToPage(`/company/${id}`)}
+                    onClick={() => {
+                      if (id === 'certification') {
+                        onClickGoToPage(`/company/${id}/?type=license`);
+                      } else {
+                        onClickGoToPage(`/company/${id}`);
+                      }
+                    }}
                   >
                     {value}
                   </li>
