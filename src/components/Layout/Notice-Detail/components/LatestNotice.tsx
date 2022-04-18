@@ -1,9 +1,12 @@
 import { mixins } from '@/styles';
 import React from 'react';
 import styled from 'styled-components';
+import { INoticeDetail } from '@/interfaces';
 
 interface IProps {
+  list: INoticeDetail[];
   onClickGoToList(): void;
+  onClickGoToDetail(id: number | string): void;
 }
 
 const LatestNoticeLayout = styled.div`
@@ -98,32 +101,33 @@ const GoToList = styled.div`
   cursor: pointer;
 `;
 
-const LatestNotice: React.VFC<IProps> = ({ onClickGoToList }) => {
+const LatestNotice: React.VFC<IProps> = ({
+  list,
+  onClickGoToDetail,
+  onClickGoToList,
+}) => {
   return (
     <LatestNoticeLayout>
       <Title>최신글</Title>
-      <ContentLayout>
-        <LeftSide>
-          <DateText>22.02.17</DateText>
-          <ContentTitle>동파방지 댐퍼코일 카타로그 입니다.</ContentTitle>
-          <ContentText>
-            권사를 영어로 Brokerage Firm 이라고도 한다. 증권사가 고객과 투자처를
-            이어주는 중개인(broker)
-          </ContentText>
-        </LeftSide>
-        <ContentImage src={undefined} />
-      </ContentLayout>
-      <ContentLayout>
-        <LeftSide>
-          <DateText>22.02.17</DateText>
-          <ContentTitle>동파방지 댐퍼코일 카타로그 입니다.</ContentTitle>
-          <ContentText>
-            권사를 영어로 Brokerage Firm 이라고도 한다. 증권사가 고객과 투자처를
-            이어주는 중개인(broker)
-          </ContentText>
-        </LeftSide>
-        <ContentImage src={undefined} />
-      </ContentLayout>
+      {list.map(
+        ({ _id, created_at, notice_title, notice_content, notice_images }) => (
+          <ContentLayout key={_id} onClick={() => onClickGoToDetail(_id)}>
+            <LeftSide>
+              <DateText>
+                {created_at.split('T')[0].replaceAll('-', '.')}
+              </DateText>
+              <ContentTitle>{notice_title}</ContentTitle>
+              <ContentText>{notice_content}</ContentText>
+            </LeftSide>
+            {(notice_images?.length ?? 0) > 0 && (
+              <ContentImage
+                alt={notice_images[0].name}
+                src={notice_images[0].url}
+              />
+            )}
+          </ContentLayout>
+        )
+      )}
       <GoToList onClick={onClickGoToList}>목록으로</GoToList>
     </LatestNoticeLayout>
   );

@@ -19,10 +19,15 @@ const NoticeDetailView: React.FC = () => {
     router.push('/notice/data');
   };
 
+  const onClickGoToDetail = (id: string | number) => {
+    router.push(`/notice/data/${id}`);
+  };
+
   return noticeDetail ? (
     <NoticeDetail.Container
       detail={noticeDetail}
       onClickGoToList={onClickGoToList}
+      onClickGoToDetail={onClickGoToDetail}
     />
   ) : (
     <></>

@@ -14,6 +14,7 @@ export interface INoticeDetail {
   created_at: string | null;
   deleted_at: string | null;
   updated_at: string | null;
+  latest: INoticeDetail[];
 }
 
 export interface IDataList {

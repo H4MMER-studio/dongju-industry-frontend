@@ -43,7 +43,12 @@ export function* getNoticeDataDetailSaga({
       API.GET,
       `${NOTICE_DETAIL_API}/${payload.id}`
     );
-    yield put(noticeActions.setNoticeDetail(noticeDetail.data));
+    yield put(
+      noticeActions.setNoticeDetail({
+        ...noticeDetail.data,
+        latest: noticeDetail.latest,
+      })
+    );
   } catch (error) {
     console.log(error);
   }

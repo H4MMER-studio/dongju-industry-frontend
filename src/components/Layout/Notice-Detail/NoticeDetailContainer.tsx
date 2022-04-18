@@ -7,6 +7,7 @@ import { INoticeDetail } from '@/interfaces';
 interface IProps {
   detail: INoticeDetail;
   onClickGoToList(): void;
+  onClickGoToDetail(id: number | string): void;
 }
 
 const ScrollLayout = styled.div`
@@ -117,6 +118,7 @@ const DownloadFileName = styled.p`
 const NoticeDetailContainer: React.FC<IProps> = ({
   detail,
   onClickGoToList,
+  onClickGoToDetail,
 }) => {
   const newDate = detail.created_at.split('T')[0].split('-').join('.');
 
@@ -128,7 +130,7 @@ const NoticeDetailContainer: React.FC<IProps> = ({
           <WriterLayout>
             <WriterProfilImage src={undefined} />
             <div>
-              <Writer>{`글쓴이`}작성</Writer>
+              <Writer>동주산업</Writer>
               <DateText>{newDate}</DateText>
             </div>
           </WriterLayout>
@@ -152,8 +154,9 @@ const NoticeDetailContainer: React.FC<IProps> = ({
           })}
 
         <SubText>{detail.notice_content}</SubText>
-
         <NoticeDetailComponents.LatestNotice
+          list={detail?.latest ?? []}
+          onClickGoToDetail={onClickGoToDetail}
           onClickGoToList={onClickGoToList}
         />
       </NoticeDetailContainerLayout>
