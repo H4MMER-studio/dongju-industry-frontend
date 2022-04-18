@@ -75,6 +75,7 @@ const BannerImage = styled.img`
   height: 100%;
   z-index: 1;
   object-fit: cover;
+  border-radius: 12px;
 `;
 
 const BreadCrum = styled.div`

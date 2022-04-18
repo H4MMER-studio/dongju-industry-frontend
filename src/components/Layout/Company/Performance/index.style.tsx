@@ -239,6 +239,7 @@ export const SelectOrderBox = styled.div`
 
 export const PageNationLayout = styled.div`
   ${mixins.flexSet()}
+  padding-bottom: 36px;
 `;
 
 export const ArrowIcon = styled.img`
