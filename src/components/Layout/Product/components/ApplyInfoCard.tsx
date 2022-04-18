@@ -24,6 +24,10 @@ const UnorderedList = styled.ul`
 
 const List = styled.li`
   font-size: 19px;
+
+  @media (max-width: 1024px) {
+    font-size: 17px;
+  }
 `;
 
 const ApplyInfoCard: React.FC<Iprops> = ({ applyList }) => {

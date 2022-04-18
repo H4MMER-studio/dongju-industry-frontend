@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "noImplicitReturns": false,
     "allowSyntheticDefaultImports": true,
     "alwaysStrict": true,
+    "noImplicitAny": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,

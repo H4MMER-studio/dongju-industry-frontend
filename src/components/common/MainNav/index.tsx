@@ -72,6 +72,7 @@ const STDMenuWrapper = styled.div`
 const STDProductList = styled.div`
   flex: 1;
   height: 100%;
+  width: 155px;
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -90,7 +91,6 @@ const STDProductWrapper = styled.div<{ isSelected: boolean }>`
 
   &:hover {
     background: #efefef;
-    box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);
 
     p {
       font-size: 15px;
@@ -239,6 +239,7 @@ const STDSideProductItem = styled.div<{ marginRight?: number }>`
 const STDSubListMenuWrapper = styled.div`
   ${mixins.flexSet('flex-start', 'center', 'column')}
   height: calc(100% - 72px);
+  width: 154px;
   margin-top: 66px;
   padding: 0 26px 0 46px;
 `;

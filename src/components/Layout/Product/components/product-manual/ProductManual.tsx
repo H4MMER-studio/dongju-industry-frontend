@@ -23,6 +23,11 @@ const ProductImagesLayout = styled.div`
     width: 100%;
     min-height: 262px;
   }
+
+  @media (max-width: 1365px) {
+    width: 100%;
+    height: 360px;
+  }
 `;
 
 const ProductManual: React.FC<Iprops> = ({ productMenu, clickContact }) => {

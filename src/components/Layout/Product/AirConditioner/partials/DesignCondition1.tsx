@@ -26,15 +26,15 @@ const h3Style = css`
 
 const STDContainer = styled.div`
   overflow: auto;
+  margin-bottom: 36px;
 `;
 
 const STDWrapper = styled.div`
   width: 1064px;
-  margin-bottom: 36px;
   border-radius: 12px;
-  overflow: hidden;
   border: 1px solid #b7b7b7;
   background-color: white;
+  overflow: hidden;
 `;
 
 const STDAirConditionWrapper = styled.div`
@@ -106,6 +106,10 @@ const STDMainContentWrapper = styled.div<{ cssStyle?: string }>`
     line-height: 36px;
     background-color: #f5f5f5;
     border-right: 1px solid #b7b7b7;
+
+    @media (max-width: 1024px) {
+      font-size: 17px;
+    }
   }
 
   p {
@@ -116,6 +120,10 @@ const STDMainContentWrapper = styled.div<{ cssStyle?: string }>`
     font-size: 19px;
     line-height: 36px;
     text-align: center;
+
+    @media (max-width: 1024px) {
+      font-size: 17px;
+    }
   }
 
   ${({ cssStyle }) => cssStyle}
@@ -135,6 +143,10 @@ const STDVaporPressureWrapper = styled.div`
     font-size: 19px;
     line-height: 36px;
     text-align: center;
+
+    @media (max-width: 1024px) {
+      font-size: 17px;
+    }
   }
 `;
 
@@ -155,6 +167,10 @@ const STDWindSpeedWrapper = styled.div`
     font-size: 19px;
     line-height: 36px;
     text-align: center;
+
+    @media (max-width: 1024px) {
+      font-size: 17px;
+    }
   }
 `;
 
@@ -177,6 +193,10 @@ const STDNoticeWrapper = styled.div`
         list-style: disc;
         font-size: 19px;
         line-height: 36px;
+
+        @media (max-width: 1024px) {
+          font-size: 17px;
+        }
       }
     }
   }

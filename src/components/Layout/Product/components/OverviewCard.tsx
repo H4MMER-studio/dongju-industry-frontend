@@ -28,6 +28,10 @@ const OverviewLayout = styled.div`
   font-size: 19px;
   white-space: pre-line;
 
+  @media (max-width: 1024px) {
+    font-size: 17px;
+  }
+
   img {
     width: 100%;
     margin-top: 12px;

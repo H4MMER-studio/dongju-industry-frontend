@@ -51,6 +51,12 @@ const STDTableDescription = styled.div`
   line-height: 32px;
   font-size: 19px;
 
+  @media (max-width: 1024px) {
+    align-items: stretch;
+    height: auto;
+    font-size: 17px;
+  }
+
   li {
     list-style: disc;
     margin-left: 25px;
