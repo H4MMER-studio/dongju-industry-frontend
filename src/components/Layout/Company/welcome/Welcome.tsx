@@ -7,6 +7,7 @@ const WelcomeLayout = styled.main`
 
   @media (max-width: 1023px) {
     display: block;
+    padding: 0 16px 24px;
   }
 `;
 

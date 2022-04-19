@@ -37,6 +37,11 @@ const ScollLayout = styled.div`
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+
+  @media (max-width: 1024px) {
+    overflow-y: visible;
+    height: auto;
+  }
 `;
 
 const BannerSection = styled.section<{ marginBottom?: number }>`

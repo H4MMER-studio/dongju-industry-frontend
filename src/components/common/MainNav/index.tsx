@@ -274,6 +274,7 @@ const STDSideListWrapper = styled.ul<sideProductListProps>`
     line-height: 20px;
     color: #555555;
     margin-bottom: 10px;
+    cursor: pointer;
 
     &:last-child {
       margin-bottom: 0;

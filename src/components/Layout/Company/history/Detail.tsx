@@ -9,6 +9,10 @@ const STDDetailLayout = styled.div`
   margin-bottom: 30px;
   border-bottom: 1px solid #c8c8c8;
 
+  &:last-child {
+    border-bottom: none;
+  }
+
   @media (max-width: 1023px) {
     padding: 0 16px 30px;
   }

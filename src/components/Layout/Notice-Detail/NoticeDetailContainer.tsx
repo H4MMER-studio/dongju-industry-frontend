@@ -84,17 +84,8 @@ const SubText = styled.div`
 
 const ContentImage = styled.img`
   width: 100%;
-  height: 446px;
   background-color: #383838;
   margin-bottom: 32px;
-
-  @media (max-width: 1024px) {
-    height: 490px;
-  }
-
-  @media (max-width: 375px) {
-    height: 186px;
-  }
 `;
 
 const DownloadFileLayout = styled.a`
