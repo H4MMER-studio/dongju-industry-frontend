@@ -13,7 +13,7 @@ const NoticeDetailView: React.FC = () => {
 
   useEffect(() => {
     dispatch(noticeActions.getNoticeDataDetail({ id }));
-  }, []);
+  }, [id]);
 
   const onClickGoToList = () => {
     router.push('/notice/data');

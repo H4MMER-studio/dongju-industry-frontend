@@ -57,9 +57,9 @@ const Menu: React.FC<Iprops> = ({ productMenu, clickContact }) => {
   return (
     <MenuLayout>
       <TopLayout>
-        <BreadCrumb>홈/제품/{productMenu.productName}</BreadCrumb>
+        <BreadCrumb>홈/제품/{productMenu?.productName ?? ''}</BreadCrumb>
         <ProductNameLayout>
-          <ProductName>{productMenu.productName}</ProductName>
+          <ProductName>{productMenu?.productName ?? ''}</ProductName>
           <Button.Primary
             value="문의하기"
             state="active"
@@ -70,7 +70,7 @@ const Menu: React.FC<Iprops> = ({ productMenu, clickContact }) => {
       </TopLayout>
       <BottomLayout>
         <MenuButtonGroup>
-          {productMenu.menuList.map((menu) => {
+          {productMenu?.menuList.map((menu) => {
             return <MenuButton key={menu}>{menu}</MenuButton>;
           })}
         </MenuButtonGroup>
