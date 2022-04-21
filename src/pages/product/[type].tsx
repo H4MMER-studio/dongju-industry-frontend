@@ -4,16 +4,11 @@ import Head from 'next/head';
 import { getProduct } from '@/utils';
 import { Product } from '@/components';
 import { ProductType } from '@/interfaces';
-import { wrapper } from '@/store';
 
-interface IProps {
-  currentType: ProductType['type'];
-}
-
-const ProductView: React.FC<IProps> = ({ currentType }) => {
+const ProductView: React.FC = () => {
   const router = useRouter();
   const { type } = router.query as { type: ProductType['type'] };
-  const currentProduct = getProduct(type ?? currentType);
+  const currentProduct = getProduct(type);
 
   return (
     <>
@@ -51,15 +46,3 @@ const ProductView: React.FC<IProps> = ({ currentType }) => {
 };
 
 export default ProductView;
-
-export const getServerSideProps = wrapper.getServerSideProps(
-  (_) => async (ctx) => {
-    return {
-      props: {
-        currentType: ctx.params.type,
-      },
-    };
-  }
-);
-
-// getServerSideProps 예제

@@ -1,19 +1,9 @@
 import React from 'react';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { Company } from '@/components';
 import { ICertificationMenuType } from '@/interfaces';
-import { wrapper } from '@/store';
 
-interface IProps {
-  currentMenu:
-    | 'welcome'
-    | 'history'
-    | 'way-to-come'
-    | 'performance'
-    | 'certification';
-}
-
-const CompanyView: React.FC<IProps> = ({ currentMenu }) => {
+const CompanyView: React.FC = () => {
   const router = useRouter();
   const { menu, type } = router.query as {
     menu:
@@ -31,7 +21,7 @@ const CompanyView: React.FC<IProps> = ({ currentMenu }) => {
 
   return (
     <Company.Container
-      menu={menu ?? currentMenu}
+      menu={menu}
       type={type}
       clickCertificationTypeMenu={clickCertificationTypeMenu}
     />
@@ -39,13 +29,3 @@ const CompanyView: React.FC<IProps> = ({ currentMenu }) => {
 };
 
 export default CompanyView;
-
-export const getServerSideProps = wrapper.getServerSideProps(
-  (_) => async (ctx) => {
-    return {
-      props: {
-        currentMenu: ctx.params.menu,
-      },
-    };
-  }
-);
