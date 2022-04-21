@@ -7,6 +7,7 @@ const CompanyInfoBannerLarge = '/image/company_info_banner_large.png';
 const CompanyInfoBannerSmall = '/image/company_info_banner_small.png';
 const PagenationLeft = '/image/pagenationLeft.png';
 const PagenationRight = '/image/pagenationRight.png';
+const MainDongjuLogo = '/image/main_page/main_dongju.png';
 
 export const Images = {
   EsitmateBackground,
@@ -18,6 +19,7 @@ export const Images = {
   CompanyInfoBannerSmall,
   PagenationLeft,
   PagenationRight,
+  MainDongjuLogo,
 };
 
 import DownloadIcon from './download-icon.svg';

@@ -52,7 +52,7 @@ const TableLocation = styled.section`
 
 const ProductContainer: React.FC<Iprops> = ({ productType }) => {
   const [selectedProductManual, setSelectedProductManual] = useState(
-    PRODUCT_MANUAL_DATA['air-conditioner']
+    PRODUCT_MANUAL_DATA[productType ?? 'air-conditioner']
   );
 
   const [openContact, setOpenContact] = useState(false);

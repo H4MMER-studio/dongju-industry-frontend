@@ -99,6 +99,10 @@ function App({ Component, pageProps }: AppProps) {
           name="keywords"
         />
         <title>동주산업</title>
+        <meta content="동주산업" property="og:title" key="og:title" />
+        <meta content="동주산업" name="twitter:title" key="twitter:title" />
+        <meta content="동주산업" name="author" key="author" />
+        <meta content="동주산업" property="og:site_name" key="og:site_name" />
       </Head>
       <CssBaseline />
       <STDContainer height={height}>

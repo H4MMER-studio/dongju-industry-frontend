@@ -2,17 +2,21 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { NoticeDetail } from '@/components';
-import { noticeActions } from '@/store';
+import { noticeActions, wrapper } from '@/store';
 import { useGetStore } from '@/hooks';
 
-const NoticeDetailView: React.FC = () => {
+interface IProps {
+  currentId: number | string;
+}
+
+const NoticeDetailView: React.FC<IProps> = ({ currentId }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { id } = router.query as { id: string };
   const { noticeDetail } = useGetStore.notice();
 
   useEffect(() => {
-    dispatch(noticeActions.getNoticeDataDetail({ id }));
+    dispatch(noticeActions.getNoticeDataDetail({ id: id ?? currentId }));
   }, [id]);
 
   const onClickGoToList = () => {
@@ -35,3 +39,13 @@ const NoticeDetailView: React.FC = () => {
 };
 
 export default NoticeDetailView;
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (_) => async (ctx) => {
+    return {
+      props: {
+        currentId: ctx.params.id,
+      },
+    };
+  }
+);

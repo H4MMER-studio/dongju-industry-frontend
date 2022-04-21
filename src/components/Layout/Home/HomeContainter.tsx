@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Images } from 'public/image';
 import { mixins } from '@/styles';
 
-interface IProps {
-  onClickSetTest(test: string): void;
-}
+interface IProps {}
 
 const STDContainer = styled.article`
   ${mixins.flexSet()}
@@ -50,11 +49,11 @@ const STDMainLogoWrapper = styled.div`
   }
 `;
 
-const HomeContainter: React.FC<IProps> = ({ onClickSetTest }) => {
+const HomeContainter: React.FC<IProps> = () => {
   return (
     <STDContainer>
       <STDMainLogoWrapper>
-        <img src="/image/main_page/main_dongju.png" />
+        <img src={Images.MainDongjuLogo} />
         <p>
           정직과 신뢰, 폭 넓은 전문지식으로
           <br />
