@@ -58,6 +58,16 @@ export default class MyDocument extends Document {
             type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0230e081e91dc95d605b7a918f56669a"
           ></script>
+          <meta charSet="utf-8" />
+          <meta content="ie=edge" httpEquiv="X-UA-Compatible" />
+          <meta content="동주산업" property="og:title" />
+          <meta content="동주산업" name="twitter:title" />
+          <meta content="동주산업" name="author" />
+          <meta content="동주산업" property="og:site_name" />
+          <meta content="동주산업" property="og:article:author" />
+          <meta content="ko_KR" property="og:locale" />
+          <meta content="summary_large_image" name="twitter:card" />
+          <link href="https://www.dongjuind.co.kr" rel="canonical" />
         </Head>
         <body>
           <Main />

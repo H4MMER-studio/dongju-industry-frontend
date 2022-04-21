@@ -79,6 +79,25 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <meta
+          content="정직과 신뢰, 폭 넓은 전문지식으로 고객 만족에 한 발 더 나아가겠습니다."
+          name="description"
+          key="description"
+        />
+        <meta
+          content="정직과 신뢰, 폭 넓은 전문지식으로 고객 만족에 한 발 더 나아가겠습니다."
+          property="og:description"
+          key="og:description"
+        />
+        <meta
+          content="정직과 신뢰, 폭 넓은 전문지식으로 고객 만족에 한 발 더 나아가겠습니다."
+          name="twitter:description"
+          key="twitter:description"
+        />
+        <meta
+          content="공기조화기, 동파방지댐퍼코일, 동파방지, 댐퍼코일, 배기유니트, 조화기, 버블댐퍼, 완전밀폐도어, 밀폐도어, 송풍기, 동주산업, 동주"
+          name="keywords"
+        />
         <title>동주산업</title>
       </Head>
       <CssBaseline />
