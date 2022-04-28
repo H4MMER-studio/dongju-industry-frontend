@@ -172,7 +172,12 @@ const AirConditioner: React.FC = () => {
 
   return (
     <STDContainer>
-      <AirConditionerInfoBox title={'Casing Panel'} list={casingPanelContent} />
+      <div id="menu-1">
+        <AirConditionerInfoBox
+          title={'Casing Panel'}
+          list={casingPanelContent}
+        />
+      </div>
       <AirConditionerInfoBox title={'Supply Fan'} list={supplyFanContent} />
       <AirConditionerInfoBox
         title={'Coil (Heating & Cooling)'}
@@ -184,11 +189,11 @@ const AirConditioner: React.FC = () => {
       />
       <AirConditionerInfoBox title={'Damper'} list={damperContent} />
       <STDContentBox>
-        <h2>선정방법</h2>
+        <h2 id="menu-2">선정방법</h2>
         <img src="/image/product/airConditioner/airconditioner_graph.png" />
       </STDContentBox>
       <STDContentBox>
-        <h2>표준사항 설계조건</h2>
+        <h2 id="menu-3">표준사항 설계조건</h2>
         <DesignCondition1 />
         <DesignCondition2 />
       </STDContentBox>

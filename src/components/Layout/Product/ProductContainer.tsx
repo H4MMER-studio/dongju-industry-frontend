@@ -10,6 +10,7 @@ import { customerServiceActions } from '@/store';
 import { IForm } from '@/interfaces';
 import { useRouter } from 'next/router';
 import { useGetStore } from '@/hooks';
+import useResize from '@/hooks/useResize';
 
 interface Iprops {
   productType: ProductType['type'];
@@ -55,8 +56,8 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
   const [selectedProductManual, setSelectedProductManual] = useState(
     PRODUCT_MANUAL_DATA[productType ?? 'air-conditioner']
   );
-
   const [openContact, setOpenContact] = useState(false);
+  const { width } = useResize();
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -98,6 +99,20 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
     dispatch(customerServiceActions.postInquiryProduct(form));
   };
 
+  const clickMenu = (id: string) => {
+    const element = document.getElementById(id);
+    const scrollTop = element.getBoundingClientRect().top;
+
+    if (width > 1024) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      scrollTo({
+        top: scrollTop - 74,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <>
       <ProductContainerLayout>
@@ -105,6 +120,7 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
           <ProductComponents.ProductManual
             productMenu={selectedProductManual}
             clickContact={clickContact}
+            clickMenu={clickMenu}
           />
         </ProductManualLayout>
         <TableLocation>{renderProduct(productType)}</TableLocation>
