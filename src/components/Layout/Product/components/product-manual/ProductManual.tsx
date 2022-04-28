@@ -6,6 +6,7 @@ import { ProductMenu } from '@/interfaces';
 
 interface Iprops {
   productMenu: ProductMenu;
+  clickMenu: (id: string) => void;
   clickContact: () => void;
 }
 
@@ -30,13 +31,21 @@ const ProductImagesLayout = styled.div`
   }
 `;
 
-const ProductManual: React.FC<Iprops> = ({ productMenu, clickContact }) => {
+const ProductManual: React.FC<Iprops> = ({
+  productMenu,
+  clickMenu,
+  clickContact,
+}) => {
   return (
     <ProductMaualLayout>
       <ProductImagesLayout>
         <ProductImages detailImages={productMenu?.detailImages ?? []} />
       </ProductImagesLayout>
-      <Menu productMenu={productMenu} clickContact={clickContact} />
+      <Menu
+        productMenu={productMenu}
+        clickMenu={clickMenu}
+        clickContact={clickContact}
+      />
     </ProductMaualLayout>
   );
 };

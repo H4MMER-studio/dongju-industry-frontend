@@ -14,6 +14,6 @@ export interface ProductType {
 
 export interface ProductMenu {
   productName: string;
-  menuList: string[];
+  menuList: { id: string; menu: string }[];
   detailImages: string[];
 }

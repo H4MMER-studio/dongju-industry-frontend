@@ -6,6 +6,7 @@ import { ProductMenu } from '@/interfaces';
 interface Iprops {
   productMenu: ProductMenu;
   clickContact: () => void;
+  clickMenu: (id: string) => void;
 }
 
 const MenuLayout = styled.div`
@@ -53,7 +54,7 @@ const MenuButton = styled.button`
   font-weight: 400;
 `;
 
-const Menu: React.FC<Iprops> = ({ productMenu, clickContact }) => {
+const Menu: React.FC<Iprops> = ({ productMenu, clickContact, clickMenu }) => {
   return (
     <MenuLayout>
       <TopLayout>
@@ -71,7 +72,11 @@ const Menu: React.FC<Iprops> = ({ productMenu, clickContact }) => {
       <BottomLayout>
         <MenuButtonGroup>
           {productMenu?.menuList.map((menu) => {
-            return <MenuButton key={menu}>{menu}</MenuButton>;
+            return (
+              <MenuButton key={menu.id} onClick={() => clickMenu(menu.id)}>
+                {menu.menu}
+              </MenuButton>
+            );
           })}
         </MenuButtonGroup>
       </BottomLayout>
