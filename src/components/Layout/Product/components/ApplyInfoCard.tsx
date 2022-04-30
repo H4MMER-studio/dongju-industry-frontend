@@ -3,13 +3,16 @@ import styled from 'styled-components';
 
 interface Iprops {
   applyList: string[];
+  isSelected: boolean;
 }
 
-const ApplyInfoCardLayout = styled.div`
+const ApplyInfoCardLayout = styled.div<{ isSelected: boolean }>`
   width: 100%;
   padding: 24px;
   background: #ffffff;
   border-radius: 12px;
+  box-shadow: ${(props) =>
+    props.isSelected && '0px 0px 12px 4px rgba(41, 121, 255, 0.12)'};
 `;
 const Title = styled.div`
   color: #2979ff;
@@ -30,9 +33,9 @@ const List = styled.li`
   }
 `;
 
-const ApplyInfoCard: React.FC<Iprops> = ({ applyList }) => {
+const ApplyInfoCard: React.FC<Iprops> = ({ applyList, isSelected }) => {
   return (
-    <ApplyInfoCardLayout>
+    <ApplyInfoCardLayout isSelected={isSelected}>
       <Title>적용</Title>
       <UnorderedList>
         {applyList.map((value) => {

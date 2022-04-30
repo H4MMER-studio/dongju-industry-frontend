@@ -57,6 +57,7 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
     PRODUCT_MANUAL_DATA[productType ?? 'air-conditioner']
   );
   const [openContact, setOpenContact] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState(null);
   const { width } = useResize();
 
   const dispatch = useDispatch();
@@ -72,22 +73,23 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
 
   useEffect(() => {
     setSelectedProductManual(PRODUCT_MANUAL_DATA[productType]);
+    setSelectedMenu(null);
   }, [productType]);
 
   const renderProduct = (type: ProductType['type']) => {
     switch (type) {
       case 'air-conditioner':
-        return <Product.AirConditioner />;
+        return <Product.AirConditioner selectedMenu={selectedMenu} />;
       case 'freeze-protection-damper-coil':
-        return <Product.DamperCoilDetail />;
+        return <Product.DamperCoilDetail selectedMenu={selectedMenu} />;
       case 'exhaust-unit':
-        return <Product.ExhaustUnit />;
+        return <Product.ExhaustUnit selectedMenu={selectedMenu} />;
       case 'bubble-damper':
-        return <Product.BubbleDamper />;
+        return <Product.BubbleDamper selectedMenu={selectedMenu} />;
       case 'fully-sealed-door':
-        return <Product.FullySealedDoor />;
+        return <Product.FullySealedDoor selectedMenu={selectedMenu} />;
       case 'air-blower':
-        return <Product.AirBlower />;
+        return <Product.AirBlower selectedMenu={selectedMenu} />;
     }
   };
 
@@ -102,6 +104,7 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
   const clickMenu = (id: string) => {
     const element = document.getElementById(id);
     const scrollTop = element.getBoundingClientRect().top;
+    setSelectedMenu(id);
 
     if (width > 1024) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -119,6 +122,7 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
         <ProductManualLayout>
           <ProductComponents.ProductManual
             productMenu={selectedProductManual}
+            selectedMenu={selectedMenu}
             clickContact={clickContact}
             clickMenu={clickMenu}
           />

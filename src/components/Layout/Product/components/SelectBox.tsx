@@ -70,11 +70,8 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   selectedProduct,
   onClick,
 }) => {
-  const [expand, setExpand] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-
-  // const [] = useResize()
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

@@ -9,6 +9,7 @@ interface IProps {
     subTitle: string;
     description: React.ReactNode | string;
   }[];
+  isSelected: boolean;
 }
 
 const STDContainer = styled.div<{ marginBottom?: number }>`
@@ -22,10 +23,12 @@ const STDContainer = styled.div<{ marginBottom?: number }>`
   }
 `;
 
-const STDTableWrapper = styled.div`
+const STDTableWrapper = styled.div<{ isSelected: boolean }>`
   border-radius: 12px;
   background-color: white;
   overflow: hidden;
+  box-shadow: ${(props) =>
+    props.isSelected && '0px 0px 12px 4px rgba(41, 121, 255, 0.12)'};
 `;
 
 const STDTableOneLine = styled.div`
@@ -67,11 +70,12 @@ const AirConditionerInfoBox: React.FC<IProps> = ({
   title,
   list,
   marginBottom,
+  isSelected,
 }) => {
   return (
     <STDContainer marginBottom={marginBottom}>
       <h2>{title}</h2>
-      <STDTableWrapper>
+      <STDTableWrapper isSelected={isSelected}>
         {list.map(({ subTitle, description }) => (
           <STDTableOneLine key={subTitle}>
             <h3>{subTitle}</h3>
