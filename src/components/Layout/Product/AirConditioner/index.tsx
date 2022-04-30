@@ -1,9 +1,12 @@
-import { mixins } from '@/styles';
 import React from 'react';
 import styled from 'styled-components';
 import AirConditionerInfoBox from './partials/AirConditionerInfoBox';
 import DesignCondition1 from './partials/DesignCondition1';
 import DesignCondition2 from './partials/DesignCondition2';
+
+interface IProps {
+  selectedMenu: string | null;
+}
 
 const STDContainer = styled.article`
   flex: 1;
@@ -29,7 +32,7 @@ const STDContentBox = styled.div<{ marginBottom?: number }>`
   }
 `;
 
-const AirConditioner: React.FC = () => {
+const AirConditioner: React.FC<IProps> = ({ selectedMenu }) => {
   const casingPanelContent = [
     {
       subTitle: '재질',
@@ -176,18 +179,29 @@ const AirConditioner: React.FC = () => {
         <AirConditionerInfoBox
           title={'Casing Panel'}
           list={casingPanelContent}
+          isSelected={selectedMenu === 'menu-1'}
         />
       </div>
-      <AirConditionerInfoBox title={'Supply Fan'} list={supplyFanContent} />
+      <AirConditionerInfoBox
+        title={'Supply Fan'}
+        list={supplyFanContent}
+        isSelected={selectedMenu === 'menu-1'}
+      />
       <AirConditionerInfoBox
         title={'Coil (Heating & Cooling)'}
         list={heatingCoolingCoil}
+        isSelected={selectedMenu === 'menu-1'}
       />
       <AirConditionerInfoBox
         title={'Air Filter (Pre & Medium)'}
         list={airFilterContent}
+        isSelected={selectedMenu === 'menu-1'}
       />
-      <AirConditionerInfoBox title={'Damper'} list={damperContent} />
+      <AirConditionerInfoBox
+        title={'Damper'}
+        list={damperContent}
+        isSelected={selectedMenu === 'menu-1'}
+      />
       <STDContentBox>
         <h2 id="menu-2">선정방법</h2>
         <img src="/image/product/airConditioner/airconditioner_graph.png" />

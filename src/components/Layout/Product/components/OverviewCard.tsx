@@ -5,14 +5,20 @@ interface Iprops {
   title?: string;
   overview: string | React.ReactNode;
   marginBottom?: number;
+  isSelected: boolean;
 }
 
-const OverviewCardLayout = styled.div<{ marginBottom?: number }>`
+const OverviewCardLayout = styled.div<{
+  marginBottom?: number;
+  isSelected: boolean;
+}>`
   margin-bottom: ${({ marginBottom }) => marginBottom ?? 0}px;
   width: 100%;
   padding: 24px;
   background: #ffffff;
   border-radius: 12px;
+  box-shadow: ${(props) =>
+    props.isSelected && '0px 0px 12px 4px rgba(41, 121, 255, 0.12)'};
 `;
 
 const Title = styled.div`
@@ -39,9 +45,14 @@ const OverviewLayout = styled.div`
   }
 `;
 
-const OverviewCard: React.FC<Iprops> = ({ title, overview, marginBottom }) => {
+const OverviewCard: React.FC<Iprops> = ({
+  title,
+  overview,
+  marginBottom,
+  isSelected,
+}) => {
   return (
-    <OverviewCardLayout marginBottom={marginBottom}>
+    <OverviewCardLayout marginBottom={marginBottom} isSelected={isSelected}>
       <Title>{title ?? '개요'}</Title>
       <OverviewLayout>{overview}</OverviewLayout>
     </OverviewCardLayout>

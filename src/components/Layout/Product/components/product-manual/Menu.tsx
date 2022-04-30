@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '@/components/widgets';
 import { ProductMenu } from '@/interfaces';
 
 interface Iprops {
   productMenu: ProductMenu;
+  selectedMenu: string | null;
   clickContact: () => void;
   clickMenu: (id: string) => void;
 }
@@ -47,14 +48,28 @@ const MenuButtonGroup = styled.div`
 
 const BottomLayout = styled.div``;
 
-const MenuButton = styled.button`
+const MenuButton = styled.button<{ selected: boolean }>`
   width: 100%;
   height: 44px;
   font-size: 16px;
   font-weight: 400;
+  background-color: ${(props) => (props.selected ? '#2962FF' : '#fff')};
+  color: ${(props) => (props.selected ? '#fff' : '#000')};
+
+  &:hover {
+    background-color: ${(props) => !props.selected && '#e8e8e8'};
+    color: ${(props) => !props.selected && '##383838'};
+  }
 `;
 
-const Menu: React.FC<Iprops> = ({ productMenu, clickContact, clickMenu }) => {
+const Menu: React.FC<Iprops> = ({
+  productMenu,
+  selectedMenu,
+  clickContact,
+  clickMenu,
+}) => {
+  // const [selectedMenu, setSelectedMenu] = useState(null);
+
   return (
     <MenuLayout>
       <TopLayout>
@@ -73,7 +88,13 @@ const Menu: React.FC<Iprops> = ({ productMenu, clickContact, clickMenu }) => {
         <MenuButtonGroup>
           {productMenu?.menuList.map((menu) => {
             return (
-              <MenuButton key={menu.id} onClick={() => clickMenu(menu.id)}>
+              <MenuButton
+                key={menu.id}
+                selected={selectedMenu === menu.id}
+                onClick={() => {
+                  clickMenu(menu.id);
+                }}
+              >
                 {menu.menu}
               </MenuButton>
             );

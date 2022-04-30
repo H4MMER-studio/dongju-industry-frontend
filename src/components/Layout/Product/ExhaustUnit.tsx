@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import * as ProductComponents from './components';
 
+interface IProps {
+  selectedMenu: string | null;
+}
+
 const ExhaustUnitLayout = styled.section`
   width: 100%;
   padding: 24px 0;
@@ -11,11 +15,14 @@ const OverviewCardLayout = styled.div`
   margin-bottom: 36px;
 `;
 
-const ExhaustUnit: React.FC = () => {
+const ExhaustUnit: React.FC<IProps> = ({ selectedMenu }) => {
   return (
     <ExhaustUnitLayout>
       <OverviewCardLayout id="menu-1">
-        <ProductComponents.OverviewCard overview="배기유니트란 실내공기의 압력을 외부보다 낮게(-3~-5pa) 유지시켜 병실이나 실험실 내부의 세균이나 바이러스 등이 외부로 유출되지 않도록 하는 읍압 장비입니다." />
+        <ProductComponents.OverviewCard
+          overview="배기유니트란 실내공기의 압력을 외부보다 낮게(-3~-5pa) 유지시켜 병실이나 실험실 내부의 세균이나 바이러스 등이 외부로 유출되지 않도록 하는 읍압 장비입니다."
+          isSelected={selectedMenu === 'menu-1'}
+        />
       </OverviewCardLayout>
       <div id="menu-2">
         <ProductComponents.ApplyInfoCard
@@ -27,6 +34,7 @@ const ExhaustUnit: React.FC = () => {
             '삼성서울병원 응급실 및 격리병실',
             '국립중앙 의료원(메르스 병원균 격리병실)',
           ]}
+          isSelected={selectedMenu === 'menu-2'}
         />
       </div>
     </ExhaustUnitLayout>

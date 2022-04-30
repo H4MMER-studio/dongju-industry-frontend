@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { OverviewCard } from './components';
 
+interface IProps {
+  selectedMenu: string | null;
+}
+
 const STDContainer = styled.div`
   flex: 1;
   height: 100%;
@@ -10,7 +14,12 @@ const STDContainer = styled.div`
   padding: 24px 0;
 `;
 
-const DamperCoilDetail: React.FC = () => {
+const Layout = styled.div`
+  border-radius: 12px;
+  overflow: hidden;
+`;
+
+const DamperCoilDetail: React.FC<IProps> = ({ selectedMenu }) => {
   return (
     <STDContainer>
       <div id="menu-1">
@@ -20,6 +29,7 @@ const DamperCoilDetail: React.FC = () => {
             '첨단화된 산업사회에서 생활하고 있는 우리의 주거생활에는 불가결한 냉방 및 난방에도 많은 관심을 기울여 공기조화설비에서도 급속한 발전을 거듭해 왔다. 하지만 겨울철 난방을 함에 있어서 공조기의 운전 중에 발생하는 온수 및 증기 코일의 빈번한 동파에 대해 동파방지 대안이나 그 해결점을 찾지 못하여 동절기 운전에 많은 어려움이 있었다.\n\n 특히 외기조화기나 환기조화기에서 발생하는 코일의 동파로 인하여 유지보수비나 교체비로 매년 많은 예산상의 낭비가 발생하고 있다.\n\n오래전부터 구미 선진국에서는 코일 동파의 해결방안으로 IFB 코일을 널리 보급해 왔으며, 우리나라에도 수 년 전부터 소개가 되어 지금은 널리 설치 보급되고 있는 추세이다. IFB 코일은 원리 및 구조가 간단하면서도 코일의 동파를 근원적으로 막아주며 뛰어난 열효율을 보장, 동파로 인한 유지보수 비용 및 교체 비용을 절감시켜주며, Preheating 또는 Heating 코일로도 적용 가능한 혁신적인 코일이라고 할 수 있다.'
           }
           marginBottom={36}
+          isSelected={selectedMenu === 'menu-1'}
         />
       </div>
       <OverviewCard
@@ -28,12 +38,14 @@ const DamperCoilDetail: React.FC = () => {
           'IFB 코일 내에 항상 스팀이나 온수를 공급하면서 댐퍼콘트롤에 의해 토출온도를 제어하는 장치이다. 토출공기의 온도는 한번 설정되면 수시로 변하는 외기 온도에 상관없이 일정하게 유지된다. IFB 코일은 기존 코일의 변형이 아닌 독특한 장치로서 구조가 매우 간단하고 뛰어난 효율을 보장한다.'
         }
         marginBottom={36}
+        isSelected={selectedMenu === 'menu-1'}
       />
       <OverviewCard
         overview={
           '병원, 학교, 일반빌딩 외조기의 예열 코일용 / 공장 등 환기가 필요한 곳의 급기용 / 보일러용 연소공기 예열용 / 기타 일반 난방 및 환기용 공조기의 히팅 코일용'
         }
         marginBottom={36}
+        isSelected={selectedMenu === 'menu-1'}
       />
       <div id="menu-2">
         <OverviewCard
@@ -47,6 +59,7 @@ const DamperCoilDetail: React.FC = () => {
             </>
           }
           marginBottom={36}
+          isSelected={selectedMenu === 'menu-2'}
         />
       </div>
       <div id="menu-3">
@@ -61,6 +74,7 @@ const DamperCoilDetail: React.FC = () => {
             </>
           }
           marginBottom={36}
+          isSelected={selectedMenu === 'menu-3'}
         />
       </div>
       <div id="menu-4">
@@ -70,6 +84,7 @@ const DamperCoilDetail: React.FC = () => {
             'IFB 코일 내에 항상 스팀이나 온수를 공급하면서 댐퍼콘트롤에 의해 토출온도를 제어하는 장치이다. 토출공기의 온도는 한번 설정되면 수시로 변하는 외기 온도에 상관없이 일정하게 유지된다.\nIFB 코일은 기존 코일의 변형이 아닌 독특한 장치로서 구조가 매우 간단하고 뛰어난 효율을 보장한다.'
           }
           marginBottom={36}
+          isSelected={selectedMenu === 'menu-4'}
         />
       </div>
       <OverviewCard
@@ -83,6 +98,7 @@ const DamperCoilDetail: React.FC = () => {
           </>
         }
         marginBottom={36}
+        isSelected={selectedMenu === 'menu-4'}
       />
       <OverviewCard
         title={'엘보우 연결'}
@@ -95,6 +111,7 @@ const DamperCoilDetail: React.FC = () => {
           </>
         }
         marginBottom={36}
+        isSelected={selectedMenu === 'menu-4'}
       />
       <OverviewCard
         title={'공조기 내부 설치'}
@@ -106,6 +123,7 @@ const DamperCoilDetail: React.FC = () => {
             <img src="/image/product/freeze-protection-damper-coil/damper_coil_detail5.png" />
           </>
         }
+        isSelected={selectedMenu === 'menu-4'}
       />
     </STDContainer>
   );
