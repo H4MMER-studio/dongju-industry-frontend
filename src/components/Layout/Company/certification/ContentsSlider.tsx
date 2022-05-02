@@ -205,10 +205,19 @@ const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
     setSlideNumber(0);
   }, [type]);
 
-  const setDate = (date: string) => {
-    const yearMonthDay = date.substring(0, 10);
+  const setDate = (startDate?: string, endDate?: string) => {
+    if (Boolean(startDate) && !Boolean(endDate)) {
+      const startDay = startDate.substring(0, 10);
 
-    return yearMonthDay.replaceAll('-', '.');
+      return startDay.replaceAll('-', '.');
+    } else if (Boolean(startDate) && Boolean(endDate)) {
+      const startDay = startDate.substring(0, 10);
+      const endDay = endDate.substring(0, 10);
+
+      return `${startDate} ~ ${endDate}`;
+    } else {
+      return '';
+    }
   };
 
   const clickCertification = (index: number) => {
@@ -274,7 +283,10 @@ const ContentsSlider: React.VFC<Iprops> = ({ type, certificationList }) => {
                   <>
                     <span className="title">시험기간: </span>
                     <span className="contents">
-                      {setDate(certification.certification_start_date)}
+                      {setDate(
+                        certification.certification_start_date,
+                        certification.certification_end_date
+                      )}
                     </span>
                   </>
                 )}
