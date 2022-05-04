@@ -40,9 +40,9 @@ export function getProduct(type: ProductType['type']) {
       };
     case 'fully-sealed-door':
       return {
-        name: '완전밀폐도어',
+        name: '밀폐도어',
         description:
-          '완전밀폐도어는 열교환될 수 있는 가능성을 대폭 줄여줌으로써 열량 손실과 결로 발생을 최소화하여 줍니다.',
+          '밀폐도어는 열교환될 수 있는 가능성을 대폭 줄여줌으로써 열량 손실과 결로 발생을 최소화하여 줍니다.',
       };
     default:
       return {

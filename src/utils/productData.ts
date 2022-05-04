@@ -72,7 +72,7 @@ export const PRODUCT_MANUAL_DATA: {
     ],
   },
   'fully-sealed-door': {
-    productName: '완전밀폐도어',
+    productName: '밀폐도어',
     menuList: [
       { id: 'menu-1', menu: '개요' },
       { id: 'menu-2', menu: '적용' },

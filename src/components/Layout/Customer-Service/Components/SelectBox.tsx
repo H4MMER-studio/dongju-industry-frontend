@@ -155,7 +155,7 @@ const PRDUCT_LIST: {
   },
   {
     imageSrc: '/image/main_nav/product_5.png',
-    name: '완전밀폐도어',
+    name: '밀폐도어',
     type: 'fully-sealed-door',
   },
   {
