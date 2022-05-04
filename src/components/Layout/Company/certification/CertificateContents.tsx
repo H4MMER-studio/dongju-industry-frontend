@@ -30,6 +30,10 @@ const LeftNavSide = styled.nav`
   width: 217px;
   height: 100%;
   border-right: 1px solid #777777;
+
+  @media (max-width: 1211px) {
+    min-width: 159px;
+  }
 `;
 
 const MenuValue = styled.div<{ selected: boolean }>`
@@ -41,6 +45,8 @@ const MenuValue = styled.div<{ selected: boolean }>`
 `;
 
 const RightSide = styled.div`
+  overflow: hidden;
+
   width: 951px;
 
   @media (max-width: 1612px) {
@@ -61,6 +67,10 @@ const RightSide = styled.div`
 
   @media (max-width: 1193px) {
     width: 526px;
+  }
+
+  @media (max-width: 1023px) {
+    width: calc(100% - 217px);
   }
 `;
 

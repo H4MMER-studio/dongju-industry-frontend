@@ -352,7 +352,7 @@ const MainNav: React.FC<IProps> = ({
     },
     {
       imageSrc: '/image/main_nav/product_5.png',
-      name: '완전밀폐도어',
+      name: '밀폐도어',
       type: 'fully-sealed-door',
     },
     {
@@ -542,7 +542,7 @@ const MainNav: React.FC<IProps> = ({
                     onClick={() => onClickSideMenuProduct('fully-sealed-door')}
                   >
                     <img src="/image/main_nav/sub_product5.png" />
-                    <p>완전밀폐도어</p>
+                    <p>밀폐도어</p>
                   </STDSideProductItem>
                   <STDSideProductItem
                     onClick={() => onClickSideMenuProduct('air-blower')}

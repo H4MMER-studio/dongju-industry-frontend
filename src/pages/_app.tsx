@@ -95,7 +95,7 @@ function App({ Component, pageProps }: AppProps) {
           key="twitter:description"
         />
         <meta
-          content="공기조화기, 동파방지댐퍼코일, 동파방지, 댐퍼코일, 배기유니트, 조화기, 버블댐퍼, 완전밀폐도어, 밀폐도어, 송풍기, 동주산업, 동주"
+          content="공기조화기, 동파방지댐퍼코일, 동파방지, 댐퍼코일, 배기유니트, 조화기, 버블댐퍼, 밀폐도어, 밀폐도어, 송풍기, 동주산업, 동주"
           name="keywords"
         />
         <title>동주산업</title>
