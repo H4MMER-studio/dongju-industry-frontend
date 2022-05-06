@@ -21,6 +21,7 @@ const Performance: React.FC = () => {
 
     return () => {
       document.onmousedown = null;
+      document.onclick = null;
     };
   }, []);
 
@@ -66,7 +67,14 @@ const Performance: React.FC = () => {
                 setModalOnAt('searchText');
               }}
               value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
+              onKeyUp={(e) => {
+                if (e.key === 'Enter') {
+                  console.log(searchText + 'enter key pushed');
+                }
+              }}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+              }}
               placeholder="검색어를 입력하세요."
             />
             <IconSearch />

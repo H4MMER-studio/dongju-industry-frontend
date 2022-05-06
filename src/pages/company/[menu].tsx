@@ -53,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 };
 
 export const getStaticProps: GetStaticProps = (ctx) => {
-  const currentMenu = ctx.params.menu;
+  const currentMenu = ctx.params?.menu;
 
   return {
     props: {
