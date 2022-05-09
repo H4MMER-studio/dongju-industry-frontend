@@ -81,10 +81,10 @@ const Footer: React.FC = () => {
       <STDCompanyInfoBox>
         <div>
           <STDCompanyInfoText>
-            <b>본사</b> : 경기도 화성시 남양읍 주석로 228-6, 1층
+            <b>본사 및 공장</b> : 경기도 화성시 남양읍 주석로 228-6
           </STDCompanyInfoText>
           <STDCompanyInfoText cssStyle={'margin-bottom: 0;'}>
-            <b>대표</b> : 전춘식
+            <b>대표이사</b> : 이왕주
           </STDCompanyInfoText>
         </div>
         <div>
