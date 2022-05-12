@@ -19,8 +19,8 @@ export function* getHistoryListSaga({
   }
 }
 
-export function* watchHistoryList() {
+export function* watchGetHistoryList() {
   yield takeEvery(historyActions.getHistoryList, getHistoryListSaga);
 }
 
-export default [watchHistoryList].map((fn) => fn());
+export default [watchGetHistoryList].map((fn) => fn());

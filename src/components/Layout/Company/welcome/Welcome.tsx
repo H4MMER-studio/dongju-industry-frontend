@@ -103,7 +103,7 @@ const Welcome: React.FC = () => {
           <MainText>
             {'고객 여러분 안녕하십니까?\n'}
             <span className="bold">
-              {'주식회사 동주산업을 찾아주셔서 감사합니다.\n'}
+              {'(주) 동주산업을 찾아주셔서 감사합니다.\n'}
             </span>
             {'\n'}
             {
@@ -130,7 +130,7 @@ const Welcome: React.FC = () => {
             </span>
           </MainText>
           <SignLayout>
-            <SignText>주식회사 동주산업 대표이사 전춘식</SignText>
+            <SignText>(주) 동주산업 대표이사 이왕주</SignText>
             <SignImage src={Images.Sign} />
           </SignLayout>
         </CardLayout>

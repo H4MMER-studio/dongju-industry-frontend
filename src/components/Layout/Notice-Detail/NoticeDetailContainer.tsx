@@ -53,9 +53,13 @@ const WriterLayout = styled.div`
 const WriterProfilImage = styled.img`
   width: 48px;
   height: 48px;
-  background-color: #c4c4c4;
+  padding: 8px;
+  padding-left: 10px;
+  background-color: #fff;
   border-radius: 50%;
+  border: 1px solid #d0d0d0;
   margin-right: 16px;
+  object-fit: contain;
 `;
 
 const Writer = styled.div`
@@ -119,7 +123,7 @@ const NoticeDetailContainer: React.FC<IProps> = ({
         <Header>
           <Title>{detail.notice_title}</Title>
           <WriterLayout>
-            <WriterProfilImage src={undefined} />
+            <WriterProfilImage src={'/image/favi.png'} />
             <div>
               <Writer>동주산업</Writer>
               <DateText>{newDate}</DateText>
