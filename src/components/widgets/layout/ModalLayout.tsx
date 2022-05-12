@@ -2,6 +2,7 @@ import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
 
 interface ModalLayoutProps {
+  children?: React.ReactNode;
   paperStyle?: React.CSSProperties;
   onClose: (reason: 'backdropClick' | 'escapeKeyDown') => void;
 }
