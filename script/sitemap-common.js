@@ -5,6 +5,7 @@ const prettier = require('prettier');
 // 오늘 날짜 가져오기 & 도메인 설정
 const getDate = new Date().toISOString();
 const DONGJU_DOMAIN = 'https://dongjuind.co.kr';
+const DONGJU_DOMAIN2 = 'https://www.dongjuind.co.kr';
 
 //
 const formatted = (sitemap) => prettier.format(sitemap, { parser: 'html' });
@@ -45,6 +46,24 @@ const formatted = (sitemap) => prettier.format(sitemap, { parser: 'html' });
       .join('')}
   `;
 
+  const pagesSitemap2 = `
+    ${pages
+      .map((page) => {
+        const path = page
+          .replace('../src/pages/', '')
+          .replace('.tsx', '')
+          .replace(/\/index/g, '');
+        const routePath = path === 'index' ? '' : path;
+        return `
+          <url>
+            <loc>${DONGJU_DOMAIN2}/${routePath}</loc>
+            <lastmod>${getDate}</lastmod>
+          </url>
+        `;
+      })
+      .join('')}
+  `;
+
   const generatedSitemap = `
     <?xml version="1.0" encoding="UTF-8"?>
     <urlset
@@ -56,11 +75,29 @@ const formatted = (sitemap) => prettier.format(sitemap, { parser: 'html' });
     </urlset>
   `;
 
+  const generatedSitemap2 = `
+    <?xml version="1.0" encoding="UTF-8"?>
+    <urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+    >
+      ${pagesSitemap2}
+    </urlset>
+  `;
+
   const formattedSitemap = formatted(generatedSitemap);
+  const formattedSitemap2 = formatted(generatedSitemap2);
 
   fs.writeFileSync(
     '../public/sitemap/sitemap-common.xml',
     formattedSitemap,
+    'utf8'
+  );
+
+  fs.writeFileSync(
+    '../public/sitemap/sitemap-common2.xml',
+    formattedSitemap2,
     'utf8'
   );
 })();

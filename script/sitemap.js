@@ -1,27 +1,23 @@
 const fs = require('fs');
-const globby = require('globby');
 const prettier = require('prettier');
 
 const getDate = new Date().toISOString();
 const DONGJU_DOMAIN = 'https://dongjuind.co.kr';
+const DONGJU_DOMAIN2 = 'https://www.dongjuind.co.kr';
 
 const formatted = (sitemap) => prettier.format(sitemap, { parser: 'html' });
 
 // public/sitemap 내부의 모든 .gz 파일을 불러와 참조하도록 합니다.
 (async () => {
-  const pages = await globby(['../public/sitemap/*.gz']);
-
   const sitemapIndex = `
-    ${pages
-      .map((page) => {
-        const path = page.replace('../public/', '');
-        return `
           <sitemap>
-            <loc>${`${DONGJU_DOMAIN}/${path}`}</loc>
+            <loc>${DONGJU_DOMAIN}/sitemap/sitemap-common.xml.gz</loc>
             <lastmod>${getDate}</lastmod>
-          </sitemap>`;
-      })
-      .join('')}
+          </sitemap>
+          <sitemap>
+            <loc>${DONGJU_DOMAIN2}/sitemap/sitemap-common2.xml.gz</loc>
+            <lastmod>${getDate}</lastmod>
+          </sitemap>
   `;
 
   const sitemap = `
