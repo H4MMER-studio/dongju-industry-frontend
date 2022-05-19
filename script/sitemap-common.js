@@ -20,20 +20,38 @@ const formatted = (sitemap) => prettier.format(sitemap, { parser: 'html' });
     '!../src/pages/_app.tsx',
     '!../src/pages/_document.tsx',
     '!../src/pages/404.tsx',
-    '!../src/pages/company/[menu].tsx',
-    '!../src/pages/product/[type].tsx',
-    '!../src/pages/notice/data/[id]/*.tsx',
-    '!../src/pages/notice/list/[id]/*.tsx',
+    '!../src/pages/company/*.tsx',
+    '!../src/pages/product/*.tsx',
+    '!../src/pages/notice/data/**/*.tsx',
+    '!../src/pages/notice/list/**/*.tsx',
+    //include
+    '../src/pages/notice/data/index.tsx',
+    '../src/pages/notice/list/index.tsx',
     // (...중간 생략)
     // '!../pages/**/[t_id]/*.tsx',
     // '!../pages/**/[t_id]/**/*.tsx',
   ]);
 
+  const newPages = [
+    ...pages,
+    '../src/pages/product/air-conditioner.tsx',
+    '../src/pages/product/freeze-protection-damper-coil.tsx',
+    '../src/pages/product/exhaust-unit.tsx',
+    '../src/pages/product/bubble-damper.tsx',
+    '../src/pages/product/fully-sealed-door.tsx',
+    '../src/pages/product/air-blower.tsx',
+    '../src/pages/company/welcome.tsx',
+    '../src/pages/company/history.tsx',
+    '../src/pages/company/way-to-come.tsx',
+    '../src/pages/company/performance.tsx',
+    '../src/pages/company/certification.tsx',
+  ];
+
   // 파일 경로를 도메인 형태로 변경
   // ../pages/category/index.tsx -> https://wwww.codeit.kr/category
   // ../pages/community/threads -> https://wwww.codeit.kr/community/threads
   const pagesSitemap = `
-    ${pages
+    ${newPages
       .map((page) => {
         const path = page
           .replace('../src/pages/', '')
@@ -51,7 +69,7 @@ const formatted = (sitemap) => prettier.format(sitemap, { parser: 'html' });
   `;
 
   const pagesSitemap2 = `
-    ${pages
+    ${newPages
       .map((page) => {
         const path = page
           .replace('../src/pages/', '')
