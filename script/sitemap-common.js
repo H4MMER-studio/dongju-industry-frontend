@@ -20,6 +20,10 @@ const formatted = (sitemap) => prettier.format(sitemap, { parser: 'html' });
     '!../src/pages/_app.tsx',
     '!../src/pages/_document.tsx',
     '!../src/pages/404.tsx',
+    '!../src/pages/company/[menu].tsx',
+    '!../src/pages/product/[type].tsx',
+    '!../src/pages/notice/data/[id]/*.tsx',
+    '!../src/pages/notice/list/[id]/*.tsx',
     // (...중간 생략)
     // '!../pages/**/[t_id]/*.tsx',
     // '!../pages/**/[t_id]/**/*.tsx',
