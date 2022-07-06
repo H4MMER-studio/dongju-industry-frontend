@@ -2,12 +2,32 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useResize from '@/hooks/useResize';
 
-const STDWayToComeLayout = styled.section`
+const STDContainer = styled.section`
+  @media (max-width: 1023px) {
+    padding: 0 16px 30px;
+  }
+`;
+
+const STDTitle = styled.h2`
+  margin-bottom: 20px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+`;
+
+const STDWayToComeLayout = styled.article`
   display: flex;
+  padding-bottom: 48px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid #c8c8c8;
 
   @media (max-width: 1023px) {
     display: block;
-    padding: 0 16px 30px;
+  }
+
+  &:last-child {
+    border: none;
   }
 `;
 
@@ -31,11 +51,11 @@ const RightSection = styled.div`
   box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);
   border-radius: 12px;
   width: 608px;
+  height: 100%;
   padding: 24px;
 
   @media (max-width: 1023px) {
     width: 100%;
-    height: 256px;
   }
 `;
 
@@ -63,7 +83,7 @@ const Value = styled.div`
   width: 100%;
   font-size: 19px;
   color: #383838;
-  padding: 0 16px;
+  padding: 8px 16px;
   border-bottom: 1px solid #e8e8e8;
   word-break: keep-all;
 
@@ -82,6 +102,7 @@ const WayToCome: React.FC = () => {
   useEffect(() => {
     if (!window.kakao) return;
     let mapContainer = document.getElementById('kakao_map');
+    let mapContainer2 = document.getElementById('kakao_map2');
     let mapOption = {
       center: new window.kakao.maps.LatLng(
         37.21221844319734,
@@ -90,13 +111,26 @@ const WayToCome: React.FC = () => {
       level: 4,
     };
 
+    let mapOption2 = {
+      center: new window.kakao.maps.LatLng(
+        37.374266446251454,
+        126.94691414593339
+      ),
+      level: 4,
+    };
+
     const map = new window.kakao.maps.Map(mapContainer, mapOption);
+    const map2 = new window.kakao.maps.Map(mapContainer2, mapOption2);
 
     var marker = new window.kakao.maps.Marker({
       position: map.getCenter(),
     });
+    var marker2 = new window.kakao.maps.Marker({
+      position: map2.getCenter(),
+    });
 
     marker.setMap(map);
+    marker2.setMap(map2);
 
     function resizeMap() {
       var mapContainer = document.getElementById('kakao_map');
@@ -108,25 +142,48 @@ const WayToCome: React.FC = () => {
   }, [isMobile]);
 
   return (
-    <STDWayToComeLayout>
-      <LeftSection>
-        <div id="kakao_map" style={{ width: '100%', height: '100%' }}>
-          <div style={{ width: '100%', height: '100%' }} />
-        </div>
-      </LeftSection>
-      <RightSection>
-        <TableLayout>
-          {COMPANY_ADDRESS_INFORMATION.map((info) => {
-            return (
-              <DataLayout key={info.type}>
-                <Head>{info.type}</Head>
-                <Value>{info.value}</Value>
-              </DataLayout>
-            );
-          })}
-        </TableLayout>
-      </RightSection>
-    </STDWayToComeLayout>
+    <STDContainer>
+      <STDTitle>본사 및 공장</STDTitle>
+      <STDWayToComeLayout>
+        <LeftSection>
+          <div id='kakao_map' style={{ width: '100%', height: '100%' }}>
+            <div style={{ width: '100%', height: '100%' }} />
+          </div>
+        </LeftSection>
+        <RightSection>
+          <TableLayout>
+            {COMPANY_ADDRESS_INFORMATION.map((info) => {
+              return (
+                <DataLayout key={info.type}>
+                  <Head>{info.type}</Head>
+                  <Value>{info.value}</Value>
+                </DataLayout>
+              );
+            })}
+          </TableLayout>
+        </RightSection>
+      </STDWayToComeLayout>
+      <STDTitle>영업 사무소</STDTitle>
+      <STDWayToComeLayout>
+        <LeftSection>
+          <div id='kakao_map2' style={{ width: '100%', height: '100%' }}>
+            <div style={{ width: '100%', height: '100%' }} />
+          </div>
+        </LeftSection>
+        <RightSection>
+          <TableLayout>
+            {OFFICE_INFORMATION.map((info) => {
+              return (
+                <DataLayout key={info.type}>
+                  <Head>{info.type}</Head>
+                  <Value>{info.value}</Value>
+                </DataLayout>
+              );
+            })}
+          </TableLayout>
+        </RightSection>
+      </STDWayToComeLayout>
+    </STDContainer>
   );
 };
 
@@ -148,5 +205,20 @@ const COMPANY_ADDRESS_INFORMATION = [
   {
     type: '이메일',
     value: 'dongju97@hanmail.net',
+  },
+];
+
+const OFFICE_INFORMATION = [
+  {
+    type: '주소',
+    value: '경기도 안양시 동안구 엘에스로 142, 808호 (금정역 SK V1 Center)',
+  },
+  {
+    type: '팩스',
+    value: '031-429-9431',
+  },
+  {
+    type: '메일',
+    value: 'dongju91@hanmail.net',
   },
 ];
