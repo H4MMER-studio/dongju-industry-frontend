@@ -204,7 +204,7 @@ const COMPANY_ADDRESS_INFORMATION = [
   },
   {
     type: '이메일',
-    value: 'dongju97@hanmail.net',
+    value: 'dongju91@hanmail.net',
   },
 ];
 
