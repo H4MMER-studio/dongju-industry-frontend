@@ -13,8 +13,13 @@ const Performance: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [orderModalOn, setOrderModalOn] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState('new');
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const dispatch = useDispatch();
-  const { deliveryList } = useGetStore.performance();
+  const { deliveryList, searchList } = useGetStore.performance();
+  const newPageNumbers = Array(Math.ceil((deliveryList?.size ?? 0) / 10))
+    .fill(0)
+    .map((_, index) => index + 1)
+    .filter((num) => Math.abs(page - num) < 5);
 
   useEffect(() => {
     document.onclick = onClickCloseModal;
@@ -26,14 +31,50 @@ const Performance: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    getDeliveryList();
+  }, [selectedOrder, page]);
+
+  useEffect(() => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    const newTimer = setTimeout(() => {
+      getSearchList(searchText);
+    }, 200);
+    setTimer(newTimer);
+  }, [searchText]);
+
+  const getSearchList = (searchText: string) => {
     dispatch(
       performanceActions.getDeliveryList({
         isAsc: selectedOrder !== 'new',
+        isSearch: true,
+        field:
+          selectedSearchTitle === '납품처'
+            ? 'delivery_supplier'
+            : 'delivery_product',
+        value: searchText,
+        skip: 1,
+        limit: 100,
+      })
+    );
+  };
+
+  const getDeliveryList = (currentSearchText?: string) => {
+    dispatch(
+      performanceActions.getDeliveryList({
+        isAsc: selectedOrder !== 'new',
+        isSearch: false,
+        field:
+          selectedSearchTitle === '납품처'
+            ? 'delivery_supplier'
+            : 'delivery_product',
+        value: currentSearchText ?? searchText,
         skip: 10 * page - 9,
         limit: 10 * page,
       })
     );
-  }, [selectedOrder, page]);
+  };
 
   const onClickCloseModal = () => {
     setModalOnAt('');
@@ -69,15 +110,30 @@ const Performance: React.FC = () => {
               value={searchText}
               onKeyUp={(e) => {
                 if (e.key === 'Enter') {
-                  console.log(searchText + 'enter key pushed');
+                  if (page === 1) {
+                    getDeliveryList();
+                  } else {
+                    setPage(1);
+                  }
                 }
               }}
               onChange={(e) => {
                 setSearchText(e.target.value);
               }}
-              placeholder="검색어를 입력하세요."
+              placeholder='검색어를 입력하세요.'
             />
-            <IconSearch />
+            <button
+              className='button'
+              onClick={() => {
+                if (page === 1) {
+                  getDeliveryList();
+                } else {
+                  setPage(1);
+                }
+              }}
+            >
+              <IconSearch />
+            </button>
           </S.SearchWrapper>
           {modalOnAt === 'searchTitle' && (
             <S.DeliverySelectBox onClick={(e) => e.stopPropagation()}>
@@ -101,13 +157,14 @@ const Performance: React.FC = () => {
               </S.DeliverySelectText>
             </S.DeliverySelectBox>
           )}
-          {modalOnAt === 'searchText' && (
+          {modalOnAt === 'searchText' && searchList.length > 0 && (
             <S.DeliverySearchTextBox onClick={(e) => e.stopPropagation()}>
-              {['예시1', '예시2', '예시3', '예시4'].map((text) => (
+              {searchList?.map((text) => (
                 <S.DeliverySearchText
                   key={text}
                   onClick={() => {
                     setSearchText(text);
+                    getDeliveryList(text);
                     setModalOnAt('');
                   }}
                 >
@@ -182,35 +239,37 @@ const Performance: React.FC = () => {
         </div>
       </S.TableContainer>
       <S.PageNationLayout>
-        <S.ArrowIcon
-          onClick={() => {
-            if (page !== 1) {
-              onClickPageHandler(page - 1);
-            }
-          }}
-          src={Images.PagenationLeft}
-          style={{ marginRight: 20 }}
-        />
-        {Array(Math.round(deliveryList.size / 10))
-          .fill(0)
-          .map((_, index) => (
-            <S.PageNumber
-              isSelected={page === index + 1}
-              onClick={() => setPage(index + 1)}
-            >
-              {index + 1}
-            </S.PageNumber>
-          ))}
-
-        <S.ArrowIcon
-          onClick={() => {
-            if (page !== Math.round(deliveryList.size / 10)) {
-              onClickPageHandler(page + 1);
-            }
-          }}
-          src={Images.PagenationRight}
-          style={{ marginLeft: 8 }}
-        />
+        {page !== 1 && (
+          <S.ArrowIcon
+            onClick={() => {
+              if (page !== 1) {
+                onClickPageHandler(page - 1);
+              }
+            }}
+            src={Images.PagenationLeft}
+            style={{ marginRight: 20 }}
+          />
+        )}
+        {newPageNumbers.map((num) => (
+          <S.PageNumber
+            key={num}
+            isSelected={page === num}
+            onClick={() => setPage(num)}
+          >
+            {num}
+          </S.PageNumber>
+        ))}
+        {page < Math.round(deliveryList.size / 10) && (
+          <S.ArrowIcon
+            onClick={() => {
+              if (page !== Math.round(deliveryList.size / 10)) {
+                onClickPageHandler(page + 1);
+              }
+            }}
+            src={Images.PagenationRight}
+            style={{ marginLeft: 8 }}
+          />
+        )}
       </S.PageNationLayout>
     </S.Container>
   );

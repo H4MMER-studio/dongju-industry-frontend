@@ -75,6 +75,12 @@ export const SearchWrapper = styled.div`
   }
 
   svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .button {
     position: absolute;
     right: 16.74px;
     top: 15px;
@@ -203,6 +209,8 @@ export const DeliverySearchTextBox = styled.div`
   left: 0;
   z-index: 1000;
   width: 100%;
+  max-height: 10rem;
+  overflow-y: auto;
   padding: 18px 22px;
   background: #ffffff;
   box-shadow: 2px 4px 12px 4px rgba(56, 56, 56, 0.08);

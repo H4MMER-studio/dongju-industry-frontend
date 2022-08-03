@@ -3,6 +3,7 @@ import { IPerformanceInitialState, IGetDeliveryListParams } from '@/interfaces';
 
 const initialState: IPerformanceInitialState = {
   deliveryList: { list: [], size: 0 },
+  searchList: [],
 };
 
 const slice = createSlice({
@@ -15,15 +16,20 @@ const slice = createSlice({
     ) => {
       state.deliveryList = payload;
     },
+    setSearchList: (state, { payload }: PayloadAction<string[]>) => {
+      state.searchList = payload;
+    },
     getDeliveryList: (_, __: PayloadAction<IGetDeliveryListParams>) => {},
   },
 });
 
 export const selectPerformanceState = createSelector(
   (state: IPerformanceInitialState) => state.deliveryList,
-  (deliveryList) => {
+  (state: IPerformanceInitialState) => state.searchList,
+  (deliveryList, searchList) => {
     return {
       deliveryList,
+      searchList,
     };
   }
 );
