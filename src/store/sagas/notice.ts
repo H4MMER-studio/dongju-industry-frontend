@@ -46,7 +46,6 @@ export function* getNoticeDataDetailSaga({
     yield put(
       noticeActions.setNoticeDetail({
         ...noticeDetail.data,
-        latest: noticeDetail.latest,
       })
     );
   } catch (error) {
@@ -62,7 +61,6 @@ export function* watchGetNoticeDataDetailSaga() {
   yield takeEvery(noticeActions.getNoticeDataDetail, getNoticeDataDetailSaga);
 }
 
-export default [
-  watchGetNoticeDataList,
-  watchGetNoticeDataDetailSaga,
-].map((fn) => fn());
+export default [watchGetNoticeDataList, watchGetNoticeDataDetailSaga].map(
+  (fn) => fn()
+);

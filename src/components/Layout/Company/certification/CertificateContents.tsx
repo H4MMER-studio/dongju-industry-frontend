@@ -42,6 +42,10 @@ const MenuValue = styled.div<{ selected: boolean }>`
   font-weight: 600;
   margin-bottom: 36px;
   cursor: pointer;
+
+  @media (max-width: 1920px) {
+    font-size: 25px;
+  }
 `;
 
 const RightSide = styled.div`
@@ -166,8 +170,8 @@ const MENU_LIST: { value: string; type: ICertificationMenuType }[] = [
     value: '특허증',
     type: 'patent',
   },
-  {
-    value: '시험성적서',
-    type: 'test-result',
-  },
+  // {
+  //   value: '시험성적서',
+  //   type: 'test-result',
+  // },
 ];

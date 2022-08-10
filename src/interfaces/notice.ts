@@ -5,6 +5,11 @@ export interface INoticeInitialState {
 }
 
 export interface INoticeDetail {
+  current: INoticeDetailCurrent;
+  latest: INoticeDetailCurrent[];
+}
+
+export interface INoticeDetailCurrent {
   _id: string;
   notice_title: string;
   notice_content: string;
@@ -14,11 +19,10 @@ export interface INoticeDetail {
   created_at: string | null;
   deleted_at: string | null;
   updated_at: string | null;
-  latest: INoticeDetail[];
 }
 
 export interface IDataList {
-  list: INoticeDetail[];
+  list: INoticeDetailCurrent[];
   size: number;
 }
 

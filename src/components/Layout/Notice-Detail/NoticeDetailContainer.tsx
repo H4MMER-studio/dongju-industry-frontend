@@ -115,13 +115,13 @@ const NoticeDetailContainer: React.FC<IProps> = ({
   onClickGoToList,
   onClickGoToDetail,
 }) => {
-  const newDate = detail.created_at.split('T')[0].split('-').join('.');
+  const newDate = detail.current.created_at?.split('-').join('.');
 
   return (
     <ScrollLayout>
       <NoticeDetailContainerLayout>
         <Header>
-          <Title>{detail.notice_title}</Title>
+          <Title>{detail.current.notice_title}</Title>
           <WriterLayout>
             <WriterProfilImage src={'/image/favi.png'} />
             <div>
@@ -130,25 +130,25 @@ const NoticeDetailContainer: React.FC<IProps> = ({
             </div>
           </WriterLayout>
         </Header>
-        {(detail.notice_images?.length ?? 0) > 0 && (
+        {(detail.current.notice_images?.length ?? 0) > 0 && (
           <ContentImage
-            alt={detail.notice_images[0].name}
-            src={detail.notice_images[0].url}
+            alt={detail.current.notice_images[0].name}
+            src={detail.current.notice_images[0].url}
           />
         )}
-        {(detail.notice_files?.length ?? 0) > 0 &&
-          detail.notice_files.map(({ name, url }) => {
+        {(detail.current.notice_files?.length ?? 0) > 0 &&
+          detail.current.notice_files.map(({ name, url }) => {
             return (
-              <DownloadFileLayout href={url} download={name} target="_blank">
+              <DownloadFileLayout href={url} download={name} target='_blank'>
                 <DownloadFileName>
-                  {detail.notice_files[0].name}
+                  {detail.current.notice_files[0].name}
                 </DownloadFileName>
                 <Icon.DownloadIconBlue />
               </DownloadFileLayout>
             );
           })}
 
-        <SubText>{detail.notice_content}</SubText>
+        <SubText>{detail.current.notice_content}</SubText>
         <NoticeDetailComponents.LatestNotice
           list={detail?.latest ?? []}
           onClickGoToDetail={onClickGoToDetail}

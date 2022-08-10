@@ -1,10 +1,10 @@
 import { mixins } from '@/styles';
 import React from 'react';
 import styled from 'styled-components';
-import { INoticeDetail } from '@/interfaces';
+import { INoticeDetailCurrent } from '@/interfaces';
 
 interface IProps {
-  list: INoticeDetail[];
+  list: INoticeDetailCurrent[];
   onClickGoToList(): void;
   onClickGoToDetail(id: number | string): void;
 }
@@ -101,11 +101,13 @@ const GoToList = styled.div`
   cursor: pointer;
 `;
 
-const LatestNotice: React.VFC<IProps> = ({
+const LatestNotice: React.FC<IProps> = ({
   list,
   onClickGoToDetail,
   onClickGoToList,
 }) => {
+  console.log(list);
+
   return (
     <LatestNoticeLayout>
       <Title>최신글</Title>
