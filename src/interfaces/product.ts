@@ -9,7 +9,8 @@ export interface ProductType {
     | 'exhaust-unit'
     | 'bubble-damper'
     | 'fully-sealed-door'
-    | 'air-blower';
+    | 'air-blower'
+    | 'exhaust-pan';
 }
 
 export interface ProductMenu {

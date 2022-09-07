@@ -360,6 +360,11 @@ const MainNav: React.FC<IProps> = ({
       name: '송풍기',
       type: 'air-blower',
     },
+    {
+      imageSrc: '/image/main_nav/product_7.jpeg',
+      name: '대공간 환기시스템',
+      type: 'exhaust-pan',
+    },
   ];
 
   useEffect(() => {
@@ -389,7 +394,7 @@ const MainNav: React.FC<IProps> = ({
       <STDContainer isMain={selectedMenu === '/'}>
         <STDMainMenu>
           <img
-            src="/image/main_nav/header_logo.png"
+            src='/image/main_nav/header_logo.png'
             onClick={() => onClickMenu('')}
           />
           <STDMenuWrapper>
@@ -442,7 +447,7 @@ const MainNav: React.FC<IProps> = ({
                 isSelected={router.asPath.includes(type)}
                 onClick={() => onClickProduct(type)}
               >
-                <img alt="product image" src={imageSrc} />
+                <img alt='product image' src={imageSrc} />
                 <p>{name}</p>
               </STDProductWrapper>
             ))}
@@ -478,8 +483,8 @@ const MainNav: React.FC<IProps> = ({
       <STDMiniHeaderWrapper isOpen={isOpen}>
         <STDMiniHeader>
           <img
-            alt="header logo"
-            src="/image/main_nav/header_logo2.png"
+            alt='header logo'
+            src='/image/main_nav/header_logo2.png'
             onClick={() => onClickMenu('')}
           />
           <STDHamburgButton onClick={() => setIsOpen((isOpen) => !isOpen)}>
@@ -509,7 +514,7 @@ const MainNav: React.FC<IProps> = ({
                     marginRight={11}
                     onClick={() => onClickSideMenuProduct('air-conditioner')}
                   >
-                    <img src="/image/main_nav/sub_product1.png" />
+                    <img src='/image/main_nav/sub_product1.png' />
                     <p>공기 조화기</p>
                   </STDSideProductItem>
                   <STDSideProductItem
@@ -517,7 +522,7 @@ const MainNav: React.FC<IProps> = ({
                       onClickSideMenuProduct('freeze-protection-damper-coil')
                     }
                   >
-                    <img src="/image/main_nav/sub_product2.png" />
+                    <img src='/image/main_nav/sub_product2.png' />
                     <p>동파방지댐퍼코일</p>
                   </STDSideProductItem>
                 </STDProductTwinWrapper>
@@ -526,13 +531,13 @@ const MainNav: React.FC<IProps> = ({
                     marginRight={11}
                     onClick={() => onClickSideMenuProduct('exhaust-unit')}
                   >
-                    <img src="/image/main_nav/sub_product3.png" />
+                    <img src='/image/main_nav/sub_product3.png' />
                     <p>배기유니트</p>
                   </STDSideProductItem>
                   <STDSideProductItem
                     onClick={() => onClickSideMenuProduct('bubble-damper')}
                   >
-                    <img src="/image/main_nav/sub_product4.png" />
+                    <img src='/image/main_nav/sub_product4.png' />
                     <p>버블댐퍼</p>
                   </STDSideProductItem>
                 </STDProductTwinWrapper>
@@ -541,15 +546,24 @@ const MainNav: React.FC<IProps> = ({
                     marginRight={11}
                     onClick={() => onClickSideMenuProduct('fully-sealed-door')}
                   >
-                    <img src="/image/main_nav/sub_product5.png" />
+                    <img src='/image/main_nav/sub_product5.png' />
                     <p>밀폐도어</p>
                   </STDSideProductItem>
                   <STDSideProductItem
                     onClick={() => onClickSideMenuProduct('air-blower')}
                   >
-                    <img src="/image/main_nav/sub_product6.png" />
+                    <img src='/image/main_nav/sub_product6.png' />
                     <p>송풍기</p>
                   </STDSideProductItem>
+                </STDProductTwinWrapper>
+                <STDProductTwinWrapper>
+                  <STDSideProductItem
+                    onClick={() => onClickSideMenuProduct('exhaust-pan')}
+                  >
+                    <img src='/image/main_nav/product_7.jpeg' />
+                    <p>대공간 환기시스템</p>
+                  </STDSideProductItem>
+                  <div style={{ flex: 1 }} />
                 </STDProductTwinWrapper>
               </STDSideProductListWrapper>
             </STDSideMenuTitleContainer>

@@ -85,7 +85,7 @@ const DetailImageLayout = styled.div`
   width: 100%;
   height: 448px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1365px) {
     height: 360px;
   }
 `;
@@ -105,8 +105,8 @@ const ProductImages: React.FC<Iprops> = ({ detailImages }) => {
     autoplay: false,
     appendDots: (dots) => <ul>{dots}</ul>,
     customPaging: () => (
-      <div className="custom-dot-layout">
-        <div className="custom-dot" />
+      <div className='custom-dot-layout'>
+        <div className='custom-dot' />
       </div>
     ),
     prevArrow: (

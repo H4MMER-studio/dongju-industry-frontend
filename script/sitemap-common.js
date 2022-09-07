@@ -40,6 +40,7 @@ const formatted = (sitemap) => prettier.format(sitemap, { parser: 'html' });
     '../src/pages/product/bubble-damper.tsx',
     '../src/pages/product/fully-sealed-door.tsx',
     '../src/pages/product/air-blower.tsx',
+    '../src/pages/product/exhaust-pan.tsx',
     '../src/pages/company/welcome.tsx',
     '../src/pages/company/history.tsx',
     '../src/pages/company/way-to-come.tsx',

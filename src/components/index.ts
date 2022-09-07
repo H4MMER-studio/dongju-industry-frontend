@@ -47,12 +47,14 @@ import ExhaustUnit from './Layout/Product/ExhaustUnit';
 import BubbleDamper from './Layout/Product/BubbleDamper';
 import FullySealedDoor from './Layout/Product/FullySealedDoor';
 import AirBlower from './Layout/Product/AirBlower';
+import ExhaustPan from './Layout/Product/ExhaustPan';
 
 export const Product = {
   Container: ProductContainer,
   DamperCoilDetail,
   AirConditioner,
   ExhaustUnit,
+  ExhaustPan,
   BubbleDamper,
   FullySealedDoor,
   AirBlower,

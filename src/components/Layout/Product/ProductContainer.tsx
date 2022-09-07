@@ -90,6 +90,8 @@ const ProductContainer: React.FC<Iprops> = ({ productType }) => {
         return <Product.FullySealedDoor selectedMenu={selectedMenu} />;
       case 'air-blower':
         return <Product.AirBlower selectedMenu={selectedMenu} />;
+      case 'exhaust-pan':
+        return <Product.ExhaustPan selectedMenu={selectedMenu} />;
     }
   };
 

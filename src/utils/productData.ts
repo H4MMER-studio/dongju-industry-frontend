@@ -7,6 +7,7 @@ export const PRODUCT_LIST = [
   'bubble-damper',
   'fully-sealed-door',
   'air-blower',
+  'exhaust-pan',
 ];
 
 export const PRODUCT_MANUAL_DATA: {
@@ -95,6 +96,21 @@ export const PRODUCT_MANUAL_DATA: {
       '/image/product/air-blower/prod6_img1.jpg',
       '/image/product/air-blower/prod6_img2.jpg',
       '/image/product/air-blower/prod6_img3.jpg',
+    ],
+  },
+  'exhaust-pan': {
+    productName: '대공간 환기시스템',
+    menuList: [
+      { id: 'menu-1', menu: '급배기' },
+      { id: 'menu-2', menu: '급배기 제원' },
+      { id: 'menu-3', menu: '기류팬' },
+      { id: 'menu-4', menu: '기류팬 제원' },
+    ],
+    detailImages: [
+      '/image/product/exhaust-pan/exhaust-item1.jpeg',
+      '/image/product/exhaust-pan/exhaust-item2.jpeg',
+      '/image/product/exhaust-pan/exhaust-item3.jpeg',
+      '/image/product/exhaust-pan/exhaust-item4.jpeg',
     ],
   },
 };
