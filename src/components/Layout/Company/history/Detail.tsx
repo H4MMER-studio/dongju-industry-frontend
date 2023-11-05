@@ -106,13 +106,13 @@ const Detail: React.FC = () => {
 
   return (
     <>
-      {historyList.map(({ start_year, value }) => {
+      {historyList?.map(({ start_year, data }, index) => {
         const newValue = {} as {
           [key: string]: (Omit<IHistory, 'history_content'> & {
             history_content: string[];
           })[];
         };
-        value.forEach((v) => {
+        data?.forEach((v) => {
           if ((newValue[v.history_year]?.length ?? 0) > 0) {
             let isExist = false;
             newValue[v.history_year] = newValue[v.history_year].map((v2) => {
@@ -149,19 +149,21 @@ const Detail: React.FC = () => {
             </YearRange>
             {Object.keys(newValue)
               .reverse()
-              .map((year) => {
+              .map((year, index) => {
                 return (
                   <YearHistoryLayout key={year}>
                     <LeftSection>
-                      <div className="year">{year}</div>
+                      <div className='year'>{year}</div>
                     </LeftSection>
                     <RightSection>
                       {newValue[year]?.map(
-                        ({ _id, history_month, history_content }) => (
+                        ({ _id, history_month, history_content }, index) => (
                           <MonthHistoryLayout key={_id}>
-                            <div className="month">{history_month}월</div>
-                            {history_content.reverse().map((content) => (
-                              <DetailContents>{content}</DetailContents>
+                            <div className='month'>{history_month}월</div>
+                            {history_content.reverse().map((content, index) => (
+                              <DetailContents key={index}>
+                                {content}
+                              </DetailContents>
                             ))}
                           </MonthHistoryLayout>
                         )
