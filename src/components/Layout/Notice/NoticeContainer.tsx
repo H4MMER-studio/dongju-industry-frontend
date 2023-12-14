@@ -93,7 +93,6 @@ const NoticeContainer: React.FC<IProps> = ({
   clickNoticeItem,
   onClickPageHandler,
 }) => {
-  console.log(dataList);
   return (
     <NoticeContainerLayout>
       <ContentsLayout>

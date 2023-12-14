@@ -2,6 +2,7 @@ import { mixins } from '@/styles';
 import React from 'react';
 import styled from 'styled-components';
 import { INoticeDetailCurrent } from '@/interfaces';
+import parse from 'html-react-parser';
 
 interface IProps {
   list: INoticeDetailCurrent[];
@@ -113,13 +114,16 @@ const LatestNotice: React.FC<IProps> = ({
       <Title>최신글</Title>
       {list.map(
         ({ _id, created_at, notice_title, notice_content, notice_images }) => (
-          <ContentLayout key={_id} onClick={() => onClickGoToDetail(_id)}>
+          <ContentLayout
+            key={_id}
+            onClick={() => onClickGoToDetail(_id)}
+          >
             <LeftSide>
               <DateText>
                 {created_at.split('T')[0].replaceAll('-', '.')}
               </DateText>
               <ContentTitle>{notice_title}</ContentTitle>
-              <ContentText>{notice_content}</ContentText>
+              <ContentText>{parse(notice_content)}</ContentText>
             </LeftSide>
             {(notice_images?.length ?? 0) > 0 && (
               <ContentImage

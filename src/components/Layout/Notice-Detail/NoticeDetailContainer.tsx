@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import * as NoticeDetailComponents from './components';
 import { Icon } from 'public/image';
 import { INoticeDetail } from '@/interfaces';
+import parse from 'html-react-parser';
 
 interface IProps {
   detail: INoticeDetail;
@@ -139,7 +140,11 @@ const NoticeDetailContainer: React.FC<IProps> = ({
         {(detail.current.notice_files?.length ?? 0) > 0 &&
           detail.current.notice_files.map(({ name, url }) => {
             return (
-              <DownloadFileLayout href={url} download={name} target='_blank'>
+              <DownloadFileLayout
+                href={url}
+                download={name}
+                target='_blank'
+              >
                 <DownloadFileName>
                   {detail.current.notice_files[0].name}
                 </DownloadFileName>
@@ -148,7 +153,7 @@ const NoticeDetailContainer: React.FC<IProps> = ({
             );
           })}
 
-        <SubText>{detail.current.notice_content}</SubText>
+        <SubText>{parse(detail.current.notice_content)}</SubText>
         <NoticeDetailComponents.LatestNotice
           list={detail?.latest ?? []}
           onClickGoToDetail={onClickGoToDetail}

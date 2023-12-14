@@ -46,6 +46,7 @@
     "@types/styled-components": "^5.1.15",
     "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.13.2",
+    "html-react-parser": "^5.0.7",
     "prettier": "^2.6.2"
   }
 }
