@@ -1,54 +1,41 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  INoticeInitialState,
-  IGetNoticeDataParams,
-  IGetNoticeDataDetail,
-} from '@/interfaces';
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { INoticeInitialState, IGetNoticeDataParams, IGetNoticeDataDetail } from "@/interfaces";
 
 const initialState: INoticeInitialState = {
-  noticeList: { list: [], size: 0 },
-  dataList: { list: [], size: 0 },
-  noticeDetail: null,
+    noticeList: { list: undefined, size: 0 },
+    dataList: { list: undefined, size: 0 },
+    noticeDetail: null,
 };
 
 const slice = createSlice({
-  name: 'noticeReducer',
-  initialState,
-  reducers: {
-    setNoticeList: (
-      state,
-      { payload }: PayloadAction<INoticeInitialState['noticeList']>
-    ) => {
-      state.noticeList = payload;
+    name: "noticeReducer",
+    initialState,
+    reducers: {
+        setNoticeList: (state, { payload }: PayloadAction<INoticeInitialState["noticeList"]>) => {
+            state.noticeList = payload;
+        },
+        setDataList: (state, { payload }: PayloadAction<INoticeInitialState["dataList"]>) => {
+            state.dataList = payload;
+        },
+        setNoticeDetail: (state, { payload }: PayloadAction<INoticeInitialState["noticeDetail"]>) => {
+            state.noticeDetail = payload;
+        },
+        getNoticeDataList: (_, __: PayloadAction<IGetNoticeDataParams>) => {},
+        getNoticeDataDetail: (_, __: PayloadAction<IGetNoticeDataDetail>) => {},
     },
-    setDataList: (
-      state,
-      { payload }: PayloadAction<INoticeInitialState['dataList']>
-    ) => {
-      state.dataList = payload;
-    },
-    setNoticeDetail: (
-      state,
-      { payload }: PayloadAction<INoticeInitialState['noticeDetail']>
-    ) => {
-      state.noticeDetail = payload;
-    },
-    getNoticeDataList: (_, __: PayloadAction<IGetNoticeDataParams>) => {},
-    getNoticeDataDetail: (_, __: PayloadAction<IGetNoticeDataDetail>) => {},
-  },
 });
 
 export const selectNoticeState = createSelector(
-  (state: INoticeInitialState) => state.noticeList,
-  (state: INoticeInitialState) => state.dataList,
-  (state: INoticeInitialState) => state.noticeDetail,
-  (noticeList, dataList, noticeDetail) => {
-    return {
-      noticeList,
-      dataList,
-      noticeDetail,
-    };
-  }
+    (state: INoticeInitialState) => state.noticeList,
+    (state: INoticeInitialState) => state.dataList,
+    (state: INoticeInitialState) => state.noticeDetail,
+    (noticeList, dataList, noticeDetail) => {
+        return {
+            noticeList,
+            dataList,
+            noticeDetail,
+        };
+    }
 );
 
 export const notice = slice.name;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -10,6 +10,7 @@ import { mixins } from "@/styles";
 import useResize from "@/hooks/useResize";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ProductType } from "@/interfaces";
+import { BackgroundLoading } from "@/components/widgets";
 
 interface IContainerProps {
     height: number;
@@ -40,32 +41,37 @@ function App({ Component, pageProps }: AppProps) {
     };
     const { height } = useResize();
 
-    useEffect(() => {}, []);
+    const [isLoading, setIsLoading] = useState(false);
 
     const onClickMenu = (menu: string) => {
-        router.push(`/${menu}`);
+        setIsLoading(true);
+        router.push(`/${menu}`).finally(() => setIsLoading(false));
     };
 
     const onClickProduct = (productType: ProductType["type"]) => {
-        router.push(`/product/${productType}`);
+        setIsLoading(true);
+        router.push(`/product/${productType}`).finally(() => setIsLoading(false));
     };
 
     const onClickCompanyMenu = (
         companyMenu: "welcome" | "history" | "way-to-come" | "performance" | "certification"
     ) => {
+        setIsLoading(true);
         if (companyMenu === "certification") {
-            router.push(`/company/${companyMenu}?type=license`);
+            router.push(`/company/${companyMenu}?type=license`).finally(() => setIsLoading(false));
         } else {
-            router.push(`/company/${companyMenu}`);
+            router.push(`/company/${companyMenu}`).finally(() => setIsLoading(false));
         }
     };
 
     const onClickNoticeMenu = (noticeMenu: "list" | "data") => {
-        router.push(`/notice/${noticeMenu}`);
+        setIsLoading(true);
+        router.push(`/notice/${noticeMenu}`).finally(() => setIsLoading(false));
     };
 
     const onClickCustomerMenu = (customerMenu: "inquiry") => {
-        router.push(`/customer-service/${customerMenu}`);
+        setIsLoading(true);
+        router.push(`/customer-service/${customerMenu}`).finally(() => setIsLoading(false));
     };
 
     return (
@@ -110,6 +116,7 @@ function App({ Component, pageProps }: AppProps) {
                 <Component {...pageProps} />
             </STDContainer>
             {selectedMenu === "/" && <Footer />}
+            <BackgroundLoading isLoading={isLoading} />
         </>
     );
 }

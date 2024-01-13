@@ -3,7 +3,7 @@ import styled from "styled-components";
 import * as CustomerServiceComponents from "./Components";
 import { Images } from "public/image";
 import useResize from "@/hooks/useResize";
-import { IForm } from "@/interfaces";
+import { IForm, InquiryType } from "@/interfaces";
 import { useDispatch } from "react-redux";
 import { customerServiceActions } from "@/store";
 import { useRouter } from "next/router";
@@ -11,8 +11,8 @@ import { useGetStore } from "@/hooks";
 import { Widgets } from "@/components";
 
 interface Iprops {
-    questionType: "estimate" | "A/S" | "ETC";
-    clickContact: (type: "estimate" | "A/S" | "ETC") => void;
+    questionType: InquiryType;
+    clickContact: (type: InquiryType) => void;
     closeForm: () => void;
 }
 
@@ -68,11 +68,13 @@ const CustomerServiceContainer: React.FC<Iprops> = ({ questionType, clickContact
     const router = useRouter();
     const { isSubmitSuccess } = useGetStore.customerService();
     const { width } = useResize();
-    const [isOpenAlert, setIsOpenAlert] = useState(true);
+    const [isOpenAlert, setIsOpenAlert] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (Boolean(isSubmitSuccess)) {
-            router.push("/customer-service/inquiry");
+            setIsLoading(true);
+            router.push("/customer-service/inquiry").then(() => setIsLoading(false));
             dispatch(customerServiceActions.setIsSubmitSuccess(""));
         }
     }, [isSubmitSuccess]);
@@ -108,7 +110,7 @@ const CustomerServiceContainer: React.FC<Iprops> = ({ questionType, clickContact
                         title="A/S 문의"
                         infoMessage="설치 후 고장 및 수리 관련 문의"
                         backgroundImageSrc={Images.ASBackground}
-                        clickContact={() => clickContact("A/S")}
+                        clickContact={() => clickContact("after-service")}
                     />
                 </ServiceLayout>
                 <ServiceLayout>
@@ -116,7 +118,7 @@ const CustomerServiceContainer: React.FC<Iprops> = ({ questionType, clickContact
                         title="그 외 문의"
                         infoMessage="기타 사항 문의"
                         backgroundImageSrc={Images.ETCBackground}
-                        clickContact={() => clickContact("ETC")}
+                        clickContact={() => clickContact("etc")}
                     />
                 </ServiceLayout>
                 {width > 1023 && <CustomerServiceComponents.InfoCard backgroundImageSrc={Images.InfoBackground} />}
@@ -128,6 +130,7 @@ const CustomerServiceContainer: React.FC<Iprops> = ({ questionType, clickContact
                     clickSubmit={clickSubmit}
                 />
             )}
+            <Widgets.BackgroundLoading isLoading={isLoading} />
         </CustomerServiceContainerLayout>
     );
 };
