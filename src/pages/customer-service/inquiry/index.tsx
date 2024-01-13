@@ -1,41 +1,38 @@
-import React from 'react';
-import Router, { useRouter } from 'next/router';
-import { CustomerService } from '@/components';
+import React from "react";
+import Router, { useRouter } from "next/router";
+import { CustomerService } from "@/components";
+import { InquiryType } from "@/interfaces";
 
 const CustomerServiceView: React.FC = () => {
-  const route = Router;
-  const query = useRouter().query as { question: 'estimate' | 'A/S' | 'ETC' };
+    const route = Router;
+    const query = useRouter().query as { question: InquiryType };
 
-  const clickContact = (type: 'estimate' | 'A/S' | 'ETC') => {
-    switch (type) {
-      case 'estimate':
-        route.push('/customer-service/inquiry?question=estimate');
-        break;
+    const clickContact = (type: InquiryType) => {
+        switch (type) {
+            case "estimate":
+                route.push("/customer-service/inquiry?question=estimate");
+                break;
 
-      case 'A/S':
-        route.push('/customer-service/inquiry?question=A/S');
-        break;
+            case "after-service":
+                route.push("/customer-service/inquiry?question=after-service");
+                break;
 
-      case 'ETC':
-        route.push('/customer-service/inquiry?question=ETC');
-        break;
+            case "etc":
+                route.push("/customer-service/inquiry?question=etc");
+                break;
 
-      default:
-        break;
-    }
-  };
+            default:
+                break;
+        }
+    };
 
-  const closeForm = () => {
-    route.push('/customer-service/inquiry');
-  };
+    const closeForm = () => {
+        route.push("/customer-service/inquiry");
+    };
 
-  return (
-    <CustomerService.Container
-      questionType={query.question}
-      clickContact={clickContact}
-      closeForm={closeForm}
-    />
-  );
+    return (
+        <CustomerService.Container questionType={query.question} clickContact={clickContact} closeForm={closeForm} />
+    );
 };
 
 export default CustomerServiceView;
